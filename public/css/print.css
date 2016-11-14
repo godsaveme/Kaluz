@@ -1,0 +1,96 @@
+body{
+	position: absolute;
+	width: 1400px;
+	margin-top: 50px;
+	margin-left: 80px;
+
+}
+.logotipo{
+	background-color: green;
+	width: 600px;
+	border-radius: 5px;
+	text-align: left;
+    border-top: 0px;
+    border-left: 5px;
+    float: left;
+}
+.log{
+	margin-bottom: 0px;
+}
+.descrResult{
+	width: 450px;
+}
+.cuadroNume{
+	border-right: 5px;
+	background-color: red;
+	width: 200px;
+	border-radius: 5px;
+	text-align: center;
+    display: inline-block;
+}
+
+.fac{
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+.firma{
+	background-color: red;
+	width: 400px;
+	float: left;
+	margin-top: 40px;
+	text-align: center;
+}
+.result{
+	background-color: blue;
+	width: 400px;
+	display: inline-block;
+}
+.tbre{
+	width: 200px;
+	margin-left: 220px;
+}
+
+.tbcontent{
+	margin-top: 20px;
+	background-color: yellow;
+	width: 800px;
+}
+.headfac{
+	background-color: violet;
+	width: 800px;
+}
+input{
+	width: 100px;
+}
+.contenedor{
+	
+	margin-left: -50px !important;
+	width: 60% !important;
+}
+.contenedor2{
+	width: 60% !important;
+	
+}
+.tablajaa{
+	width: 100% !important;
+}
+#printx { 
+	
+	visibility:visible; 
+  	 display: block !important; 
+}
+.noPrintx{
+	visibility:hidden; 
+    display: none !important; 
+}
+.main-footer{
+	visibility:hidden; 
+    display: none !important; 
+}
+
+.sidebar{
+	visibility: hidden;
+	overflow: hidden !important;
+    display: none !important; 
+    background-color: red;
+}

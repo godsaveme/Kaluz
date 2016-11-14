@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrderPurchases" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f3ea2e2-5cac-4706-a27a-fb405c62256e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaini" class="java.lang.String"/>
+	<parameter name="fechafin" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select orderPurchases.*,suppliers.empresa from orderPurchases inner join suppliers on suppliers.id=orderPurchases.supplier_id where orderPurchases.fechaPedido between $P{fechaini} and $P{fechafin};]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaPedido" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaPrevista" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoBruto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Estado" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="warehouses_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="supplier_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="51">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="71" backcolor="#006699" uuid="170397b1-bb11-4057-b2c0-4aef9fb8d79a"/>
+				<staticText>
+					<reportElement x="20" y="20" width="555" height="43" forecolor="#FFFFFF" uuid="4af0495e-1e77-4a09-afed-e84a94fa6da5"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Registro ordenes de Compra]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14"/>
+	</columnHeader>
+	<detail>
+		<band height="102">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="64" width="555" height="33" uuid="7f2da925-46ab-4932-aa91-e21fec788c89"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy">
+				<reportElement mode="Opaque" x="0" y="22" width="125" height="20" backcolor="#F2F1F0" uuid="464ad1db-34f5-4519-92a5-56d7a79487db"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaPedido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy">
+				<reportElement mode="Opaque" x="125" y="22" width="135" height="20" backcolor="#F2F1F0" uuid="f30f771a-04dd-4489-9fcf-236b34d8fbda"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaPrevista}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Opaque" x="260" y="22" width="132" height="20" backcolor="#F2F1F0" uuid="d776f4a3-1ca3-4203-8beb-abf1de5df7a9"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Estado}.equals(0)?"Pendiente":$F{Estado}.equals(2)?"Cancelado":"Antendido"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="392" y="22" width="163" height="20" backcolor="#F2F1F0" uuid="05cadfe5-af8c-43f1-a6b6-641af653c5b9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#ADA9A5" uuid="564ee42b-d747-464d-8466-23dd32b506fc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orden de Compra N°:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="47" width="555" height="11" uuid="99397a29-8270-49a6-b45d-97d807254797"/>
+				<subreportParameter name="ordePurchase_ID">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreporteCompras.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="364" y="71" width="72" height="20" uuid="9b5b5370-12ff-4a94-b2da-780c223b478f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="436" y="71" width="79" height="20" backcolor="#C0C0C0" uuid="9e33587f-cf88-4183-864d-7ff46d284c0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="212" y="71" width="56" height="20" uuid="1e1be9bf-d410-4bea-80af-36b47970ecf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[descuento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="268" y="71" width="65" height="20" backcolor="#C0C0C0" uuid="900962f3-8648-4198-b875-a1312bfae6c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["S/."+$F{descuento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="31" y="71" width="69" height="20" uuid="33c70e00-0b1c-40e4-afa6-48ee5a8a02d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Bruto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="100" y="71" width="87" height="20" backcolor="#C0C0C0" uuid="5bd9fca3-3703-4c87-a3f4-ae4412366ef5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoBruto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="1" width="60" height="20" uuid="6327d7b6-cb1e-4eb2-8fae-f444563cab22"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="c8a6fefa-3642-4567-96d9-bb21374cb844"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="df248869-6469-423d-82f8-be0800681935"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="4e25fb0a-120e-45b6-bd01-7f2ad980a5c0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

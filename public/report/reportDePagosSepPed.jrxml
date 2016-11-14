@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportDePagosSepPed" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5f94bef6-b799-4264-877d-85e481b20b9c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="salePaymentid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select saledetPayments.created_at as fecha,saledetPayments.monto,methodPayments.nombre,detCash.montoMovimientoTarjeta,detCash.montoMovimientoEfectivo from saledetPayments
+inner join methodPayments on methodPayments.id=saleMethodPayment_id
+inner join detCash on detCash.id=saledetPayments.detCash_id
+where salePayment_id=$P{salePaymentid};]]>
+	</queryString>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoMovimientoTarjeta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoMovimientoEfectivo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="cd231475-401c-466a-973a-0af2f2d46dfb"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="135" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3e70f517-6f46-48c9-a250-3d5680edd4e4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="135" y="0" width="157" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="4d215d95-6a28-4812-9bde-fd6992f508b5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mont. Tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="292" y="0" width="163" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2be1ef90-561a-4572-ab3a-b9ebaa1b3661"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mont. Efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="455" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ca3a2f44-6c20-42b4-a9b8-a1c658d0bed1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="2e83498f-535b-4cae-ad22-b7f3d93563cd"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="0" y="0" width="135" height="20" uuid="0373210a-c54e-407b-859d-37820e111fc1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="157" height="20" uuid="53095f35-c1e2-4eb5-913e-9888d645f8b2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoMovimientoTarjeta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="0" width="163" height="20" uuid="9e812e6c-1186-49cc-85c9-6ae127297a7e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoMovimientoEfectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="136525b8-7e98-45f9-bcd5-974986709069"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["S/."+$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

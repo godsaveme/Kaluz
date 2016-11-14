@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportDetCash2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55b7bf4f-91a3-441b-9c8c-a4d90ca878e7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaini" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cashes.fechaInicio,cashMotives.nombre,SUM(montoMovimientoTarjeta) as totMovTar,SUM(montoMovimientoEfectivo)as totMovEfec,cashMotives.observacion from detCash inner join cashMotives on cashMotives.id=detCash.cashMotive_id inner join cashes on cashes.id=detCash.cash_id where cashMotives.tipo="-" and cashes.fechainicio between $P{fechaini} and $P{fechafin} group by cashMotives.id order by cashMotives.tipo;]]>
+	</queryString>
+	<field name="fechaInicio" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totMovTar" class="java.math.BigDecimal"/>
+	<field name="totMovEfec" class="java.math.BigDecimal"/>
+	<field name="observacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band height="79">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="31" forecolor="#006699" backcolor="#E6E6E6" uuid="ebf589bb-5d59-420b-b6ad-c31be718cee9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalles Egresos Cajas]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="45" width="555" height="34" uuid="b22a0e43-30fa-4404-bff6-36ce1622d8dd"/>
+				<subreportParameter name="fechaini">
+					<subreportParameterExpression><![CDATA[$P{fechaini}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechafin">
+					<subreportParameterExpression><![CDATA[$P{fechafin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "DetCashTotales2mes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="7571d59d-a185-4724-9f84-39e4ef792ebe"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="89" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5d064c2a-2237-4369-b5fb-a2e25a7314cc"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[fechaInicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="217" y="0" width="119" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="cce2e288-a14f-4ec3-9870-f9731395fd84"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nov. Tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="336" y="0" width="117" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1172ea6d-df9b-419b-ab08-d69f5087a1ce"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mov. Efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="89" y="0" width="128" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="eca49015-c650-44ee-a62b-8ebbf792c12a"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Movimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="438" y="0" width="117" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f0ea8fb5-62f1-4944-8829-b8685a742346"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="f10790a7-c954-463f-a783-53413e26befd"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="248" y="0" width="88" height="20" uuid="d84fbc06-e81e-4a06-9758-f1c50c6872a0"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totMovTar}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="346" y="0" width="107" height="20" uuid="2f913c52-f7ca-481d-99a0-30ef33d86105"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totMovEfec}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="89" y="0" width="159" height="20" uuid="b6881f92-1a72-4907-9c0c-1dd6f923720f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="89" height="20" uuid="5c5daf1d-93df-446f-8f71-8dbe395fd335"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="0" width="102" height="20" uuid="b4cfab75-8b3c-4b54-b221-e42204ac166e"/>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17"/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Comprobante" language="groovy" pageWidth="250" pageHeight="310" columnWidth="230" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="00718658-47b3-491b-a1e7-4dbf97453e95">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idPago" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select detPayments.*,payments.*,suppliers.empresa from payments inner join detPayments on payments.id=detPayments.payment_id inner join suppliers on suppliers.id=payments.supplier_id
+ where detPayments.id=$P{idPago} group by  detPayments.id ;]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoPagado" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoPago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="payment_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="methodPayment_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Saldo_F" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="detCash_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cashMonthly_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NumFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NumSerie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoDoc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MontoTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Acuenta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Saldo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderPurchase_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="purchase_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="supplier_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="290" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="66" width="100" height="20" uuid="9c885463-913c-4829-8090-123987325d4c"/>
+				<text><![CDATA[Documento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="66" width="100" height="20" uuid="0bdae604-5c8b-49a1-8cd5-4ea8e039456a"/>
+				<textFieldExpression><![CDATA[$F{NumFactura}+"-"+$F{tipoDoc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="86" width="100" height="20" uuid="de3e6a9b-1c9a-4387-aa82-0190bc7dab73"/>
+				<text><![CDATA[NumSerie:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="86" width="100" height="20" uuid="cc927d14-7357-4aca-9054-e673cc9c7ca7"/>
+				<textFieldExpression><![CDATA[$F{NumSerie}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="106" width="100" height="20" uuid="f242580b-e044-4135-8de7-192fdeacbcf1"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="106" width="100" height="20" uuid="9aaf5a0b-a3a2-4375-810d-c081dd742c0d"/>
+				<textFieldExpression><![CDATA["S/."+$F{MontoTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="126" width="100" height="20" uuid="4e3d298f-3839-4991-ac7f-bd5aeab8b682"/>
+				<text><![CDATA[Total Pagado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="126" width="100" height="20" uuid="4ceb7d11-fbb8-4af4-bd73-cb6a68044371"/>
+				<textFieldExpression><![CDATA["S/."+$F{Acuenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="146" width="100" height="20" uuid="b3399509-8a7e-4824-8689-89afa6078b6c"/>
+				<text><![CDATA[Saldo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="146" width="100" height="20" uuid="abf515a5-4276-423c-938b-8d814a7a295b"/>
+				<textFieldExpression><![CDATA["S/."+$F{Saldo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="226" width="100" height="20" uuid="0bf8f76d-cf51-4b22-8648-af73ef62bbc0"/>
+				<text><![CDATA[fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="226" width="100" height="20" uuid="b80741af-00f3-4348-8bc3-f5c0d87cfd21"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="246" width="100" height="20" uuid="04f796b2-51a8-4e3e-9842-28f212cd989c"/>
+				<text><![CDATA[montoPagado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="246" width="100" height="20" uuid="6ec1b086-e183-4061-ae0f-25f1af36b09c"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoPagado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="266" width="100" height="20" uuid="f511e5ae-40de-41fa-b976-8b9f8bd55b2e"/>
+				<text><![CDATA[Metodo de Pago:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="266" width="100" height="20" uuid="f2d822af-3e2f-4b3b-9119-ecfd476e9d96"/>
+				<textFieldExpression><![CDATA[($F{cashMonthly_id}.equals(null) ? ($F{detCash_id}.equals(null)? ($F{Saldo_F}.equals(null)?"Otros":"Adelanto"):"Caja"):"Caja Mensual")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="186" width="200" height="20" uuid="097679fb-1563-479b-92b5-de7d8e74954a"/>
+				<text><![CDATA[Detalle Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="166" width="200" height="20" uuid="3a4a74a1-b58a-47aa-87be-e462b848a348"/>
+				<text><![CDATA[---------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="26" width="200" height="20" uuid="182bcf66-ac8e-42ab-877d-b459f2d319a7"/>
+				<text><![CDATA[---------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="6" width="200" height="20" uuid="b5397916-cdb2-49ff-9f3d-6908113ee038"/>
+				<text><![CDATA[Historial de Deuda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="206" width="200" height="20" uuid="ca674a00-78bc-4082-893d-ed2596adc7ca"/>
+				<text><![CDATA[---------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="46" width="100" height="20" uuid="e6bfb698-d937-41f5-b662-3f76d069e7e8"/>
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="46" width="100" height="20" uuid="f2e7ae8a-022a-403d-892c-f7a81406c03a"/>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

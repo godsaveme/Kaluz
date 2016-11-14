@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePagos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ace8295a-262f-42ec-9a6e-7df654e05f97">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="supplier_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select payments.*,suppliers.empresa from payments inner join suppliers on suppliers.id=payments.supplier_id where suppliers.id=$P{supplier_id};]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NumFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NumSerie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoDoc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MontoTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Acuenta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Saldo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderPurchase_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="purchase_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="supplier_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="0c49e29d-d453-4a67-a0b0-563c6c0530ee"/>
+				<staticText>
+					<reportElement x="20" y="20" width="295" height="43" forecolor="#FFFFFF" uuid="97902425-2334-4f08-a815-d5d6ad76f3f7"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reporte Pagos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="47de2265-9777-4f1c-a9c7-bf289ac56979"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Add a description here]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="106">
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement mode="Opaque" x="0" y="22" width="157" height="20" backcolor="#E6E6E6" uuid="211d5559-d22f-4a9c-ab06-e3427d9e8cf7"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{created_at}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="157" height="20" backcolor="#E0E000" uuid="e9541468-75e5-4902-9598-0332f71dc3ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="157" y="22" width="122" height="20" backcolor="#E6E6E6" uuid="c20eecbd-8a8f-4c90-b2f2-1db45db4b4c2"/>
+				<textFieldExpression><![CDATA[$F{NumFactura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="157" y="1" width="122" height="20" backcolor="#E0E000" uuid="62d38903-dc00-4313-849d-268bf9c54730"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Documento]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="279" y="22" width="71" height="20" backcolor="#E6E6E6" uuid="3e2cd91b-c43a-459a-8d59-0acce940c9bd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{orderPurchase_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="279" y="1" width="71" height="20" backcolor="#E0E000" uuid="ee647b08-6166-4a6a-b270-def39df95ffa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°: Orden]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="349" y="22" width="83" height="20" backcolor="#E6E6E6" uuid="5242f24a-4237-4489-ac42-913cc662574a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchase_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="349" y="1" width="83" height="20" backcolor="#E0E000" uuid="273dc60a-b890-4a79-89cf-7fa8c622b480"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Compra]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="432" y="22" width="123" height="20" backcolor="#E6E6E6" uuid="b2959f8d-4beb-4145-8ab4-f8067ef9d285"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="432" y="1" width="123" height="20" backcolor="#E0E000" uuid="ac85b262-ee39-45a6-8708-dca022fb2a26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[empresa]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="66" width="555" height="11" uuid="8a8c536f-4cb3-4754-bfd0-f67e8725548e"/>
+				<subreportParameter name="payment_id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreportedetPagos.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="46" width="555" height="20" forecolor="#FFFFFF" backcolor="#3C3C3C" uuid="11789b54-12de-4fba-a852-1e0084788733"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Pagos Realizados]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="70" y="83" width="100" height="20" backcolor="#E6E6E6" uuid="aa7765d3-68fe-471f-8d37-b4a37f0746b9"/>
+				<textFieldExpression><![CDATA["S/."+$F{MontoTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="0" y="83" width="70" height="20" backcolor="#E6E6E6" uuid="6225c72f-a5ae-478d-b126-5a908fff660a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MontoTotal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="267" y="83" width="100" height="20" backcolor="#E6E6E6" uuid="e10a8795-442e-4442-a009-6a1ae442cb64"/>
+				<textFieldExpression><![CDATA["S/."+$F{Acuenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="212" y="83" width="55" height="20" backcolor="#E6E6E6" uuid="6199bc65-adaf-4486-82e0-f9c89b656209"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acuenta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="478" y="83" width="77" height="20" backcolor="#E6E6E6" uuid="bf70f7e8-62e6-4bcd-aaa7-7d0501f1f60c"/>
+				<textFieldExpression><![CDATA["S/."+$F{Saldo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="432" y="83" width="46" height="20" backcolor="#E6E6E6" uuid="9780a945-eae1-4170-a4b1-e3a3f866d4e0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="bb528b7c-a521-425a-b9c7-ad2401e12264"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="62d33086-c75c-4810-8133-b339b583c591"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="9a80884f-f945-461b-a58c-06b93afd07ea"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

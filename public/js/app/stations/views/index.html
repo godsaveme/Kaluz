@@ -1,0 +1,91 @@
+<!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>Estaciones
+            <small>Panel de Control</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Estaciones</li>
+          </ol>
+
+          
+        </section>
+
+        
+
+        <!-- Main content -->
+        <section class="content">
+        <div class="row">
+        <div class="col-md-12">
+          <a href="/stations/create" type="submit" class="btn btn-primary pull-left">Add Station</a> 
+          </div>
+        </div>
+        </br>
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Stations</h3>
+                  <div class="box-tools">
+                  <form ng-keyup="searchStation()">
+                    <div class="input-group" style="width: 200px;">
+                      <input type="text" ng-model="query"  name="table_search" class="form-control input-sm pull-right" placeholder="Search" />
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div ng-show="success" class="callout callout-info">
+                                <strong>{{success}} se ha creado correctamente!</strong>
+                            </div>
+                        </div>
+                    </div>
+                <div class="callout callout-info"  ng-show="station.id">
+                    <h4>¿ Estás seguro que deseas eliminar a "{{station.nombre}}" ?</h4>
+                    <p>
+                      <button type="button" class="btn btn-danger" ng-click="destroyStation()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelStation()">No</button>
+                    </p>
+                  </div>
+                  <table class="table table-bordered">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Nombre</th>
+                      <th>ShortName</th>
+                      <th>Descripcion</th>
+                      
+                      <th style="width: 40px">Editar</th>
+                      <th style="width: 40px">Eliminar</th>
+                    </tr>
+                    
+                    <tr ng-repeat="row in stations">
+                      <td>{{$index + 1}}</td>
+                      <td>{{row.nombre}}</td>
+                      <td>{{row.shortname}}</td>
+                      <td>{{row.descripcion}}</td>
+                      <td><a ng-click="editStation(row)" class="btn btn-warning btn-xs">Editar</a></td>
+                      <td><a ng-click="deleteStation(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+                      
+                    </tr>
+                    
+                    
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+
+
+
+                </div>
+              </div><!-- /.box -->
+            </div>  
+          </div>
+        </section>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubreporteMovimientos" language="groovy" pageWidth="554" pageHeight="842" columnWidth="554" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="db38784e-fd58-4415-90e2-bba27edec0ce">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="inputStocks_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select inputStocks.*,variants.codigo from inputStocks inner join variants on variants.id=inputStocks.variant_id where inputStocks.headInputStock_id=$P{inputStocks_id};]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad_llegado" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="variant_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="headInputStock_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="1" width="552" height="27" backcolor="#987070" uuid="250236c7-6372-45b9-b517-bbf37348b7ff"/>
+				<textElement>
+					<font size="18" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Movimientos de Alamacen]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="0" width="228" height="20" backcolor="#4A4A4A" uuid="4d6858a2-a016-43a9-849f-69cd0d32c5d3"/>
+				<textElement>
+					<font fontName="Droid Sans Fallback" size="15" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="301" y="0" width="183" height="20" backcolor="#4A4A4A" uuid="1ebf9944-3317-4c93-a2a8-adc81177206f"/>
+				<textElement>
+					<font fontName="Droid Sans Fallback" size="15" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="484" y="0" width="69" height="20" backcolor="#4A4A4A" uuid="d4df702f-824d-4470-9108-61a0dece0dfb"/>
+				<textElement>
+					<font fontName="Droid Sans Fallback" size="15" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="229" y="0" width="72" height="20" backcolor="#4A4A4A" uuid="44458797-86d4-4680-97da-7781e99248a2"/>
+				<textElement>
+					<font fontName="Droid Sans Fallback" size="15" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="1" y="0" width="229" height="20" backcolor="#DFDFDF" uuid="54a7fc30-3dfb-4548-a38b-1c6099e790da"/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="300" y="0" width="184" height="20" backcolor="#DFDFDF" uuid="4c0b3d4d-191b-40c2-bfdd-7f2e147dc092"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="230" y="0" width="70" height="20" backcolor="#DFDFDF" uuid="06ef7ec6-9616-4b48-b247-09023152c6c7"/>
+				<textFieldExpression><![CDATA[$F{cantidad_llegado}+"UN"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="484" y="0" width="69" height="20" backcolor="#DFDFDF" uuid="4fc62e1f-1c66-4b8b-829d-1a833652fc14"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

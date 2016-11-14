@@ -1,0 +1,31 @@
+{
+  "name": "Salesfly",
+  "version": "1.0.1",
+  "description": "Sales and Inventory Software",
+  "dependencies": {
+    "angular": "~1.3.2",
+    "adminlte": "~2.1.2",
+    "moment": "~2.8.3",
+    "angular-route": "~1.3.2",
+    "angular-sanitize": "~1.3.2",
+    "angular-ui-router": "~0.2.11",
+    "angular-socket-io": "~0.6.1",
+    "ng-phpdebugbar": "*",
+    "angucomplete": "*",
+    "angular-bootstrap": "*",
+    "font-awesome": "*",
+    "ionicons": "*",
+    "raphael": "*",
+    "jquery": "*",
+    "jquery-ui": "*",
+    "moment": "*",
+    "jquery.inputmask": "*",
+    "angular-xeditable": "*",
+    "ngprogress": "*",
+    "angular-ui-slider":"*",
+    "jspdf":"*",
+    "html2canvas":"*",
+    "semantic":"*",
+    "semantic-ui":"*"
+  }
+}

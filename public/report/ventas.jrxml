@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d750732f-c59e-4602-a361-ecb6ccf8bb08">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaini" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select SUM(detSales.cantidad) AS totalUnidades, SUM(detPres.suppPri) as totalPrecioCompra, SUM(detSales.subTotal)as totalVentas, SUM(detSales.subTotal-detPres.suppPri) as totalGanacia from detSales left join detPres on detPres.id=detSales.detPre_id
+                     left join variants on variants.id=detPres.variant_id
+                     left join products on products.id=variants.product_id
+                     left join brands on products.brand_id=brands.id
+                     left join types on products.type_id=types.id
+                     left join stations on products.station_id=stations.id
+                     inner join sales on detSales.sale_id=sales.id
+                     inner join detCash on sales.detCash_id=detCash.id
+                     inner join cashes on detCash.cash_id=cashes.id
+                     inner join salePayments on salePayments.sale_id=sales.id
+                     inner join saledetPayments on saledetPayments.salePayment_id=salePayments.id
+                     inner join saleMethodPayments on saleMethodPayments.id=saledetPayments.saleMethodPayment_id
+
+                    and detSales.created_at between $P{fechaini} and $P{fechafin}]]>
+	</queryString>
+	<field name="totalUnidades" class="java.math.BigDecimal"/>
+	<field name="totalPrecioCompra" class="java.math.BigDecimal"/>
+	<field name="totalVentas" class="java.math.BigDecimal"/>
+	<field name="totalGanacia" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="cfad5044-4650-4b63-b778-07c589d05b64"/>
+				<staticText>
+					<reportElement x="20" y="20" width="413" height="43" forecolor="#FFFFFF" uuid="332dbf90-c2b4-431f-8ef1-073fa0028730"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reporte Ventas]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="b7728c82-94d9-4f75-afda-271999caee0e"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="cbc68eb4-d159-42d8-886f-156c787188c7"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tot. Unidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="be1512d5-9be0-4851-82e0-2b8f3d2dbab9"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tot. P. Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="276" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f4dd4d21-b67e-4795-a36a-482c33a847b5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tot. Mon. Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1a0d44ac-8149-47db-a235-032b42392a8c"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tot. Ganancia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="98">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="a25aeb25-e92c-4e96-a87d-537847f4959a"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="-1" y="0" width="138" height="20" uuid="6416ca42-9eb1-4f10-8a76-8b1a4d799a56"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalUnidades}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="137" y="0" width="138" height="20" uuid="0bbc8a80-707d-4dc4-8e0d-327e1e88daab"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalPrecioCompra}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="275" y="0" width="138" height="20" uuid="22d4e855-3eb4-4820-b5bd-c75a13f66e07"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalVentas}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="413" y="0" width="138" height="20" forecolor="#0000FF" uuid="8a31cb47-a0f2-4c27-a7a8-9ce2920d078f"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalGanacia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="f4e6c528-971e-4e8a-b43e-22a629d66dcd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="386e0508-a64b-4033-b355-7cd0751ce936"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="4ed4ab10-29c0-45a7-9a8c-defe97525881"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

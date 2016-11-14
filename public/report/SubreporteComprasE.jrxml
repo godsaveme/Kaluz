@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubreporteComprasE" language="groovy" pageWidth="556" pageHeight="842" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="dc92da17-4303-45fe-9e0e-7f255cb2a4d6">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="purchase_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from detailPurchases where detailPurchases.purchases_id=$P{purchase_id};]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoBruto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="detPres_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="purchases_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="preProducto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="preCompra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#005C5C" uuid="b66a1793-c1ec-4b6a-9433-6b6ed5533284"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Detalles de Compre]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="186" height="20" backcolor="#6B6B6B" uuid="bde7db2a-5261-4015-9d94-895f2ace637f"/>
+				<text><![CDATA[producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="372" y="0" width="55" height="20" backcolor="#6B6B6B" uuid="e413b00f-942c-4e8a-81b5-3a125ccc37a5"/>
+				<text><![CDATA[descuento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="427" y="0" width="64" height="20" backcolor="#6B6B6B" uuid="5313127b-58f9-4016-b90d-c330c3f0ce2b"/>
+				<text><![CDATA[montoBruto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="186" y="0" width="55" height="20" backcolor="#6B6B6B" uuid="116a34cd-7546-4ca1-8677-dbc92a6373df"/>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="241" y="0" width="70" height="20" backcolor="#6B6B6B" uuid="e5b539f0-3ae8-485d-b75d-5230daca87ac"/>
+				<text><![CDATA[preProducto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="311" y="0" width="61" height="20" backcolor="#6B6B6B" uuid="1511f093-a7d7-4b7a-90b8-44a540887f4a"/>
+				<text><![CDATA[preCompra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="491" y="0" width="64" height="20" backcolor="#6B6B6B" uuid="570c7433-6d43-4e04-8376-a89f7c6c0089"/>
+				<text><![CDATA[montoTotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="186" height="20" backcolor="#DFDFDF" uuid="ba229f39-e3ff-453b-af29-bc07e6460275"/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="372" y="0" width="55" height="20" backcolor="#DFDFDF" uuid="b7dc54d4-25ef-490b-bdad-413a1d9e3193"/>
+				<textFieldExpression><![CDATA["S/."+$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="427" y="0" width="64" height="20" backcolor="#DFDFDF" uuid="ece31a49-eb35-4d50-a341-e431ad00c7b6"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoBruto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="186" y="0" width="55" height="20" backcolor="#DFDFDF" uuid="31c68730-ac63-4274-bc09-d46789c40f4b"/>
+				<textFieldExpression><![CDATA[$F{cantidad}+"UN"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="241" y="0" width="70" height="20" backcolor="#DFDFDF" uuid="ae3d2b9f-6896-427d-ab35-67751841c514"/>
+				<textFieldExpression><![CDATA["S/."+$F{preProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="311" y="0" width="61" height="20" backcolor="#DFDFDF" uuid="39cd1d9b-189a-44d8-9034-666b580d1cc5"/>
+				<textFieldExpression><![CDATA["S/."+$F{preCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="491" y="0" width="64" height="20" backcolor="#DFDFDF" uuid="5303d58e-296e-4a8c-87f2-ebc0cb5cc762"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportVentas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="a79d4afb-19d5-41e9-81e3-a24b10014a80">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaini" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select (select ROUND(SUM(detSeparateSales.cantidad),0) from detSeparateSales inner join separateSales on separateSales.id=detSeparateSales.separateSale_id  where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}) AS totalUnidades,
+(select ROUND(SUM(detPres.suppPri*detSeparateSales.cantidad),2) from detSeparateSales inner join separateSales on separateSales.id=detSeparateSales.separateSale_id left join detPres on detPres.id=detSeparateSales.detPre_id where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}) as totalPrecioCompra,
+(select ROUND(SUM(detSeparateSales.subTotal-(detPres.suppPri*detSeparateSales.cantidad)),2) from detSeparateSales inner join separateSales on separateSales.id=detSeparateSales.separateSale_id left join detPres on detPres.id=detSeparateSales.detPre_id where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}) as totalGanacia,
+(select ROUND(SUM(detSeparateSales.subTotal),2) from detSeparateSales inner join separateSales on separateSales.id=detSeparateSales.separateSale_id  where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}) AS totalVentas,
+(select ROUND(SUM(salePayments.Acuenta),2) from detSeparateSales inner join separateSales on separateSales.id=detSeparateSales.separateSale_id left join salePayments on salePayments.separateSale_id=detSeparateSales.id where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}) AS totAcuenta,
+
+(select ROUND(SUM(salePayments.Saldo),2) from detSeparateSales inner join separateSales on separateSales.id=detSeparateSales.separateSale_id left join salePayments on salePayments.separateSale_id=detSeparateSales.id where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}) AS totoSaldo,
+ ROUND(SUM(detPres.suppPri*detSeparateSales.cantidad),2) as totalPrecioCompra1, ROUND(SUM(detSeparateSales.subTotal),2)as totalVentas1, ROUND(SUM(detSeparateSales.subTotal-(detPres.suppPri*detSeparateSales.cantidad)),2) as totalGanacia1,ROUND(SUM(salePayments.Acuenta),2) as totAcuenta1,ROUND(SUM(salePayments.Saldo),2) AS totoSaldo1 from detSeparateSales
+                     left join detPres on detPres.id=detSeparateSales.detPre_id
+                     left join variants on variants.id=detPres.variant_id
+                     left join products on products.id=variants.product_id
+                     left join brands on products.brand_id=brands.id
+                     left join types on products.type_id=types.id
+                     left join stations on products.station_id=stations.id
+
+                     inner join separateSales on separateSales.id=detSeparateSales.separateSale_id
+                     left join salePayments on salePayments.separateSale_id=detSeparateSales.id
+                     left join saledetPayments on saledetPayments.salePayment_id=salePayments.id
+                     left join saleMethodPayments on saleMethodPayments.id=saledetPayments.saleMethodPayment_id
+
+                    where separateSales.estado like $P{estado} and separateSales.tipo like $P{tipo} and detSeparateSales.created_at between $P{fechaini} and $P{fechafin}]]>
+	</queryString>
+	<field name="totalUnidades" class="java.math.BigDecimal"/>
+	<field name="totalPrecioCompra" class="java.math.BigDecimal"/>
+	<field name="totalGanacia" class="java.math.BigDecimal"/>
+	<field name="totalVentas" class="java.math.BigDecimal"/>
+	<field name="totAcuenta" class="java.math.BigDecimal"/>
+	<field name="totoSaldo" class="java.math.BigDecimal"/>
+	<field name="totalPrecioCompra1" class="java.math.BigDecimal"/>
+	<field name="totalVentas1" class="java.math.BigDecimal"/>
+	<field name="totalGanacia1" class="java.math.BigDecimal"/>
+	<field name="totAcuenta1" class="java.math.BigDecimal"/>
+	<field name="totoSaldo1" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="40">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="40" backcolor="#25A5A5" uuid="eb8d85e4-3ff8-489c-9566-3bb77ec731ee"/>
+				<textElement>
+					<font size="32"/>
+				</textElement>
+				<text><![CDATA[REPORTE SEPARADOS/PEDIDOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="5"/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="136">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="67" height="20" forecolor="#006699" backcolor="#D1B5B5" uuid="bf0fa06c-fac4-4d5c-a847-1efaa37142af"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T. Unid.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="0" width="74" height="20" forecolor="#006699" backcolor="#D1B5B5" uuid="808219bc-9606-4c77-8b84-3cf75359410e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T. P.Com.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="419" y="0" width="66" height="20" forecolor="#006699" backcolor="#D1B5B5" uuid="2d476265-1e73-4c45-82cd-8ab0954bbbac"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T. Gan.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="116" y="0" width="71" height="20" forecolor="#006699" backcolor="#D1B5B5" uuid="5d3aed1d-66d9-40ba-a224-d6dc778ae2f8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T. Vent.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Opaque" x="67" y="0" width="49" height="20" backcolor="#A89C72" uuid="57a22ed0-eea2-4b58-98d5-ba0336ebd90f"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalUnidades}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Opaque" x="351" y="0" width="68" height="20" backcolor="#A89C72" uuid="71754212-99ab-4403-aac5-46bdcb269885"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalPrecioCompra}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Opaque" x="485" y="0" width="70" height="20" backcolor="#A89C72" uuid="9dea812b-4394-4558-9867-1ad33f21a496"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalGanacia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Opaque" x="188" y="0" width="88" height="20" backcolor="#A89C72" uuid="c38670ea-6840-43b9-8e25-938bee997585"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalVentas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="383" y="108" width="25" height="20" uuid="9ddb159e-9329-4c29-9bf2-d404670c5ccd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalUnidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="412" y="108" width="50" height="20" forecolor="#0000FF" uuid="3bd0ebfa-0725-4d5f-a8c5-d376455034a1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totAcuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="462" y="108" width="33" height="20" forecolor="#FF0000" uuid="3627c95f-f6f8-49e7-a85a-c44456829be1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totoSaldo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="495" y="108" width="45" height="20" forecolor="#C434BE" uuid="61ccc21e-4910-44e1-b389-a31a4a4ef624"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalPrecioCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="537" y="108" width="37" height="20" forecolor="#00FF00" uuid="7c2cb559-2612-4e73-bcb2-2867648ec4b3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totalGanacia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="339" y="108" width="44" height="20" uuid="62dae030-8014-40fa-9c6e-d48757a79a84"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="-17" y="28" width="572" height="80" uuid="995bc2bf-71af-49b6-9a30-9cb1fcf8e08c"/>
+				<subreportParameter name="fechaini">
+					<subreportParameterExpression><![CDATA[$P{fechaini}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechafin">
+					<subreportParameterExpression><![CDATA[$P{fechafin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tipo">
+					<subreportParameterExpression><![CDATA[$P{tipo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="estado">
+					<subreportParameterExpression><![CDATA[$P{estado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ReporteVentas2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetCashTotales2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="aafbaa91-54ad-474a-929b-af29877631d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cash_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select SUM(montoMovimientoTarjeta) as totMovTar,SUM(montoMovimientoEfectivo)as totMovEfec from detCash inner join cashMotives on cashMotives.id=detCash.cashMotive_id inner join cashes on cashes.id=detCash.cash_id where cashMotives.tipo="-" and  cashes.id=$P{cash_id};]]>
+	</queryString>
+	<field name="totMovTar" class="java.math.BigDecimal"/>
+	<field name="totMovEfec" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="158" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="32771e30-7f91-4242-9bd2-86eaedabcdf8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tot. Mov. Tarjeta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="0" width="163" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="8ee1b529-eae2-4e04-80be-e0c03633a8e5"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tot. Mov. Efectivo:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="444" y="0" width="151" height="20" uuid="8d5325ad-078e-4460-b686-5a4b51f9e2b4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totMovEfec}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="158" y="0" width="109" height="20" uuid="865706ad-862a-407f-84e0-d6af9dbc038b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["S/."+$F{totMovTar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

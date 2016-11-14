@@ -1,0 +1,26 @@
+{
+  "name": "Salesfly",
+  "version": "1.0.1",
+  "description": "Sistema de Ventas y Almacén",
+  "bugs": {
+    "email": "jalvarez@honeysoft.pe"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Javier J. Álvarez M.",
+    "email": "jalvarez@honeysoft.pe",
+    "url": "http://honeysoft.pe"
+  },
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "dependencies": {
+    "express": "^4.10.2",
+    "redis": "^0.12.1",
+    "socket.io": "^1.2.0",
+    "laravel-elixir": "^2.0.0",
+    "bootstrap-sass": "^3.0.0",
+      "ioredis" : "*"
+  }
+}

@@ -1,0 +1,428 @@
+<!-- Content Header (Page header) -->
+
+        <section class="content-header">
+          <h1>Order de Compras
+            <small>Panel de Control</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a target="_self"  href="/purchases" >Compras</a></li>
+          </ol>
+
+          
+        </section>
+
+        
+
+        <!-- Main content -->
+        <section class="content">
+        <!--<div class="row">
+        <div class="col-md-6">
+          <a href="/orderPurchases/create"  type="submit"  class="btn btn-primary pull-left">Add Order Purchase</a> 
+          </div>
+          <div class="col-md-6">
+          <a href="/orderPurchases/createP"  type="submit"  class="btn btn-primary pull-left">Add Order Purchase</a> 
+          </div>
+        </div>-->
+        </br>
+          <div class="row">
+            <div class="col-md-12">
+              
+
+              <div class="box">
+                 
+                <div class="box-header with-border">
+                  <h3 class="box-title">Order de Compras</h3>
+                  <div class="box-tools">
+                  <div class="form-group">
+                
+                  <form ng-keyup="searchPurchase()">
+                    <div class="input-group" style="width: 200px;">
+                      <input type="text" ng-model="query"  name="table_search" class="form-control input-sm pull-right" placeholder="Search" />
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div ng-show="success" class="callout callout-info">
+                                <strong>{{success}} se ha creado correctamente!</strong>
+                            </div>
+                        </div>
+                    </div>
+                <div class="callout callout-info"  ng-show="purchase.id">
+                    <h4>¿ Estás seguro que deseas eliminar a "{{}}" ?</h4>
+                    <p>
+                      <button type="button" class="btn btn-danger" ng-click="destroyPurchase()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelPurchase()">No</button>
+                    </p>
+                  </div>
+            <div class="row">
+            
+                 <div  class="col-md-2">
+                      <div   class="form-group" >                            
+                            <input   ng-click="limpiarFiltros()" type="checkbox"  name="variantes" ng-model="check" />
+                            <em>¿filtrar individualmente?</em>
+                        </div>
+                         <div   class="form-group" >                            
+                            <input   ng-click="mostrarTodos()" type="checkbox"  name="variantes" ng-model="checkFechaPr"/>
+                            <em>¿Filtrar por fecha Prevista?</em>
+                        </div>
+                </div>
+                
+                <div class="col-md-2">
+                  <div  class="form-group">
+                                <label for="fechaPedido">Elija Rango de Fechas</label>
+                            <div  class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input  type="date" ng-change="filtroFechas()" class="form-control"  name="fechaPedido" ng-model="orderPurchase.fechaini">
+                            </div>
+                  </div>
+          </div>
+          <div ng-show="check" class="col-md-3">
+                  <div  class="form-group" >
+                            <label ><---></label>
+                                <div  class="input-group">
+                                        <div class="input-group-addon">
+                                              <i class="fa fa-calendar"></i>
+                                        </div>
+                                      <input  ng-disabled="orderPurchase.fechaini==null" type="date"  ng-change="filtroFechas()" class="form-control" name="fechaPrevista" ng-model="orderPurchase.fechafin" >
+                                   </div>   
+                                 
+                            
+                      </div> 
+          </div>
+           <div ng-hide="check" class="col-md-3">
+                  <div  class="form-group" >
+                            <label ><---></label>
+                                <div  class="input-group">
+                                        <div class="input-group-addon">
+                                              <i class="fa fa-calendar"></i>
+                                        </div>
+                                      <input  ng-disabled="orderPurchase.fechaini==null" type="date"   class="form-control" name="fechaPrevista" ng-model="orderPurchase.fechafin" >
+                                   </div>   
+                                 
+                            
+                      </div> 
+          </div>
+        
+          <div ng-show="check" class="col-md-3">
+                <label for="fechaPedido">Filtrar por Estado</label>
+                <select class="form-control"  ng-change="searchEstados()" ng-model="estado" >
+                        <option value="">--Buscar por Estados--</option>
+                        <option value="0">--Pedidos Pendientes--</option>
+                        <option value="1">--Pedidos Atendidos--</option>
+                        <option value="2">--Pedidos Cancelados--</option>
+                        <option value="3">--Todos los Pedidos--</option>
+                </select>
+              </div>
+              <div ng-hide="check" class="col-md-3">
+                <label for="fechaPedido">Filtrar por Estado</label>
+                <select ng-disabled="orderPurchase.fechaini==null || orderPurchase.fechafin==null" class="form-control"  ng-change="paginarfechaTipo()" ng-model="estado" >
+                        <option value="">--Buscar por Estados--</option>
+                        <option value="0">--Pedidos Pendientes--</option>
+                        <option value="1">--Pedidos Atendidos--</option>
+                        <option value="2">--Pedidos Cancelados--</option>
+                        <option value="3">--Todos los Pedidos--</option>
+                </select>
+              </div>
+            <div class="col-md-1">
+             <a ng-click="generarReporteFiltros()" style="width:95px;" class="btn btn-success btn-xs">{{textoBoton}}</a>
+             <a ng-href="{{pdforden}}" style="width:95px;" target="_blank" class="btn btn-primary btn-xs">Ver Reporte</a>
+          </div>
+            </div>    
+            </div>
+                  
+                  <table class="table table-bordered table-hover">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Proveedor</th>
+                      <th>Almacen</th>
+                      <th>Fecha Pedido</th>
+                      <th>Fecha Prevista</th>
+                      <th>IGV</th>
+                      <th>Monto Base</th>
+                      <th>Descuento</th>
+                      <th>Monto Bruto</th>
+                      <th>Monto Total</th>
+                      <th style="width: 40px">Añadir Pago A</th>
+                      <th style="width: 40px">Estados</th>
+                      <th style="width: 40px">Acciones</th>
+                    </tr>
+                    
+                    <tr ng-repeat="row in orderPurchases">
+                      <td>{{$index + 1}}</td>
+                      <td ng-hide="true">{{row.supID}}</td>
+                      <td ng-hide="true">{{row.id}}</td>
+                      <td>{{row.empresa}}</td>
+                      <td>{{row.almacen}}</td>
+                      <td>{{row.fechaPedido.substring(0,10)}}</td>
+                      <td>{{row.fechaPrevista.substring(0,10)}}</td>
+                      <td>{{row.igv}}</td>
+                      <td>{{row.montoBase}}</td>
+                      <td>{{row.descuento}}</td>
+                      <td>{{row.montoBruto}}</td>
+                      <td>{{row.montoTotal}}</td>
+                      <td ng-if="row.Estado==0"><button class=" label-default" ng-click="VerAdelantos(row.id)">Adelanto</button></td>
+                      <td ng-if="row.Estado!=0">------</td>
+                      <td ng-if="row.Estado==0"><a  class="btn btn-success btn-xs">Pendiente</a></td>
+                      <td ng-if="row.Estado==1"><a  class="btn btn-default btn-xs">Atendido</a></td>
+                      <td ng-if="row.Estado==2"><a  class="btn btn-danger btn-xs">Cancelado</a></td>
+                      <td ng-if="row.Estado==0"><a ng-click="editPurchase(row)" class="btn btn-warning btn-xs">Editar</a></td>
+                      <td ng-if="row.Estado==1"><a ng-click="editPurchase(row)" class="btn btn-info btn-xs">ver</a></td>
+                      <td ng-if="row.Estado==2"><a ng-click="editPurchase(row)" class="btn btn-success btn-xs">ver</a></td>
+                      
+                    </tr>
+                    
+                    
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+
+
+                </div>
+              </div><!-- /.box -->
+            </div>  
+          </div>
+        </section>
+         <!-- =======================================================================================================Ventana Emergente Crear=================================-->
+        <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog modal-lg">
+               <div style="border-radius: 5px" class="modal-content">
+                 <div class="modal-header" style="border-radius: 5px" >
+                   <button type="button"  class="close" data-dismiss="modal" aria-hidden="ngenabled"> &times; </button>
+                   <h4><b>Agregar Pagos Adelantados {{mostrarShow}}</b></h4>
+                   </div>
+   
+    <div class="modal-body">
+    <form name="paymentCreateForm" role="form" novalidate>
+      <div class="box-body">
+                <div class="row">
+                 
+                      <table class="table table-striped">
+                    <tr>
+                      <th>Monto Total</th>
+                      <th>Monto Adelantado</th>
+                      <th>Saldo</th>
+                      <th>Numero de compra</th>
+                      <th>Proveedor</th>
+                      <th></th>
+                    </tr>
+                    
+                    <tr >
+                      <td>{{payment.MontoTotal}}</td>
+                      <td>{{payment.Acuenta}}</td>
+                      <td>{{payment.Saldo}}</td>
+                      <td>{{payment.id}}</td>  
+                      <td>{{payment.empresa}}</td>
+                      <td>
+                 <progressbar class="progress-striped active" value="payment.PorPagado" type="{{type}}">{{payment.PorPagado}}%</progressbar>
+               </td>
+                    </tr>
+                    
+                    
+                  </table>
+                </div>
+            </div>
+            
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <table class="">
+
+                         <tr>
+                           <th >Fecha</th>
+                         </tr>
+                         <tr>
+                            <td> 
+                            
+                                <div  class="input-group">
+                                        <div class="input-group-addon">
+                                              <i class="fa fa-calendar"></i>
+                                        </div>
+                                      <input  type="date"   class="form-control input-sm" name="fecha" ng-model="detPayment.fecha" >
+                                   </div>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <th >Tipo de Pago</th>
+                        </tr>
+                        <tr>
+                            <td ><div class="form-group" ng-class="{true: 'has-error'}[ paymentCreateForm.warehouse.$error.required && paymentCreateForm.$submitted || paymentCreateForm.warehouse.$dirty && paymentCreateForm.warehouse.$invalid]">
+                       
+                               <select ng-disabled="detPayment.cashe_id>0 || payment.cajamensual==true" ng-hide="show" class="form-control input-sm" name="warehouse" ng-click="" ng-model="detPayment.methodPayment_id" ng-options="item.id as item.nombre for item in methodPayments" >
+                               <option value="">--Elija Modo de Pago--</option>
+                               </select>
+                               <label ng-show="paymentCreateForm.$submitted || paymentCreateForm.warehouse.$dirty && paymentCreateForm.warehouse.$invalid">
+                                <span ng-show="paymentCreateForm.warehouse.$invalid"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                               </label>
+                              </div>
+                            </td>
+                    </tr>
+                    <tr>
+                      <th >Monto</th>
+                    </tr>
+                    <tr>
+                      <td>
+                         <div class="form-group" ng-class="{true: 'has-error'}[ paymentCreateForm.montoPagando.$error.required && paymentCreateForm.$submitted || paymentCreateForm.montoPagando.$dirty && paymentCreateForm.montoPagando.$invalid]" >
+                          <input ng-enabled="false" type="number" class="form-control" ng-model='detPayment.montoPagado' ng-blur='recalPayments()' name="montoPagando" placeholder="0.00"  step="0.1" required>
+                          <label ng-show="paymentCreateForm.$submitted || paymentCreateForm.montoPagando.$dirty && paymentCreateForm.montoPagando.$invalid">
+                                <span ng-show="paymentCreateForm.montoPagando.$invalid"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                         </label>
+                        </div>
+                      </td>
+                    </tr>
+                <tr >
+                      <th >Pagar Con Caja</th>
+                </tr>
+                <tr>
+                
+               <td  ng-hide="payment.cajamensual">
+                <div class="form-group" ng-class="{true: 'has-error'}[ paymentCreateForm.warehouse.$error.required && paymentCreateForm.$submitted || paymentCreateForm.warehouse.$dirty && paymentCreateForm.warehouse.$invalid]">
+                       <select   ng-disabled="detPayment.methodPayment_id>0 || check==true || payment.cajamensual==true" ng-click="TraerSales(detPayment.cashe_id)" class="form-control" name="warehouse"  ng-model="detPayment.cashe_id" ng-options="item.id as item.nombre for item in cashHeaders" >
+                       <option value="">--Elija Caja--</option>
+                       </select>
+                       <label ng-show="paymentCreateForm.$submitted || paymentCreateForm.warehouse.$dirty && paymentCreateForm.warehouse.$invalid">
+                                <span ng-show="paymentCreateForm.warehouse.$invalid"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                       </label>
+                  </div>
+                       <label>{{cashes.montoBruto}}</label>
+                 
+                 </td>
+               </tr>
+              <tr>
+                      <th >Caja Mensual</th>
+                </tr>
+                <tr>
+                     <td>
+                       <div   class="form-group" >                            
+                            <input  ng-disabled="detPayment.methodPayment_id>0 || check==true || detPayment.cashe_id>0" type="checkbox"  ng-click="cashmontly()" name="variantes" ng-model="payment.cajamensual" />
+                            <span class="text-info"> <em>Pagar con caja mensual</em></span>
+                        </div>
+          
+                     </td>
+                </tr>
+                <tr ng-show="payment.cajamensual">
+                      <th >Descripcion</th>
+                </tr>
+                <tr>
+                <td ng-show="payment.cajamensual">
+                   <div class="form-group" >
+                        <textarea ng-model="payment.descripcion" class="form-control input-lg">
+                         </textarea>
+                    </div>
+                
+               </td>
+              </tr>
+      
+           <tr>
+                 <div ng-hide="mostrarBtnGEd" class="form-group" >
+                     <button class=" label-default" ng-click='createPayment()'>Agregar Pago</button>
+                  </div>
+                  <div  ng-show="mostrarBtnGEd" class="form-group" >
+                    <button class=" label-default" type='submit' ng-click='editPayment()' >Edit Pago</button>  
+                 </div>
+          </tr></table>
+              </div>
+              
+              <div class="col-md-9" align="center">
+                
+                  <table class="table table-striped" >
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Tipo de Pago</th>
+                      <th>Monto Pagado</th>
+                      <th>Tipo Pago</th>
+                      <th>Acciones</th>
+                    </tr>
+                    
+                    <tr ng-repeat="row in detPayments">
+                      <td ng-hide="true">{{row.Saldo_F}}</td>
+                      <td ng-hide="true">{{row.id}}</td>
+                      <td ng-hide="true">{{row.cashID}}</td>
+                      <td>{{row.fecha}}</td>
+                      <td ng-if="row.nameMethod!=null">{{row.nameMethod}}</td>
+                      <td ng-if="row.detCash_id>0">{{row.nombre}}</td>
+                      <td ng-if="row.cashMonthly_id>0">Caja Mensual</td>
+                      <td>{{row.montoPagado}}</td>
+                      <td ><span class="badge bg-blue">{{row.tipoPago}}</span></td> 
+                      <td><button type="button" class="btn btn-danger btn-xs"  ng-click="destroyPay(row)">
+                        <span class="glyphicon glyphicon-trash"></span></button>
+                     <a ng-click="editDetpayment(row)" class="btn btn-warning btn-xs">Edit</a></td>
+                    </tr>
+
+                  </table>
+
+               
+              </div>
+          </div>
+                </div>
+                </form>
+            </div>
+            <!--
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                                <label>Proveedor: </label>
+                                       <div  class="input-group">
+                                             <spam >{{payment.empresa}}</spam>
+                                       </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group" >
+                                <label for="suppPric">Num de Pedido</label>
+                                <div  class="input-group">
+                                   <spam >{{payment.id}}</spam>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group" >
+                                <label for="suppPric">Monto Total</label>
+                                <div  class="input-group">
+                                   <spam >{{payment.montoTotal}}</spam>
+                                </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group" >
+                            <label for="preCompra">Monto Adelantado </label>
+
+                             <input  type="number"  class="form-control ng-pristine ng-valid ng-touched" name="preCompra" placeholder="0.00" ng-model="payment.Acuenta" ng-blur="paymentsCalc()" step="0.1">
+               
+                           </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group" >
+                                <label for="suppPric">Saldo</label>
+                                <div  class="input-group">
+                                   <spam >{{payment.Saldo}}</spam>
+                                </div>
+                          </div>-->
+                      
+                  
+                     <div class="modal-footer" >
+                     <button type="submit" class="btn btn-primary" ng-click="createPayments()" data-dismiss="">Crear</button>
+                    <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Cancelar</a>
+                   </div>
+                     </form>
+                   
+                   
+               </div>
+             </div>
+           </div>
+        </div>
+        </div>

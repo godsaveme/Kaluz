@@ -1,0 +1,162 @@
+<!-- Content Header (Page header) -->
+     <section class="content-header">
+          <h1>
+            Gastos Mensuales
+            <small>Panel de Control</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Gastos Mensuales</li>
+          </ol>
+
+          
+        </section>
+        <!-- Main content -->
+        <section class="content">
+        <div class="row">
+        <div class="col-md-12">
+          <a href="/cashMonthlys/create" type="submit" class="btn btn-primary pull-left">Agregar Gastos Mensuales</a> 
+
+        </div>
+
+
+
+
+        </div>
+        </br>
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="box">
+
+                <div class="box-header with-border">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group" ng-class="{true: 'has-error'}[ cashMonthlyCreateForm.fechaPedido.$error.required &amp;&amp; cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.fechaPedido.$dirty &amp;&amp; cashMonthlyCreateForm.fechaPedido.$invalid]">
+                                <label for="fechaPedido">Fecha Inicio: </label>
+                            <div ng-hide="show" class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input type="date" class="form-control ng-pristine ng-valid ng-touched" name="fechaPedido" ng-model="fechaInicio" ng-change="buscarDetalles()">
+                                </div>
+                            <label ng-show="cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.fechaPedido.$dirty &amp;&amp; cashMonthlyCreateForm.fechaPedido.$invalid" class="ng-hide">
+                            <span ng-show="cashMonthlyCreateForm.fechaPedido.$invalid" class="ng-hide"><i class="fa fa-times-circle-o"></i>Fecha Inválida.</span>
+                            </label>
+                             
+                             <div ng-show="show" class="input-group ng-hide">
+                               <spam class="ng-binding"></spam>
+                            </div> 
+                      </div>  
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group" ng-class="{true: 'has-error'}[ cashMonthlyCreateForm.fechaPedido.$error.required &amp;&amp; cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.fechaPedido.$dirty &amp;&amp; cashMonthlyCreateForm.fechaPedido.$invalid]">
+                                <label for="fechaPedido">Fecha Fin: </label>
+                            <div ng-hide="show" class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input type="date" class="form-control ng-pristine ng-valid ng-touched" name="fechaPedido" ng-model="fechaFin" ng-change="buscarDetalles()">
+                                </div>
+                            <label ng-show="cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.fechaPedido.$dirty &amp;&amp; cashMonthlyCreateForm.fechaPedido.$invalid" class="ng-hide">
+                            <span ng-show="cashMonthlyCreateForm.fechaPedido.$invalid" class="ng-hide"><i class="fa fa-times-circle-o"></i>Fecha Inválida.</span>
+                            </label>
+                             
+                             <div ng-show="show" class="input-group ng-hide">
+                               <spam class="ng-binding"></spam>
+                            </div> 
+                      </div>  
+                      </div>
+
+
+                      <div class="col-md-2">
+                        <div class="form-group" >
+                         <label for="expense">Buscar por Concepto</label>
+
+                          <select class="form-control" name="" ng-model="cashMonthly.expenseMonthlys_id" ng-options="item.id as item.name for item in expenses" ng-change="buscarDetallesEcpence()">
+                          <option value="">Todos</option>
+                          </select>
+                          
+                          </div>
+                          </div>
+                      <div class="col-md-2">
+                        <div class="form-group" >
+                          <label for="amount">Monto Acumulado</label>
+                          <input type="acumulado" class="form-control" name="acumulado" ng-disabled="true" ng-model="acumulado">
+                      </div> 
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group" >
+                          <label for="amount"></label><br>
+                          <input type="submit" class="btn btn-info"  ng-click="generarReporteCajaMen()" value="Generar Reporte">
+                      </div> 
+                      </div>
+
+                  </div>
+                  
+                  <div class="box-tools">
+
+                  
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div ng-show="success" class="callout callout-info">
+                                <strong>{{success}} se ha creado correctamente!</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <div class="callout callout-info"  ng-show="cashMonthly.id > 0">
+                    <h4>¿ Estás seguro que deseas eliminar a el concepto "{{cashMonthly.expense_monthly.name}}" ?</h4>
+                    <p>
+                      <button type="button" class="btn btn-danger" ng-click="destroycashMonthly()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelcashMonthly()">No</button>
+                    </p>
+                  </div>
+                  
+                  
+                  <table class="table table-bordered">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Fecha</th>
+                      <th>Concepto</th>
+                      <th>Monto</th>
+                      <th>Descripcion</th>
+                      <th style="width: 40px">Editar</th>
+                      <th style="width: 40px">Eliminar</th>
+                    </tr>
+                    
+                    <tr ng-repeat="row in cashMonthlys">
+                      <td>{{$index + 1}}</td>
+                      <td>{{row.fecha}}</td>
+                      <td>{{row.expense_monthly.name}}</td>
+                      <td>{{row.amount}}</td>
+                      <td>{{row.descripcion}}</td>
+                      <td><a ng-click="editcashMonthly(row)" class="btn btn-warning btn-xs">Editar</a></td>
+                      <td><a ng-click="deletecashMonthly(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+
+                      
+                    </tr>
+                    
+                    
+                  </table>
+                  
+
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+
+
+
+                </div>
+              </div><!-- /.box -->
+            </div>  
+          </div>
+        </section>
+

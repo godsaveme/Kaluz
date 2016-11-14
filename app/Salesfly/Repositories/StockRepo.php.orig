@@ -1,0 +1,34 @@
+<?php
+namespace Salesfly\Salesfly\Repositories;
+use Salesfly\Salesfly\Entities\Stock;
+
+class StockRepo extends BaseRepo{
+    
+    public function getModel()
+    {
+        return new Stock;
+    }
+<<<<<<< HEAD
+
+   public function encontrar($vari){
+        $stock=Stock::where("variant_id","=",$vari);
+=======
+    
+
+    public function search($q)
+    {
+        $stock =Stock::where('direccion','like', $q.'%')
+                    //with(['customer','employee'])
+                    ->paginate(15);
+>>>>>>> 3020603313a2708a73bd9da2262e426bd3280ba2
+        return $stock;
+    }
+   /*public function traerStock($id,$id2){
+    $stock=Stock::where('warehouse_id','=',$id)->where('variant_id','=',$id2)->first();
+    return $stock;
+   }*/
+   public function encontrar($vari,$almacen){
+        $stocks=Stock::where("variant_id","=",$vari)->where("warehouse_id","=",$almacen)->first();
+        return $stocks;
+    }
+} 

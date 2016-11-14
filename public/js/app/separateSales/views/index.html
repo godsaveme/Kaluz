@@ -1,0 +1,167 @@
+<!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Lista de PEDIDOS/SEPARADOS
+            <small>Panel de Control</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Pedid/Separ</li>
+          </ol>
+
+          
+        </section>
+
+        
+
+        <!-- Main content -->
+        <section class="content">
+        <div class="row">
+        <div class="col-md-12">
+          <a href="/separateSales/create" type="submit" class="btn btn-primary pull-left">Crear Ped/Sep</a>
+          </div>
+        </div>
+        </br>
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Pedidos</h3>
+
+                  <div class="box-tools pull-right">
+
+                    <select ng-change="searchOrder()" name="" id="" class="form-control" ng-model="query2">
+                      <option value="0">--TODOS--</option>
+                      <option value="1">
+                        SEPARADO
+                      </option>
+                      <option value="2">PEDIDO</option>
+                    </select>
+
+
+                  <form ng-keyup="searchOrder()">
+                    <div class="input-group" style="width: 200px;">
+                      <input type="text" ng-model="query"  name="table_search" class="form-control input-sm" placeholder="Search" />
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                <div class="row">
+                
+                    <div class="col-md-3">                             
+                            <label for="fechaPedido">Fecha Inicio: </label>
+                            <div ng-hide="show" class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input type="date" class="form-control"  name="fechainicio" ng-model="fechainicio" >
+                            </div>                          
+                        </div> 
+                         <div class="col-md-3">                             
+                            <label for="fechaPedido">Fecha Fin: </label>
+                            <div ng-hide="show" class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input type="date" class="form-control"  ng-model="fechafin" >
+                            </div>                          
+                        </div>
+                        <div class="col-md-2">
+                            <label>Tipo</label>
+                            <select class="form-control" ng-model="tipo">
+                              <option value="0">Todos</option>
+                              <option value="1">Separados</option>
+                              <option value="2">Pedidos</option>
+                            </select>
+                        </div>
+                         <div class="col-md-2">
+                            <label>Tipo</label>
+                            <select class="form-control" ng-model="estado">
+                              <option value="0">Todos</option>
+                              <option value="1">Pendiente</option>
+                              <option value="2">Atendidos</option>
+                              <option value="3">Anulados</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2"> 
+                        <label></label> <br>
+                        <input ng-disabled="fechafin<fechainicio" type="button" class="btn btn-warning" ng-click="GenReporteCajas()" value="{{decriboton}}">
+                        </div>
+                </div><br>
+                <!--
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div ng-show="success" class="callout callout-info">
+                                <strong>{{success}} se ha creado correctamente!</strong>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="callout callout-info"  ng-show="store.id >0">
+                    <h4>¿ Estás seguro que deseas eliminar a "{{store.nombreTienda}}" ?</h4>
+                    <p>
+                      <button type="button" class="btn btn-danger" ng-click="destroyorder()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelorder()">No</button>
+                    </p>
+                  </div>
+                  -->
+                  <table class="table table-bordered">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Fechas</th>
+                      <th>Fecha Anulado</th>
+                      <th>Total</th>                                             
+                      <th>Cliente</th>
+                      <th>Vendedor</th>
+                      <th>Tipo</th>
+                      <th>Estado Pago</th>
+                      <th>Estado Venta</th>
+                        <th>Notas</th>
+                      <th style="width: 40px">Detalle</th>
+                    </tr>
+
+
+
+                    <tr ng-repeat="row in separateSales">
+                      <td>{{$index + 1}}</td>
+                      <td>{{row.fechaPedido}}</td>
+                      <td ng-if="row.fechaAnulado == '0000-00-00 00:00:00'">-</td>
+                      <td ng-if="row.fechaAnulado != '0000-00-00 00:00:00'">{{row.fechaAnulado}}</td>
+                      <td>{{row.montoTotal}}</td>                      
+                      <td>{{row.customer.nombres+' '+row.customer.apellidos+' - '+row.customer.empresa}}</td>
+                      <td>{{row.employee.nombres+' '+row.employee.apellidos}}</td>
+
+                      <td ng-if="row.tipo==1">Separ.</td>
+                      <td ng-if="row.tipo==2">Pedid.</td>
+
+                      <td ng-if="row.estado==1"><span style="color: yellow;">Pag. sin entre.</span></td>
+                      <td ng-if="row.estado==0"><span style="color: cornflowerblue;">Pend. sin entre.</span></td>
+                      <td ng-if="row.estado==2"><span style="color: green;">Pag y entre.</span></td>
+                      <td ng-if="row.estado==3"><span style="color: red;">Anulado</span></td>
+
+                      <td>{{row.estadoPago==1? 'Credito':'Contado'}}</td>
+                        <td><i>{{row.notas}}</i></td>
+                      <td><a ng-click="editseparate(row)" class="btn btn-warning btn-xs">Ver</a></td>
+                      
+                      
+                    </tr>
+                    
+                    
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+
+
+
+                </div>
+              </div><!-- /.box -->
+            </div>  
+          </div>
+        </section>

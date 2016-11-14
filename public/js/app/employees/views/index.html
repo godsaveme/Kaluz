@@ -1,0 +1,253 @@
+<!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Empleados
+            <small>Panel de Control</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Empleados</li>
+          </ol>
+          </section>
+        
+
+        <!-- Main content -->
+        <section class="content">
+        <div class="row">
+        <div class="col-md-12">
+        <a href="/employees/create" type="submit" ng-click="llenarcombo()" class="btn btn-primary pull-left">Añadir Empleado</a>
+         <!-- <input type="submit" class="btn btn-primary pull-left" value="Anadir Cl" ng-click="llenarcombo()" onclick="location='/employees/create'"/>-->
+          </div>
+        </div>
+        </br>
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Empleados</h3>
+                  <div class="box-tools">
+                  <form ng-keyup="searchEmployee()">
+                    <div class="input-group" style="width: 200px;">
+                      <input type="text" ng-model="query"  name="table_search" class="form-control input-sm pull-right" placeholder="Search" />
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                  
+                </div><!-- /.box-header -->
+                  <div class="callout callout-warning"  ng-show="estado">
+                      <h4><b>Gastos Del Empleado {{mostrarShow}}</b></h4>
+                      <button type="button" ng-click="" data-toggle="modal" data-target="#miventana1" class="btn btn-primary" ng-show="mostrarver" >Ver</button>
+                          <button type="button" ng-click="" data-toggle="modal" data-target="#miventana" class="btn btn-primary" ng-show="mostraragregar">Agregar</button>                          
+                          <button type="button" class="btn btn-default" ng-click="variable2()">Salir</button>
+                  </div>
+                <div class="box-body">
+                   
+                <div class="callout callout-info"  ng-show="employee.id > 0">
+                    <h4>¿ Estás seguro que deseas eliminar a "{{employee.nombres}}" ?</h4>
+                    <p>
+                      <button type="button" class="btn btn-danger" ng-click="destroyEmployee()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelEmployee()">No</button>
+                    </p>
+                  </div>
+                  <table class="table table-bordered">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Nombre Completo </th>
+                      <th>Codigo</th>
+                        <th>Cargo</th>
+                      <th>E-mail</th>
+                      <th>Direcion</th>
+                      <th>Estado</th>
+
+                      <th style="width: 40px">Costos</th>
+                      <th style="width: 40px">Editar</th>
+                      <th style="width: 40px">Eliminar</th>
+                    </tr>
+                   
+                    <tr ng-repeat="row in employees">
+                      <td>{{$index + 1 + (currentPage-1)*itemsperPage}}</td>
+
+                      <td>{{row.nombres+ " " + row.apellidos }}</td>
+                      <td>{{row.codigo}}</td>
+                        <td>{{row.cargo}}</td>
+                      <td>{{row.email}}</td>
+                      <td>{{row.direccioncontacto}}</td>
+                      <td><div ng-if="row.estado==='1'">
+                          Activo      
+                          </div>
+                          <div ng-if="row.estado==='0'">
+                          Inactivo      
+                          </div>
+                      </td>
+
+                      <!--<td><a ng-click="showForm" class="btn btn-warning btn-xs">Costos Fijos</a></td>
+                      <td><a ng-click="variable(row)" data-toggle="modal" data-target="#miventana" class="btn btn-info btn-xs">Costos Fijos</a></td>-->
+                        <td><a ng-click="editCostos(row)" class="btn btn-success btn-xs">Costos</a></td>
+                        <td><a ng-click="editEmployee(row)" class="btn btn-warning btn-xs">Editar</a></td>
+                      <td><a ng-click="deleteEmployee(row)" class="btn btn-danger btn-xs">Eliminar</a></td>
+                      
+                    </tr>
+                    
+                    
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="ngenabled" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+
+
+
+                </div>
+              </div><!-- /.box -->
+            </div>  
+          </div>
+        </section>
+          <!-- =======================================================================================================Ventana Emergente Crear=================================-->
+        <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog">
+               <div style="border-radius: 5px" class="modal-content">
+                 <div class="modal-header" style="" >
+                   <button type="button" style="" class="close" data-dismiss="modal" aria-hidden="ngenabled"> &times; </button>
+                   <h4><b>Gastos Del Empleado {{mostrarShow}}</b></h4>
+                   </div>
+                   <div class="modal-body">
+          <div class="row">
+          <div class="col-md-6">
+                      <form name="employeecostCreateForm" role="form" novalidate>
+                       <div class=" callout-info" >
+                      <div  class="form-group" >
+                      <label for="descripcion">Sueldo Fijo</label>
+                      <input  class="form-control" type="number" ng-blur="CalcCostos()" name="descripcion" placeholder="Sueldo Fijo" ng-model="employeecost.SueldoFijo">
+                     </div>
+                     
+                     <div  class="form-group" >
+                      <label for="descripcion">Comisiones</label>
+                      <input type="number"  class="form-control" name="descripcion" placeholder="Comisiones"
+                      ng-model="employeecost.comisiones" >
+                     </div>
+                     <div class="form-group" >
+                      <label for="descripcion">Seguro</label>
+                      <input type="number" ng-blur="CalcCostos()"class="form-control" name="descripcion" placeholder="Seguro"
+                      ng-model="employeecost.seguro">
+                     </div>
+          </div> 
+        </div>
+          <div class="col-md-6">
+                     <div class="form-group" >
+                      <label for="descripcion">Menu</label>
+                      <input type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Menu"
+                      ng-model="employeecost.menu" >
+                     </div>
+                      <div class="form-group" >
+                      <label for="descripcion">Pasajes</label>
+                      <input type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Psajes"
+                      ng-model="employeecost.pasajes" >
+                     </div>
+                      <div class="form-group" >
+                      <label for="descripcion">Descuento</label>
+                      <input type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Psajes"
+                      ng-model="employeecost.descuento" >
+                     </div>
+                     <div class="form-group" >
+                      <label for="descripcion">Total</label>
+                      <input ng-disabled="true" type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Total"
+                      ng-model="employeecost.total">
+                     </div>
+              </div>
+                     <div ng-show="false" class="form-group" >
+                      <label for="descripcion">Empleado</label>
+                      <input type="text" class="form-control"  name="descripcion" placeholder="Empleado"
+                      ng-model="employeecost.employee_id">
+                     </div>
+                     </div>
+                     </div>
+                     <div class="modal-footer" style="">
+                     <button type="submit" class="btn btn-primary" ng-click="createEmployeecost()" data-dismiss="modal">Crear</button>
+                    <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Cancelar</a>
+                   </div>
+                     </form>
+                   
+                   
+               </div>
+             </div>
+           </div>
+        </div>
+        </div>
+        <!-- ========================================================================================================Ventana Emergente Listado=================================-->
+         <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog">
+                       <div style="border-radius: 5px" class="modal-content">
+                        <div class="modal-header" style="" >
+                         <button type="button" style="" class="close" data-dismiss="modal" aria-hidden="ngenabled"> &times; </button>
+                        <h4><b>Lista De Gastos del Empleado {{mostrarShow}}</b></h4>
+                        </div>
+                   <div class="modal-body">
+          <div class="row">
+          <div class="col-md-6">
+                       <div class=" callout-info" >
+                       <div class="form-group" >
+                      <label for="descripcion">Sueldo Fijo</label>
+                      <input string-to-number ng-disabled="ngenabled" type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Sueldo Fijo" ng-model="employeecost.SueldoFijo">
+                     </div>
+                     <div class="form-group" >
+                      <label for="descripcion">Comisiones</label>
+                      <input ng-disabled="ngenabled" type="number"  class="form-control" name="descripcion" placeholder="Comisiones"
+                      ng-model="employeecost.comisiones" >
+                     </div>
+              
+                     <div class="form-group" >
+                      <label for="descripcion">Seguro</label>
+                      <input ng-disabled="ngenabled" type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Seguro"
+                      ng-model="employeecost.seguro">
+                     </div>
+        </div> 
+        </div>
+          <div class="col-md-6">
+                     <div class="form-group" >
+                      <label for="descripcion">Menu</label>
+                      <input ng-disabled="ngenabled" type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Menu"
+                      ng-model="employeecost.menu" >
+                     </div>
+                      <div class="form-group" >
+                      <label for="descripcion">Pasajes</label>
+                      <input ng-disabled="ngenabled" type="number" ng-blur="CalcCostos()" class="form-control" name="descripcion" placeholder="Psajes"
+                      ng-model="employeecost.pasajes" >
+                     </div>
+                     <div class="form-group" >
+                      <label for="descripcion">Descuento</label>
+                      <input ng-disabled="ngenabled" type="number" class="form-control" ng-blur="CalcCostos()" name="descripcion" placeholder="Psajes"
+                      ng-model="employeecost.descuento" >
+                     </div>
+                     <div class="form-group" >
+                      <label for="descripcion">Total</label>
+                      <input ng-disabled="ngenabled" type="number" class="form-control" name="descripcion" placeholder="Total"
+                      ng-model="employeecost.total">
+                     </div>
+          </div>
+
+                     <div ng-show="false" class="form-group" >
+                      <label for="descripcion">Empleado</label>
+                      <input ng-disabled="ngenabled" type="text" class="form-control"  name="descripcion" placeholder="Empleado"
+                      ng-model="employeecost.employee_id">
+                     </div>
+                   </div>
+                      <div class="modal-footer" style="">
+                    <button type="submit" class="btn btn-primary" ng-click="activarDesac()">Modificar</button>
+                     <button type="submit" class="btn btn-info" ng-click="updateEmployeecost()" data-dismiss="modal">Guardar Cambios</button>
+                     <button type="submit" class="btn btn-success" ng-click="destroyEmployeecost()" data-dismiss="modal">Eliminar</button>
+                    <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
+                   </div>
+                   
+                   
+               </div>
+             </div>
+           </div>
+        </div>
+        

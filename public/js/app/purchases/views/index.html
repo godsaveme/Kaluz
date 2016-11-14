@@ -1,0 +1,231 @@
+<!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>Compras
+            <small>Panel de Control</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Compras</li>
+          </ol>
+
+          
+        </section>
+
+        
+
+        <!-- Main content -->
+        <section class="content">
+        <!--<div class="row">
+        <div class="col-md-12">
+          <a href="/purchases/create" type="submit"  class="btn btn-primary pull-left">Add Purchases</a> 
+          </div>
+        </div>-->
+        </br>
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Compras</h3>
+                  <div class="box-tools">
+                  <form ng-keyup="searchPurchase()">
+                    <div class="input-group" style="width: 200px;">
+                      <input type="text" ng-model="query"  name="table_search" class="form-control input-sm pull-right" placeholder="Search" />
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div ng-show="success" class="callout callout-info">
+                                <strong>{{success}} se ha creado correctamente!</strong>
+                            </div>
+                        </div>
+                    </div>
+                <div class="callout callout-info"  ng-show="purchase.id">
+                    <h4>¿ Estás seguro que deseas eliminar a "{{}}" ?</h4>
+                    <p>
+                      <button type="button" class="btn btn-danger" ng-click="destroyPurchase()">Si</button>
+                      <button type="button" class="btn btn-default" ng-click="cancelPurchase()">No</button>
+                    </p>
+                  </div>
+              <div class="form-group">
+                 <a target="_self" class="btn label-default" href="/orderPurchases/createP" >Crear Compra Directa</a>
+                  <a target="_self" class="btn label-default" href="/orderPurchases/create" >Crear Orden de Compra</a>
+                  <a target="_self" class="btn label-default" href="/orderPurchases" >Listado de Ordenes</a>
+                 <a class="btn label-default" href="/purchases/create">Movimientos de Almacen</a>
+                 <a class="btn label-default" href="/purchases/showD">Cuentas por Cobrar Proveedores</a>
+                 <a class="btn label-default" href="/purchases/cardex">Cardex</a>
+              </div>
+
+           <!-- <div class="form-group">
+                <select class="form-control"  ng-click="searchEstados()" ng-model="estado" >
+                        <option value="">--Elija Variante--</option>
+                        <option value="0">--Pedidos Pendientes--</option>
+                        <option value="1">--Pedidos Atendidos--</option>
+                        <option value="2">--Pedidos Cancelados--</option>
+                </select>
+            </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <a ng-href="/orderPurchases/create" class="btn btn-success btn-xs">Crear Nuevo Pedido</a>
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <a ng-href="/purchases" class="btn btn-success btn-xs">Ver Compras Realizadas</a>
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <a ng-href="/orderPurchases/edit/" class="btn btn-success btn-xs">Ver Pedidos Pendientes</a>
+                  </div>
+              </div>
+              <div class="col-md-2">
+                  <div class="form-group">
+                    <a ng-href="/orderPurchases/edit/" class="btn btn-success btn-xs">Ver pedidos Cancelados</a>
+                  </div>
+                </div>-->
+             
+ <div class="row">
+                
+                <div class="col-md-2">
+                  <div  class="form-group">
+                                <label for="fechaPedido">Elija Rango de Fechas</label>
+                            <div  class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input  type="date" class="form-control"  name="fechaPedido" ng-model="purchase.fechaini" ng-change="filtrarFecharCompras()" >
+                            </div>
+                  </div>
+          </div>
+          <div  class="col-md-3">
+                  <div  class="form-group" >
+                            <label ><---></label>
+                                <div  class="input-group">
+                                        <div class="input-group-addon">
+                                              <i class="fa fa-calendar"></i>
+                                        </div>
+                                      <input  ng-disabled="purchase.fechaini==null" type="date"  ng-change="filtrarFecharCompras()" class="form-control" name="fechaPrevista" ng-model="purchase.fechafin" >
+                                   </div>   
+                                 
+                            
+                      </div> 
+          </div>
+          <div class="col-md-1">
+             <a ng-click="GenerarReportComprasRF()" style="width:95px;" class="btn btn-success btn-xs">{{textpurchasefecha}}</a>
+             <a ng-href="{{pdfreportCompr}}" style="width:95px;" target="_blank" class="btn btn-primary btn-xs">Ver Reporte</a>
+          </div>
+          </div>
+           
+                  
+                  <table class="table table-bordered table-hover">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Fecha Entrega</th>
+                      <th>Proveedor</th>
+                      <th>Almacen</th>
+                      <th>Orden de Compra</th>
+                      <th>Num. Documento</th>
+                      <th>IGV</th>
+                      <th>Monto Base</th>
+                      <th>Descuento</th>
+                      <th>Monto Bruto</th>
+                      <th>Monto Total</th>
+                      <th style="width: 40px">Pagar Pedido</th>
+                      <th style="width: 40px">Ver Detalles</th>
+                    </tr>
+                    
+                    <tr ng-repeat="row in purchases">
+                      <td>{{$index + 1}}</td>
+                      <td ng-hide="true">{{row.id}}</td>
+                      <td>{{row.fechaEntrega.substring(0,10)}}</td>
+                      <td>{{row.empresa}}</td>
+                      <td>{{row.almacen}}</td>
+                      <td ng-if="row.orderPurchase_id>0"><a target="_self" ng-href="/orderPurchases/edit/{{row.orderPurchase_id}}">Ver Orden</a></td>
+                      <td ng-if="row.orderPurchase_id==null">Sin Orden</td>
+                      <td style="color:red;" >{{row.tipoDoc}}-{{row.numdocument}}<br>({{row.serie}})</td>
+                      <td>{{row.igv}}</td>
+                      <td>{{row.montoBase}}</td>
+                      <td>{{row.descuento}}</td>
+                      <td>{{row.montoBruto}}</td>
+                      <td>{{row.montoTotal}}</td>
+                      <td ng-if="row.saldo>0"><a  class="btn btn-primary btn-xs" ng-href="/purchases/show/{{row.id}}">Pagar</a>
+                      </td>
+                      <td ng-if="row.saldo<=0"><a class="btn btn-primary btn-xs" ng-href="/purchases/show/{{row.id}}">Ver Pagos</a>
+                      </td>
+                      <td><a ng-click="editCompra(row)" class="btn btn-success btn-xs">Ver Detalles</a></td>
+                                        
+                    </tr>
+                    
+                    
+                  </table>
+                  <!--======================================================-->
+                
+                  <!--============================================================================-->
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+               </div>   
+              </div><!-- /.box -->
+            </div>  
+          </div>
+        </section>
+        <!-- =======================================================================================================Ventana Emergente Crear=================================-->
+        <div class="container"  style="margin-top: 60px;">
+           <div  class="modal fade" id="miventana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
+             <div  class="modal-dialog">
+               <div style="border-radius: 5px" class="modal-content">
+                 <div class="modal-header" style="border-radius: 5px" >
+                   <button type="button"  class="close" data-dismiss="modal" aria-hidden="ngenabled"> &times; </button>
+                   <h4><b>Agregar Pagos Adelantados {{mostrarShow}}</b></h4>
+                   </div>
+                   <div class="modal-body">
+                    <div class="form-group" ng-class="{true: 'has-error'}[ orderPurchaseCreateForm.empresa.$error.required && orderPurchaseCreateForm.$submitted || orderPurchaseCreateForm.empresa.$dirty && orderPurchaseCreateForm.empresa.$invalid]">
+                           <label>Proveedor: </label>
+                           <div class="input-group" ng-hide="show">
+              
+                            
+                            <input typeahead-on-select="asignarEmpresa()" type="text" name="empresa" ng-model="  orderPurchase.empresa" placeholder="Busca por Proveedor" 
+                                  typeahead="supplier as supplier.empresa for supplier in suppliers | filter:$viewValue | limitTo:8"  
+                     typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control"
+                     tooltip="Ingrese caracteres para busacar Proveedor por Empres" required>
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                    </div>
+             
+                </div> 
+                <label ng-show="orderPurchaseCreateForm.$submitted || orderPurchaseCreateForm.empresa.$dirty && orderPurchaseCreateForm.empresa.$invalid">
+                                    <span ng-show="orderPurchaseCreateForm.empresa.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                                </label>
+                <div ng-show="show" class="input-group">
+                      <spam ng-show="show">@{{orderPurchase.empresa}}</spam>
+                </div>
+        </div>
+          <div class="form-group" >
+                <label for="suppPric">Num de Pedido</label>
+                <input type="number" class="form-control" name="markup" placeholder="0.00"  ng-model="product.stock[$index].stockActual" ng-disabled="product.hasVariants || !product.track" step="0.1">
+          </div>
+                     
+                   </div>
+                  
+                     <div class="modal-footer" >
+                     <button type="submit" class="btn btn-primary" ng-click="createEmployeecost()" data-dismiss="modal">Crear</button>
+                    <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Cancelar</a>
+                   </div>
+                     </form>
+                   
+                   
+               </div>
+             </div>
+           </div>
+        </div>
+        </div>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tiket" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b415bce5-dbb5-4d78-a1f0-81c7cccfaa54">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idOrderPurcjase" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[call principal2($P{idOrderPurcjase});]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Idvar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="modelo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="image" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Taco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Talla" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sku" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="1"/>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="124">
+			<rectangle>
+				<reportElement x="323" y="18" width="111" height="80" uuid="11a91620-b47a-4854-a292-17f4103ec61a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="115" y="12" width="188" height="87" uuid="0a6ef1e1-e908-4086-b64b-63a23f5dee4d"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="166" y="75" width="127" height="20" uuid="2aa1ed10-66f4-434a-8b8d-485f9cf900ff"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="128" y="18" width="82" height="25" uuid="cd014187-f6ee-4f2f-bf29-4f8e15a6215e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="129" y="49" width="70" height="20" uuid="3caa0c2d-97b1-4961-bf08-5c2e04ecb121"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Taco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="223" y="24" width="70" height="19" uuid="c8e2c71d-65a4-4d86-95a8-c4bcecc9374e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Talla}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="35" y="12" width="80" height="87" uuid="0f96609c-08d6-43d3-8bab-64d812bbf0f8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="129" y="74" width="37" height="20" uuid="9b702ada-f887-4e35-972b-598af8f4b17b"/>
+				<text><![CDATA[MOD:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="35" y="15" width="80" height="84" uuid="0459eea6-7a56-42fb-9526-9ee401cde13e"/>
+				<imageExpression><![CDATA["/usr/share/nginx/html/salesfly/public/"+$F{image}]]></imageExpression>
+			</image>
+			<componentElement>
+				<reportElement x="339" y="43" width="83" height="49" uuid="31a666db-2391-4155-bff8-6649f94049e1"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{sku}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<textField>
+				<reportElement x="339" y="23" width="83" height="20" uuid="c8b09905-8fa5-463e-ae0b-b3d12016ba5f"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MovAlmacen" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="972bf3ce-2c29-4aae-beee-e477a0a05bfb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/usr/share/nginx/html/salesfly/public/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaMostrada" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select headInputStocks.id,headInputStocks.warehouDestino_id as idCabeseara,headInputStocks.Fecha,headInputStocks.tipo,users.name,warehouses.nombre as almcen_uno,(select warehouses.nombre from headInputStocks inner join users on users.id= headInputStocks.user_id inner join warehouses on warehouses.id=headInputStocks.warehouses_id where warehouses.id=idCabeseara limit 1)as almacen_dos from headInputStocks inner join users on users.id= headInputStocks.user_id inner join warehouses on warehouses.id=headInputStocks.warehouses_id where headInputStocks.Fecha like concat($P{fechaMostrada},"%");]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idCabeseara" class="java.lang.Long"/>
+	<field name="Fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="almcen_uno" class="java.lang.String"/>
+	<field name="almacen_dos" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="45">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="64" backcolor="#006699" uuid="494bb928-0714-4bf2-b646-b761a3a3aba8"/>
+				<staticText>
+					<reportElement x="20" y="20" width="500" height="43" forecolor="#FFFFFF" uuid="06885ee8-f827-4f46-b1ee-c76b892ae8d0"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Movimientos de Alamcen]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12"/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="129">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="97a9e107-1184-494a-99e2-b1a00cf53453"/>
+			</line>
+			<textField>
+				<reportElement mode="Opaque" x="84" y="2" width="125" height="20" backcolor="#E0E000" uuid="37ca9454-4b6f-434a-b9d1-2b3d94d7fdd9"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="209" y="2" width="223" height="20" backcolor="#E0E000" uuid="fc5149ef-c1a6-47cf-be27-e1205544b5e4"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="2" width="84" height="20" backcolor="#E0E000" uuid="d3a6a7e6-5502-4fa8-b344-2036eb981931"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="432" y="2" width="123" height="20" backcolor="#E0E000" uuid="5ef8ec16-a401-4d2d-a6a9-57fd5e3c1b71"/>
+				<textFieldExpression><![CDATA[$F{tipo}.equals("Transferencia")?$F{almcen_uno}+"->"+$F{almacen_dos}:$F{almcen_uno}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="19" y="27" width="516" height="100" uuid="ec80649c-06f0-4791-b03b-f2798389aa4f"/>
+				<subreportParameter name="inputStocks_id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubReportMovi.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="da516062-9705-4d22-b295-472868714636"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="d9e67b24-5dbc-495b-a67b-667fb4b7101c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="fa93d3e4-353a-4e33-a63d-822e27aae0ab"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

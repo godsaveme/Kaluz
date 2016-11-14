@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreporteCompras" language="groovy" pageWidth="556" pageHeight="842" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="917b8fcb-b3b3-40db-806b-e400cddd4300">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ordePurchase_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from detailOrderPurchases where detailOrderPurchases.orderPurchases_id=$P{ordePurchase_ID};]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoBruto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="detPres_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderPurchases_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="preProducto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="preCompra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Cantidad_Ll" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pendiente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#9C9494" uuid="a6d6c60b-7b3f-4a68-b7b9-161589195f63"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Detalles de Orden]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="167" height="20" backcolor="#E0E000" uuid="e63b303a-5629-4ec4-897d-ccf2afc0ad8a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="354" y="2" width="56" height="20" backcolor="#E0E000" uuid="31f2d6f1-6e68-4d4c-a6b6-4114f0bbaa1e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[descuento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="410" y="2" width="73" height="20" backcolor="#E0E000" uuid="ae05dd2d-80a2-4785-ae27-229e5f29bcad"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[montoBruto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="483" y="2" width="72" height="20" backcolor="#E0E000" uuid="892512c5-b7c0-4c06-9c9a-e80a09b25071"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[montoTotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="230" y="2" width="65" height="20" backcolor="#E0E000" uuid="70de718c-7838-4dbb-9920-172c6315439f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[preProducto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="295" y="2" width="60" height="20" backcolor="#E0E000" uuid="d2b3d0cf-0846-4e74-a7f2-3696368a8673"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[preCompra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="167" y="2" width="63" height="20" backcolor="#E0E000" uuid="844a82b3-e671-43a6-bcbf-26d1fc82efe0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="167" height="20" backcolor="#E6E6E6" uuid="0c32aa41-5143-45c9-a0e5-ecd0f69dd4b6"/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="354" y="0" width="56" height="20" backcolor="#E6E6E6" uuid="3e0a5321-5b2d-4c72-a0d5-8deeb16030f9"/>
+				<textFieldExpression><![CDATA["S/."+$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="410" y="0" width="73" height="20" backcolor="#E6E6E6" uuid="7d7d1bf8-91f7-4642-a832-5653960d751e"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoBruto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="483" y="0" width="72" height="20" backcolor="#E6E6E6" uuid="579b100d-646e-47af-8597-40d5de4f30ca"/>
+				<textFieldExpression><![CDATA["S/."+$F{montoTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="230" y="0" width="65" height="20" backcolor="#E6E6E6" uuid="20bf816f-ac64-43e4-a4d5-a96a97c049c0"/>
+				<textFieldExpression><![CDATA["S/."+$F{preProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="295" y="0" width="60" height="20" backcolor="#E6E6E6" uuid="17a606ef-8b0e-44bb-bd86-fbe18bcf9fc8"/>
+				<textFieldExpression><![CDATA["S/."+$F{preCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="167" y="0" width="63" height="20" backcolor="#E6E6E6" uuid="bd4ea3a2-3809-4a5c-af2f-7ed2b1972043"/>
+				<textFieldExpression><![CDATA[$F{cantidad}+"UN"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

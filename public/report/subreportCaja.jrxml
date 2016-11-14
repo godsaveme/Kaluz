@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportCaja" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="23150bc8-829b-4d63-a526-05fb291ca146">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaini" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select c.fechaInicio,c.ingresos,c.gastos,c.montoBruto,c.montoReal,c.descuadre,c.montoInicial,SUM(dt.montoMovimientoTarjeta) as toTarjeta,(SUM(dt.montoMovimientoEfectivo)-c.gastos) as totEfectivo from cashes c
+inner join detCash dt on dt.cash_id=c.id where c.fechaInicio between $P{fechaini} and $P{fechafin} group by c.id]]>
+	</queryString>
+	<field name="fechaInicio" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ingresos" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gastos" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoBruto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoReal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuadre" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoInicial" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="toTarjeta" class="java.math.BigDecimal"/>
+	<field name="totEfectivo" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="2bd1711d-dece-4d94-ac4b-65660505b8cf"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="76" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d96f917b-a023-4067-b858-c54250071c2f"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="76" y="0" width="59" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0eb57c2c-563c-4ec6-999b-a908a9b86c14"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[montoIni.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="135" y="0" width="59" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6758321c-8e76-4e00-8651-338806de8db0"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ingresos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="296" y="0" width="51" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6e0dc0fa-8cfa-4154-934c-04bb83d8b202"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[gastos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="347" y="0" width="71" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b3953d57-cfda-4b78-9e13-a8714537a1f9"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[montoBruto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="418" y="0" width="71" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e5a5ffd5-c892-43c7-b230-08a828796cb6"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[montoReal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="489" y="0" width="66" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="978741a5-92c7-4b3a-b898-46bd3bba0044"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[descuadre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="194" y="0" width="51" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6e3908e6-7fc3-423b-af31-46d697185231"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="245" y="0" width="51" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="9c8df79f-9fa4-4696-95dd-ca9e7616dd6e"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarjeta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="daa553b7-cefa-4c5f-b4be-377d569d5168"/>
+			</line>
+			<textField>
+				<reportElement x="418" y="0" width="71" height="20" forecolor="#0000FF" uuid="016e0781-dd6a-4e8f-8ecd-607713d57cd2"/>
+				<textFieldExpression><![CDATA["S/:"+$F{montoReal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="0" width="71" height="20" forecolor="#FFC800" uuid="31b208ff-c88f-432a-a95e-869967ca1572"/>
+				<textFieldExpression><![CDATA["S/:"+$F{montoBruto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="59" height="20" forecolor="#0000FF" uuid="14b48319-1efc-4639-bb53-1ec9792db54c"/>
+				<textFieldExpression><![CDATA["S/:"+$F{ingresos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="0" width="51" height="20" forecolor="#FF0000" uuid="d9894c4a-3272-41a2-9575-a45233953024"/>
+				<textFieldExpression><![CDATA["S/:"+$F{gastos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="0" width="59" height="20" uuid="3948b092-4aeb-46a8-bd66-2c3bc537f1c2"/>
+				<textFieldExpression><![CDATA["S/:"+$F{montoInicial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="76" height="20" uuid="89b910ca-c1ef-4f21-ab9f-24f336514fdd"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="489" y="0" width="66" height="20" forecolor="#FF0000" backcolor="#FFFFFF" uuid="fedffdc2-8b9f-4f30-854f-2e420441da81"/>
+				<textFieldExpression><![CDATA["S/:"+$F{descuadre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="0" width="51" height="20" uuid="97b14c0d-cf94-4064-b194-f22a30bdf2d2"/>
+				<textFieldExpression><![CDATA[$F{toTarjeta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="0" width="51" height="20" uuid="880ac948-1359-4831-8053-cee9c69b07ff"/>
+				<textFieldExpression><![CDATA[$F{totEfectivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

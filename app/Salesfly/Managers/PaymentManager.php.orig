@@ -1,0 +1,23 @@
+<?php
+namespace Salesfly\Salesfly\Managers;
+class PaymentManager extends BaseManager {
+
+    public function getRules()
+    {
+        $rules = [   
+            'NumFactura'=>'', 
+            'NumSerie'=>'',
+            'tipoDoc'=>'',          
+            'montoTotal'=>'',
+            'Acuenta'=>'',
+            'Saldo'=>'',
+<<<<<<< HEAD
+=======
+            //'estado'=>'',
+>>>>>>> 6aa53947f40322acde958aefcd45006f29c075ed
+            'orderPurchase_id'=>'',
+            'purchase_id'=>'',
+            'supplier_id'=>''
+                  ];
+        return $rules;
+    }}
