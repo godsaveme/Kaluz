@@ -14,9 +14,10 @@
     <!-- Theme style -->
     <link href="/vendor/adminlte/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     
-    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+    <!-- AdminLTE Skins. Choose a skin from the css/skins multi_select
          folder instead of downloading all of them to reduce the load. -->
     <link href="/vendor/adminlte/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/multi_select/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE fonts OpenSans-->
     <link href="/css/fonts.css" rel="stylesheet" type="text/css" />
 
@@ -172,6 +173,7 @@
                 @endif
                   @if($role == 1)
                 <li class=""><a href="/purchases" ><i class="fa fa-circle-o"></i>Control de Stock</a></li>
+                <li class=""><a href="/otherPheads"><i class="fa fa-circle-o"></i>Compras Varios</a></li>
                 <li class=""><a href="/brands" ><i class="fa fa-circle-o"></i>Marcas</a></li>
                 <li><a href="/types"><i class="fa fa-circle-o"></i>Líneas </a></li>
                 <li><a href="/materials"><i class="fa fa-circle-o"></i>Materiales </a></li>
@@ -591,6 +593,7 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
+    <script src="/vendor/multi_select/js/bootstrap-multiselect.js"></script>
     <script src="/vendor/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="/vendor/jquery-ui/ui/minified/jquery-ui.min.js" type="text/javascript"></script>

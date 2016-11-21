@@ -40,7 +40,7 @@
                   <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false" ng-click="actualizarCaja()">Caja Venta</a></li>
                     <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false" ng-click="cargarVentasProduct()">Ventas Productos</a></li>
 
-                    <!--<li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Opciones</a></li>-->
+                    <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Opciones</a></li>
                   
                 </ul>
                 <div class="tab-content">

@@ -109,7 +109,7 @@
           <div class="col-md-3">
                    <div class="form-group" ng-class="{true: 'has-error'}[ orderPurchaseCreateForm.warehouse.$error.required && orderPurchaseCreateForm.$submitted || orderPurchaseCreateForm.warehouse.$dirty && orderPurchaseCreateForm.warehouse.$invalid]">
                        <label for="Tienda">Almacen: </label>
-                       <select ng-hide="show" class="form-control" name="warehouse" ng-change="seleccionarWarehouse()" ng-model="orderPurchase.warehouses_id" ng-options="item.id as item.nombre for item in warehouses" required>
+                       <select ng-hide="show" class="form-control" name="warehouse" ng-change="seleccionarWarehouse()" ng-model="orderPurchase.warehouses_id" ng-options="item.id as item.nombreTienda+'-'+item.nombre for item in warehouses" required>
                        <option value="">--Elija warehouses_id--</option>
                        </select>
                        <label ng-show="orderPurchaseCreateForm.$submitted || orderPurchaseCreateForm.warehouse.$dirty && orderPurchaseCreateForm.warehouse.$invalid">

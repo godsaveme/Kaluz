@@ -54,9 +54,10 @@
                      
                      <div class="form-group" >
                        <label for="Tienda">Tienda</label>
-                       <select class="form-control" name="" ng-model="warehouse.store_id" ng-options="item.id as item.nombreTienda for item in stores">
+                       <select class="form-control"   multiple name="" ng-model="warehouse.store_id" ng-options="item.id as item.nombreTienda for item in stores">
                        </select>
                      </div>
+                       <button type="submit" class="btn btn-primary" ng-click="comprobar()">compro</button>
                      </div>
                      <div class="col-md-12">
                       <div class="form-group" >

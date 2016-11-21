@@ -26,9 +26,11 @@ class CashRepo extends BaseRepo{
                             CONCAT((SUBSTRING(cashes.fechaFin,9,2)),'-',
                                 (SUBSTRING(cashes.fechaFin,6,2)),'-',
                                 (SUBSTRING(cashes.fechaFin,1,4)))as fechafin2"))
+                    ->where('cashHeaders.store_id','=',auth()->user()->store_id)
             ->where(function($query) {
 
-                $query->orWhere('cashes.cashHeader_id', 'like', $this->q . '%')
+                $query
+                     ->orWhere('cashes.cashHeader_id', 'like', $this->q . '%')
                     ->orWhere('users.name', 'like', $this->q . '%')
                     ->orWhere('cashes.fechainicio', 'like', '%' . $this->q . '%')
                     ->orWhere('cashes.fechafin', 'like', '%' . $this->q . '%');
@@ -51,6 +53,7 @@ class CashRepo extends BaseRepo{
                                 (SUBSTRING(cashes.fechaFin,6,2)),'-',
                                 (SUBSTRING(cashes.fechaFin,1,4)))as fechafin2"))
                     //with(['customer','employee'])
+                    ->where('cashHeaders.store_id','=',auth()->user()->store_id)
                         ->orderby('cashes.fechaInicio','DESC')
                     ->paginate(15);
         return $cashes;
@@ -69,15 +72,15 @@ class CashRepo extends BaseRepo{
                      ->select("cashHeaders.id")
                      ->where('id','=', '1')
                      ->where('user_id','=',$id)
+                     ->where('cashHeaders.store_id','=',auth()->user()->store_id)
                     //with(['customer','employee'])
                     ->first();
         return $cashes;
     }
-        public function searchuserincaja1($idCaja,$id){
-           
-        $cashes =Cash::select("id")
-                     
+       public function searchuserincaja1($idCaja,$id){
+        $cashes =Cash::where('id','=', $idCaja)
                      ->where('user_id','=',$id)
+                     ->where('estado','=',1)
                     //with(['customer','employee'])
                     ->first();
         return $cashes;

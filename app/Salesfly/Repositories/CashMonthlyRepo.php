@@ -10,7 +10,14 @@ class CashMonthlyRepo extends BaseRepo{
         
         return new CashMonthly;
     }
+  public function pagosCompras($id){
+        $cashMonthlys = CashMonthly::join('OtherPheads','OtherPheads.id','=','cashMonthlys.otherPhead_id')                          
+                          ->where('cashMonthlys.otherPhead_id','=',$id)
+                          ->select(\DB::raw('cashMonthlys.id ,cashMonthlys.fecha,cashMonthlys.amount as monto,"CajaMensual" as tipo'))
 
+        ->get();
+        return $cashMonthlys;
+    }
     public function search($m,$a,$c)
     { 
         /*if($m==0){

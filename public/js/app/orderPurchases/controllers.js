@@ -198,7 +198,7 @@
 
                     });
                    
-                    crudPurchase.select('warehouses','select').then(function(data){
+                    crudPurchase.select('warehouses2','select').then(function(data){
                         $scope.warehouses = data;
                     });
 

@@ -10,7 +10,8 @@ class Warehouse extends \Eloquent {
                     'shortname',
                     'descripcion',
                     'capacidad',
-                    'store_id'];
+                    'store_id',
+                    'store_id2'];
      public function store()
     {
         return $this->belongsTo('\Salesfly\Salesfly\Entities\Store');

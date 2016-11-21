@@ -28,6 +28,12 @@ class StoresController extends Controller {
         return response()->json($stores);
         //var_dump($stores);
     }
+    public function all2()
+    {
+        $stores = $this->storeRepo->all2();
+        return response()->json($stores);
+        //var_dump($warehouses);
+    }
 
     public function paginatep(){
         $stores = $this->storeRepo->paginate(15);

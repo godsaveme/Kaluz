@@ -9,7 +9,15 @@ class DetCashRepo extends BaseRepo{
         
         return new DetCash;
     }
+public function pagosCompras($id){
+        $detCashs = DetCash::join('cashes','cashes.id','=','detCash.cash_id')
+                          ->join('OtherPheads','OtherPheads.id','=','detCash.otherPhead_id')                          
+                          ->where('detCash.otherPhead_id','=',$id)
+                          ->select(\DB::raw('detCash.id ,CONCAT(detCash.fecha," ",detCash.hora)as fecha,detCash.montoMovimientoEfectivo as monto,"Caja" as tipo'))
 
+        ->paginate(15);
+        return $detCashs;
+    }
     public function search($q)
     {
         /*$detCashs =DetCash::join('cashMotives','cashMotives.id','=','detCash.cashMotive_id')

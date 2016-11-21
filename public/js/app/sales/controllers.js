@@ -105,7 +105,7 @@
                 $scope.store={};
                 $scope.cash1.cashHeader_id='1';
                 $scope.warehouse.id='1';
-                $scope.store.id='1';
+                $scope.store.id='2';
 
                 $scope.estadoMostrarEntrega = function () {
                     if ($scope.order1.estado!=0) {$scope.banderaMostrarEntrega=true;}else{
@@ -195,8 +195,10 @@
 
                     crudServiceOrders.select('stores','select').then(function (data) {                        
                         $scope.stores = data;
+                        $scope.store.id=data[0].id;
+                        $scope.warehouse.id=data[0].idW;
 
-                    });
+                    
                     crudServiceOrders.search('warehousesStore',$scope.store.id,1).then(function (data){
                         $scope.warehouses=data.data;
                         //$log.log($scope.warehouses);
@@ -209,7 +211,7 @@
                     crudServiceOrders.search('searchHeaders',$scope.store.id,1).then(function (data){
                         $scope.cashHeaders=data;
                         $log.log($scope.cashHeaders);
-                    });
+                    });});
                     /*forma antigua*/
                     /*crudServiceOrders.search('cashes',$scope.cash1.cashHeader_id,1).then(function (data){
                         var canCashes=data.total;

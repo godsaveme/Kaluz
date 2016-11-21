@@ -7,7 +7,9 @@ class CashMonthlyManager extends BaseManager {
         $rules = ['amount'=> '',
     				'descripcion'=>'',
     				'expenseMonthlys_id'=> 'required',
-    				'fecha'=> 'required'];
+    				'fecha'=> 'required',
+    				'otherPhead_id'=>'',
+    				'expense_id'=>''];
         return $rules;
     }
 }

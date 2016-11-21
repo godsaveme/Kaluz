@@ -13,7 +13,7 @@
                 $scope.toggle = function () {
                     $scope.show = !$scope.show;
                 };
-
+             
                 $scope.pageChanged = function() {
                     if ($scope.query.length > 0) {
                         crudService.search('warehouses',$scope.query,$scope.currentPage).then(function (data){
@@ -33,8 +33,9 @@
                 {
                     crudService.byId(id,'warehouses').then(function (data) {
                         $scope.warehouse = data;
+                        
                     });
-                    crudService.select('stores','select').then(function(data){
+                    crudService.select('storestodos','select').then(function(data){
                         $scope.stores = data;
 
                     })
@@ -47,7 +48,7 @@
                         $scope.itemsperPage = 15;
 
                     });
-                    crudService.select('stores','select').then(function(data){
+                    crudService.select('storestodos','select').then(function(data){
                         $scope.stores = data;
                         //alert($scope.stores);
                         //$log.log($scope.stores);
@@ -77,6 +78,13 @@
 
                 $scope.createWarehouse = function(){
                     //$scope.atribut.estado = 1;
+                     alert($scope.warehouse.store_id[0]+"--"+$scope.warehouse.store_id[1]);
+                     if($scope.warehouse.store_id[1]!=undefined){
+                        $scope.warehouse.store_id2=$scope.warehouse.store_id[1];
+                        $scope.warehouse.store_id=$scope.warehouse.store_id[0];
+                     }else{
+                        $scope.warehouse.store_id=$scope.warehouse.store_id[0];
+                     }
                     if ($scope.warehouseCreateForm.$valid) {
                         crudService.create($scope.warehouse, 'warehouses').then(function (data) {
                           
@@ -99,7 +107,10 @@
                 };
 
                 $scope.updateWarehouse = function(){
-
+                     if($scope.warehouse.store_id[1]!=undefined){
+                        $scope.warehouse.store_id2=$scope.warehouse.store_id[1];
+                        $scope.warehouse.store_id=$scope.warehouse.store_id[0];
+                     }
                     if ($scope.warehouseCreateForm.$valid) {
                         crudService.update($scope.warehouse,'warehouses').then(function(data)
                         {

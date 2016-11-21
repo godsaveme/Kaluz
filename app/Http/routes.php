@@ -208,6 +208,7 @@ Route::get('api/storeReport/search/{q?}',['as'=>'store_search', 'uses'=>'StoresC
 
 Route::get('api/stores/find/{id}',['as'=>'store_find', 'uses'=>'StoresController@find']);
 Route::get('api/stores/select','StoresController@selectStores');
+Route::get('api/storestodos/select','StoresController@all2');
 //route::controller('/', 'Layout\proban@prob');
 
 Route::group(['middleware' => 'role'], function () {
@@ -430,7 +431,7 @@ Route::get('api/practicas/find/{id}',['as'=>'person_find', 'uses'=>'PracticasCon
 Route::get('api/expenses/find/{id}','ExpenseMonthlysController@find');
 Route::get('api/years/find/{id}','YearsController@find');
 Route::get('api/warehouses/select','WarehousesController@selectWarehouses');
-
+Route::get('api/warehouses2/select','WarehousesController@traertodosAlmacenes');
 Route::group(['middleware' => 'role'], function () {
     Route::get('orderPurchases', ['as' => 'person', 'uses' => 'OrderPurchasesController@index']);
     Route::get('orderPurchases/create', ['as' => 'person_create', 'uses' => 'OrderPurchasesController@index']);
@@ -797,4 +798,43 @@ Route::post('api/cardexProductsTipeMov/create/{fechaini}/{fechafin}/{tipo}/{tien
 Route::post('api/cardexPagoProveedores/create/{fechaini}/{fechafin}','PurchasesController@cardexPagoProveedores');
 Route::post('api/ReportDetCashes/create/{fechaini}/{fechafin}','PurchasesController@ReportDetCashesResumido');
 Route::post('api/ReportDetCashes2/create/{fechaini}/{fechafin}','PurchasesController@ReportDetCashesDetallado');
+
+Route::get('otherPheads',['as'=>'store','uses'=>'OtherPheadController@index']);
+Route::get('otherPheads/create',['as'=>'type_create','uses'=>'OtherPheadController@index']);
+Route::get('otherPheads/edit/{id?}', ['as' => 'type_edit', 'uses' => 'OtherPheadController@index']);
+Route::get('otherPheads/editGasto/{id?}', ['as' => 'type_edit', 'uses' => 'OtherPheadController@index']);
+Route::get('otherPheads/form-create',['as'=>'type_form_create','uses'=>'OtherPheadController@form_create']);
+Route::get('otherPheads/form-edit',['as'=>'type_form_edit','uses'=>'OtherPheadController@form_edit']);
+Route::get('otherPheads/form-editGasto',['as'=>'type_form_edit','uses'=>'OtherPheadController@form_editGasto']);
+Route::get('api/otherPheads/all',['as'=>'type_all', 'uses'=>'OtherPheadController@all']);
+Route::get('api/otherPheads/paginate/',['as' => 'type_paginate', 'uses' => 'OtherPheadController@paginatep']);
+Route::get('api/otherPheadsGastos/paginate/',['as' => 'type_paginate', 'uses' => 'OtherPheadController@paginatepGastos']);
+Route::get('api/detalleGastos/paginatep/{q}',['as' => 'type_paginate', 'uses' => 'OtherPheadController@traendoDetGastos']);
+
+
+Route::post('api/otherPheads/create',['as'=>'type_create', 'uses'=>'OtherPheadController@create']);
+Route::post('api/gastos/create',['as'=>'type_create', 'uses'=>'OtherPheadController@createGasto']);
+Route::put('api/otherPheads/edit',['as'=>'type_edit', 'uses'=>'OtherPheadController@edit']);
+Route::put('api/gastos/edit',['as'=>'type_edit', 'uses'=>'OtherPheadController@edit2']);
+Route::post('api/otherPheads/destroy',['as'=>'type_destroy', 'uses'=>'OtherPheadController@destroy']);
+Route::post('api/gastos/destroy',['as'=>'type_destroy', 'uses'=>'OtherPheadController@destroy2']);
+Route::get('api/otherPheads/search/{q?}',['as'=>'type_search', 'uses'=>'OtherPheadController@search']);
+Route::get('api/otherPheads/find/{id}',['as'=>'type_find', 'uses'=>'OtherPheadController@find']);
+Route::get('api/gastos/find/{id}',['as'=>'type_find', 'uses'=>'OtherPheadController@find2']);
+Route::get('api/otherPdetails/find/{id}',['as'=>'type_find', 'uses'=>'OtherPheadController@datos']);
+Route::get('otherPheads/show/{id?}','OtherPheadController@index');
+Route::get('otherPheads/view-show','OtherPheadController@show');
+Route::get('otherPheads/show2/{id?}','OtherPheadController@index');
+Route::get('otherPheads/view-show2','OtherPheadController@show2');  
+Route::get('otherPheads/form-balance','OtherPheadController@form_balance');
+Route::get('otherPheads/balance','OtherPheadController@index'); 
+Route::post('api/pagosVarios/create',['as'=>'type_create', 'uses'=>'OtherPheadController@createPago']);
+Route::post('api/gastos5/create',['as'=>'type_create', 'uses'=>'OtherPheadController@createPago2']);
+Route::get('api/pagos/find/{id}','OtherPheadController@pagosCompras');
+Route::get('api/pagos2/find/{id}','OtherPheadController@pagosCompras2');
+Route::get('api/pagos3/find/{id}','OtherPheadController@pagosCompras3');
+Route::post('api/pagos/destroy',['as'=>'type_destroy', 'uses'=>'OtherPheadController@destroyPagos']);
+Route::post('api/pagosGastos/destroy',['as'=>'type_destroy', 'uses'=>'OtherPheadController@destroyPagos2']);
+Route::get('api/acounts/select','CashMotivesController@select2');
+Route::get('api/pagos2/find/{id}','OtherPheadController@pagosCompras2');
 

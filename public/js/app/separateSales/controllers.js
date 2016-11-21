@@ -189,14 +189,18 @@
 
                     crudServiceSeparates.select('stores','select').then(function (data) {                        
                         $scope.stores = data;
-
-                    });
+                        $scope.store.id=data[0].id;
+                       $scope.warehouse.id=data[0].idW;
+                   
                     crudServiceSeparates.search('warehousesStore',$scope.store.id,1).then(function (data){
                         $scope.warehouses=data.data;
+
                     });
                     crudServiceSeparates.search('searchHeaders',$scope.store.id,1).then(function (data){
                         $scope.cashHeaders=data;
+                        $scope.cash1.cashHeader_id=data[0].id;
                     });
+                     });
 
                     /*crudServiceSeparates.search('cashes',$scope.cash1.cashHeader_id,1).then(function (data){
                         var canCashes=data.total;

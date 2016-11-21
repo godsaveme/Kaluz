@@ -20,6 +20,35 @@
                     templateUrl: '/js/app/reports/views/index.html',
                     controller: 'ReportController'
                 })
+                //---------------------------------------
+                 .when('/otherPheads', {
+                    templateUrl: '/js/app/otherPheads/views/index.html',
+                    controller: 'OtherPheadController'
+                })
+                 .when('/otherPheads/create',{
+                    templateUrl:'/otherPheads/form-create',
+                    controller: 'OtherPheadController'
+                })
+                .when('/otherPheads/edit/:id',{
+                    templateUrl:'/otherPheads/form-edit',
+                    controller: 'OtherPheadController'
+                }) 
+                .when('/otherPheads/show/:id',{
+                    templateUrl:'/otherPheads/view-show',
+                    controller: 'OtherPheadController'
+                }) 
+                .when('/otherPheads/show2/:id',{
+                    templateUrl:'/otherPheads/view-show2',
+                    controller: 'OtherPheadController'
+                })   
+                .when('/otherPheads/editGasto/:id',{
+                    templateUrl:'/otherPheads/form-editGasto',
+                    controller: 'OtherPheadController'
+                })
+                 .when('/otherPheads/balance',{
+                    templateUrl:'/otherPheads/form-balance',
+                    controller: 'OtherPheadController'
+                })
                 //---------------------------------------------------------
                  .when('/purchases', {
                     templateUrl: '/js/app/purchases/views/index.html',

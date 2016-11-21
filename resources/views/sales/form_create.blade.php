@@ -41,7 +41,7 @@
                   <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false" ng-click="actualizarCaja()">Caja Venta</a></li>
                     <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false" ng-click="cargarVentasProduct()">Ventas Productos</a></li>
 
-                    <!--<li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Opciones</a></li>-->
+                    <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Opciones</a></li>
                    <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false" ng-click="cargarConsulta()">Consultas</a></li>
                     </ul>
                 <div class="tab-content">
@@ -482,7 +482,8 @@
                       <th><select class="form-control" name="" ng-model="lineaId" ng-change="cargarConsulta2(lineaId)"ng-options="item.id as item.nombre for item in types">
                           <option value="">Linea - Todos</option>
                           </select></th>
-                      <th>Stock</th>
+                      <th>Stock 1</th>
+                      <th>Stock 2</th>
                       <th><form >
                                <div class="input-group" style="width: 120px;">
                                  <input ng-change="cargarConsulta()" type="text" ng-model="busColor"  name="table_search" class="form-control input-sm pull-right" placeholder="Color" />
@@ -527,6 +528,7 @@
                       <td>@{{row.braNombre}}</td>
                       <td>@{{row.typNombre}}</td>
                       <td>@{{row.stoStockActual}}<spam ng-if="row.separado>0" style="color: red;">-@{{row.separado}}</spam></td>
+                      <td>@{{row.stoStockActual2}}</td>
                       <td>@{{row.color}}</td>
                       <td>@{{row.Taco}}</td>
                       <td>@{{row.Talla}}</td>

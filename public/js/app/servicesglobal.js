@@ -22,6 +22,16 @@
 
                 return deferred.promise;
             }
+            function listaCashes(uri,alm)
+            {
+                var deferred = $q.defer();
+                $http.get('/api/cashHeaders/cajasActivas/'+alm)
+                    .success(function (data) {
+                        deferred.resolve(data);
+                    });
+
+                return deferred.promise;
+            }
             function deudasSupplier(page){
                 var deferred = $q.defer();
                 $http.get('api/suppliers/deudas/?page='+page).success(function (data) {
@@ -223,6 +233,7 @@
                 create:create,
                 byId:byId,
                 validar:validar,
+                listaCashes: listaCashes,
                 update:update,
                 destroy:destroy,
                 search: search,

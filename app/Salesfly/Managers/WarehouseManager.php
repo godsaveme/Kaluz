@@ -9,7 +9,8 @@ class WarehouseManager extends BaseManager {
             'shortname'=> 'required',
             'descripcion'=> '',
             'capacidad'=>'',
-            'store_id'=>''
+            'store_id'=>'',
+            'store_id2'=>''
                   ];
         return $rules;
     }}

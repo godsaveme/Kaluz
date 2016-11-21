@@ -15,7 +15,9 @@ class DetCashManager extends BaseManager{
             'estado' => '',
             'observacion' => '',
             'cashMotive_id' => 'required',
-            'cash_id' => 'required'           
+            'cash_id' => 'required',
+            'otherPhead_id' => '',
+            'expense_id'=>''        
         ];
         return $rules;
     }

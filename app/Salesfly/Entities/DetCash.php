@@ -14,7 +14,9 @@ class DetCash extends \Eloquent {
     						'estado',
     						'observacion',
     						'cashMotive_id',
-    						'cash_id'];
+    						'cash_id',
+                            'otherPhead_id',
+                            'expense_id'];
     public function cashMotive(){
         return $this->belongsTo('Salesfly\Salesfly\Entities\CashMotive','cashMotive_id');
     }

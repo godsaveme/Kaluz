@@ -1,0 +1,20 @@
+{
+  "name": "ng-phpdebugbar",
+  "main": "ng-phpdebugbar.js",
+  "homepage": "https://github.com/connyay/ng-phpdebugbar",
+  "authors": [
+    "Connor Hindley <conn.hindley@gmail.com>"
+  ],
+  "ignore": [],
+  "description": "Make angular ajax requests work with PHP Debug Bar",
+  "license": "MIT",
+  "_release": "b4a6830033",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "b4a68300333c9b35c7c6f9e85c9b2ef1862573da"
+  },
+  "_source": "git://github.com/connyay/ng-phpdebugbar.git",
+  "_target": "*",
+  "_originalSource": "ng-phpdebugbar"
+}

@@ -26,6 +26,7 @@ class CashMotivesController extends Controller
     {
         //
     }
+ 
     public function search($q)
     {
         //$q = Input::get('q');

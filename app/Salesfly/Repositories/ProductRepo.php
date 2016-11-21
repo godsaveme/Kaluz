@@ -163,11 +163,17 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
                               \DB::raw('(select dt.descripcion from detAtr dt inner join variants v on v.id=dt.variant_id inner join atributes atr on atr.id=dt.atribute_id where v.id=varid and atr.nombre="Color" and dt.descripcion like "'.$busColor.'%") as color'),
                               \DB::raw('variants.id as idvariante,(SELECT SUM(detSeparateSales.cantidad) FROM separateSales INNER JOIN detSeparateSales ON detSeparateSales.separateSale_id=
                                 separateSales.id INNER JOIN detPres ON detSeparateSales.detPre_id=detPres.id 
-                                WHERE detPres.variant_id=idvariante and (separateSales.estado=0 OR separateSales.estado=1))as separado,(SELECT sum(stock.stockActual)     
-FROM products
-INNER JOIN variants ON products.id = variants.product_id
-INNER JOIN stock ON variants.id = stock.variant_id
-WHERE variants.id = varid) as stoStockActual'),
+                                WHERE detPres.variant_id=idvariante and (separateSales.estado=0 OR separateSales.estado=1))as separado'),
+                             
+                              \DB::raw('(SELECT stock.stockActual  FROM products INNER JOIN variants 
+                                ON products.id = variants.product_id INNER JOIN stock ON variants.id = stock.variant_id 
+                                WHERE variants.id = varid order by stock.warehouse_id asc limit 1) as stoStockActual'),
+                              \DB::raw('IF((SELECT COUNT(stock.id)  FROM products INNER JOIN variants 
+                                ON products.id = variants.product_id INNER JOIN stock ON variants.id = stock.variant_id 
+                                WHERE variants.id = varid)>1,(SELECT stock.stockActual  FROM products INNER JOIN variants 
+                                ON products.id = variants.product_id INNER JOIN stock ON variants.id = stock.variant_id 
+                                WHERE variants.id = varid order by stock.warehouse_id desc limit 1),0) as stoStockActual2'),
+
                               \DB::raw('(select dt.descripcion from detAtr dt inner join variants v on v.id=dt.variant_id inner join atributes atr on atr.id=dt.atribute_id where v.id=varid and atr.nombre="Talla" and dt.descripcion like "'.$busTalla.'%") as Talla'),
                               \DB::raw('(select dt.descripcion from detAtr dt inner join variants v on v.id=dt.variant_id inner join atributes atr on atr.id=dt.atribute_id where v.id=varid and atr.nombre="Taco" and dt.descripcion like "'.$busTaco.'%") as Taco'),
                               \DB::raw('(select dt.descripcion from detAtr dt inner join variants v on v.id=dt.variant_id inner join atributes atr on atr.id=dt.atribute_id where v.id=varid and atr.nombre="Material" and dt.descripcion like "'.$busMate.'%") as Material'),

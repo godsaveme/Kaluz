@@ -8,7 +8,9 @@ class CashMonthly extends \Eloquent {
     protected $fillable = ['amount',
     'descripcion',
     'expenseMonthlys_id',
-    'fecha'];
+    'fecha',
+    'otherPhead_id',
+    'expense_id'];
 
     /*
     'months_id',

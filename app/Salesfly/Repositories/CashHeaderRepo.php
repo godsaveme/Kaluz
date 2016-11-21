@@ -14,7 +14,7 @@ class CashHeaderRepo extends BaseRepo{
 
     public function search($q)
     {
-        $cashHeaders =CashHeader::with('store')->where('nombre','like', $q.'%')
+        $cashHeaders =CashHeader::with('store')->where('cashHeaders.store_id','=',auth()->user()->store_id)->where('nombre','like', $q.'%')
                     ->orWhere('ambiente','like',$q.'%')
                     //->orWhere('s','like',$q.'%')
                     //with(['customer','employee'])
@@ -31,12 +31,14 @@ class CashHeaderRepo extends BaseRepo{
     public function comprobarCaja($id){
         $cashHeaders =CashHeader::join("cashes","cashes.cashHeader_id","=","cashHeaders.id")
                       ->where('cashes.id','=', $id)
+                      ->where('cashHeaders.store_id','=',auth()->user()->store_id)
                       ->select("cashHeaders.*")
                     ->first();
         return $cashHeaders;
     }
     public function paginate($count){
-        $cashHeaders = CashHeader::with('store');
+        $cashHeaders = CashHeader::with('store')
+        ->where('cashHeaders.store_id','=',auth()->user()->store_id);
         return $cashHeaders->paginate($count);
     }
     public function cajasActivas($alm){
@@ -45,6 +47,7 @@ class CashHeaderRepo extends BaseRepo{
                                   ->join('warehouses','warehouses.store_id','=','stores.id')
                                   ->where('cashes.estado','=',1)->where('warehouses.id','=',$alm)
                                   ->select('cashHeaders.*','cashes.id as cashID','cashes.montoBruto as montoUsable')
+                                  ->where('cashHeaders.store_id','=',auth()->user()->store_id)
                                   ->groupBy('cashHeaders.id')
                     ->get();
         return $cashHeaders;
@@ -53,6 +56,7 @@ class CashHeaderRepo extends BaseRepo{
          $cashHeaders = CashHeader::join('cashes','cashes.cashHeader_id','=','cashHeaders.id')
                                    ->where('cashes.estado','=',1)
                                    ->select('cashHeaders.*','cashes.id as cashID','cashes.montoBruto as montoUsable')
+                                   ->where('cashHeaders.store_id','=',auth()->user()->store_id)
                                    ->groupBy('cashHeaders.id')->get();
         return $cashHeaders;
     }
