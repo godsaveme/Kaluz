@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+#add for me
+/public/node_modules
+/public/vendor
+#/public/report/*
+/public/images/employees/*
+/public/images/products/*
+/public/images/users/*
+/public/images/variants/*
+/.idea
+# .add
+Homestead.yaml
+.env
