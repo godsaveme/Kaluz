@@ -229,7 +229,7 @@
 
               </ul>
             </li>
-            @if($role == 1)
+            @if($role == 1 || $role == 2)
             <li class="">
               <a href="/customers">
                 <i class="fa fa-users"></i> <span>Clientes</span>

@@ -161,8 +161,8 @@
                     <div class="row">
                       <div class="col-md-6" >
                       <div class="box box-solid">
-                        <div class="box-header with-border" style="background-color: #D7EAE3; border-style: solid;
-                              border-width: 2px; border-color: #C8D9F7; border-radius: 10px 10px 0px 0px;">
+                        <div class="box-header with-border" style="background-color: #ad4240; border-style: solid;
+                              border-width: 2px; border-color: #968383; color:white; border-radius: 10px 10px 0px 0px;">
                           <div class="row">
                             <div class="col-md-9" ng-show="skuestado">
                               <input type="text" ng-model="varianteSkuSelected" placeholder="Buscar por SKU" ng-enter="getvariantSKU()" class="form-control">
@@ -190,7 +190,7 @@
  
                         </div><!-- /.box-header -->
                         <div class="box-body" style="min-height: 400px; border-style: solid;
-                                border-width: 2px; border-color: #C8D9F7;" >
+                                border-width: 2px; border-color: #968383;" >
                           <table class="table table-bordered">
                                              
                             <tr ng-repeat="row in compras track by $index">
@@ -211,8 +211,8 @@
                         </div><!-- /.box-body -->
 
 
-                        <div class="box-footer clearfix" style="background-color: #D7EAE3; border-style: solid;
-                               border-width: 2px; border-color: #C8D9F7; border-radius: 0px 0px 10px 10px;">
+                        <div class="box-footer clearfix" style="background-color: #ad4240; border-style: solid;
+                               border-width: 2px; border-color: #968383; color:white; border-radius: 0px 0px 10px 10px;">
                           <div class="row">
                             <div class="col-md-6" >
                               <table class="table table-bordered">
@@ -297,7 +297,7 @@
                     </div>
 
                     <div class="col-md-6" style="min-height: 670px; border-style: solid;
-                                border-width: 2px; border-color: #C8D9F7; border-radius:10px" >
+                                border-width: 2px; border-color: #968383; border-radius:10px" >
                         <div>
                         <div class="modal-header">
                           <h4 class="modal-title">Favoritos <button type="button" class="btn btn-info btn-flat btn-xs pull-right" ng-click="AddFavoritos()"> <span class="glyphicon glyphicon-plus"></span> </button>
