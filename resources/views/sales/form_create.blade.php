@@ -161,7 +161,7 @@
                     <div class="row">
                       <div class="col-md-6" >
                       <div class="box box-solid">
-                        <div class="box-header with-border" style="background-color: #ad4240; border-style: solid;
+                        <div class="box-header with-border" style="background-color: #722f38; border-style: solid;
                               border-width: 2px; border-color: #968383; color:white; border-radius: 10px 10px 0px 0px;">
                           <div class="row">
                             <div class="col-md-9" ng-show="skuestado">
@@ -211,7 +211,7 @@
                         </div><!-- /.box-body -->
 
 
-                        <div class="box-footer clearfix" style="background-color: #ad4240; border-style: solid;
+                        <div class="box-footer clearfix" style="background-color: #722f38; border-style: solid;
                                border-width: 2px; border-color: #968383; color:white; border-radius: 0px 0px 10px 10px;">
                           <div class="row">
                             <div class="col-md-6" >
