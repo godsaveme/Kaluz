@@ -16,12 +16,17 @@
   font-weight: 600;
   src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(fonts-opens-sans/toadOcfmlt9b38dHJxOBGJ6-ys_j0H4QL65VLqzI3wI.woff) format('woff');
 }
+tr>th{
+  background-color: #722f38;
+  color:white;
+}
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 700;
   src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(fonts-opens-sans/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: italic;
