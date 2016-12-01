@@ -27,7 +27,7 @@
         <a href="../../index2.html"><img src="/images/logo.png" style="width:100%;"></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Escibre tus credenciales para iniciar sesión</p>
+        <p class="login-box-msg"></p>
         @if($errors->has())
          <div class="callout callout-warning">
             @foreach($errors->all() as $error)
