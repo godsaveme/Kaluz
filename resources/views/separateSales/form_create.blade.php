@@ -185,22 +185,22 @@
                             <div class="col-md-6" >
                                 <table class="table table-bordered">
                                 <tr>
-                                <td>Sub Total</td>
-                                <td>@{{sale.montoBruto | number:2}}</td>                    
+                                <th>Sub Total</th>
+                                <th>@{{sale.montoBruto | number:2}}</th>                    
                                 </tr>
                                 <tr> 
-                                <td>IGV</td>
-                                <td>@{{sale.igv | number:2}}</td>                    
+                                <th>IGV</th>
+                                <th>@{{sale.igv | number:2}}</th>                    
                                 </tr> 
                                 <tr style="border-bottom: solid; border-width: medium;">
-                                <td>Descuento</td>
-                                <td>
+                                <th>Descuento</th>
+                                <th>
                                   <button popover-template="dynamicPopover2.templateUrl" type="button" class="btn btn-default">@{{sale.descuento | number:2}}</button>
-                                </td>                    
+                                </th>                    
                                 </tr> 
                                 <tr>
-                                <td ><b>Total</b></td>
-                                <td ng-model="sale.montoTotal" ><b>@{{sale.montoTotal | number:2}}</b></td>                    
+                                <th ><b>Total</b></th>
+                                <th ng-model="sale.montoTotal" ><b>@{{sale.montoTotal | number:2}}</b></rh>                    
                                 </tr>                                   
                               </table>
                             </div>

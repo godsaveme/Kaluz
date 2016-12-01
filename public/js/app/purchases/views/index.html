@@ -157,9 +157,9 @@
                       <td>{{row.descuento}}</td>
                       <td>{{row.montoBruto}}</td>
                       <td>{{row.montoTotal}}</td>
-                      <td ng-if="row.saldo>0"><a  class="btn btn-primary btn-xs" ng-href="/purchases/show/{{row.id}}">Pagar</a>
+                      <td ng-if="row.saldo>0"><a  class="btn btn-info btn-xs" ng-href="/purchases/show/{{row.id}}">Pagar</a>
                       </td>
-                      <td ng-if="row.saldo<=0"><a class="btn btn-primary btn-xs" ng-href="/purchases/show/{{row.id}}">Ver Pagos</a>
+                      <td ng-if="row.saldo<=0"><a class="btn btn-info btn-xs" ng-href="/purchases/show/{{row.id}}">Ver Pagos</a>
                       </td>
                       <td><a ng-click="editCompra(row)" class="btn btn-success btn-xs">Ver Detalles</a></td>
                                         
