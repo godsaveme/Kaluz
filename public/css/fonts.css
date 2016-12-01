@@ -20,6 +20,9 @@ tr>th{
   background-color: #722f38;
   color:white;
 }
+tr>td{
+  background-color: #efa1ab;
+}
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
