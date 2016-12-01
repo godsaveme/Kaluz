@@ -325,6 +325,7 @@
                   </div><!-- /.tab-pane -->
 
                   <div class="tab-pane" id="tab_2">
+                  <div class="box-body table-responsive no-padding">
                     <table class="table table-bordered">
                     <tr>
                       <th style="width: 10px">#</th>
@@ -358,6 +359,7 @@
                       <td ng-if="row.cashMotive_id!=1 && row.cashMotive_id!=14">@{{row.id}}</td>
                     </tr>                   
                   </table>
+                  </div>
                   <div class="box-footer clearfix">
                     <pagination total-items="totalItems1" ng-model="currentPage1" max-size="maxSize1" 
                     class="pagination-sm no-margin pull-right" items-per-page="itemsperPage1" boundary-links="true" rotate="false" 
@@ -405,7 +407,7 @@
 
                 <div class="tab-pane" id="tab_6">
                       
-                      
+                      <div class="box-body table-responsive no-padding">
                     
                     <table class="table table-bordered">
                     <tr>
@@ -444,7 +446,7 @@
                     </tr>
                     
                     
-                  </table>
+                  </table></div>
                     <div class="box-footer clearfix">
                         <pagination total-items="totalItemsV" ng-model="currentPageV" max-size="maxSizeV" class="pagination-sm no-margin pull-right" 
                         items-per-page="itemsperPageV" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChangedV()"></pagination>
