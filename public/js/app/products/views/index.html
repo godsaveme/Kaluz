@@ -63,6 +63,7 @@
                       <button type="button" class="btn btn-default" ng-click="cancelProduct()">No</button>
                     </p>
                   </div>
+                  <div class="box-body table-responsive no-padding">
                   <table class="table table-bordered table-hover">
                     <tr>
                       <th style="width: 10px">#</th>
@@ -82,7 +83,7 @@
                       <td>{{$index + 1}}</td>
 
                       <td><a ng-href="/products/show/{{row.proId}}">{{row.proCodigo }}</a></td>
-                        <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.proId,row.Dscto)">{{row.Dscto}}</button>
+                        <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.proId,row.Dscto)">{{row.Dscto}}</button></td>
 
 
                         <td>{{row.braNombre}}</td>
@@ -114,7 +115,7 @@
                     </tr>
                     
                     
-                  </table>
+                  </table></div>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
                   <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm no-margin pull-right" items-per-page="itemsperPage" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
