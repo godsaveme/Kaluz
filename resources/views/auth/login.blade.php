@@ -23,8 +23,8 @@
   </head>
   <body class="login-page">
     <div class="login-box">
-      <div class="login-logo">
-        <a href="../../index2.html"><img src="/images/logo.png"></a>
+      <div class="login-logo" style="margin-botton:0px;">
+        <a href="../../index2.html"><img src="/images/logo.png" style="width:100%;"></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Escibre tus credenciales para iniciar sesión</p>
