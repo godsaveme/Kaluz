@@ -304,18 +304,26 @@
                 }
 
                 $scope.editcash = function(row){
-                    $scope.caj_id=row.id;
-                 crudService.Comprueba_caj_for_user1(row.id).then(function (data){
-              if(data.id!=undefined && data.id!=''){
-                    
-                       
-                        $location.path('/cashes/edit/'+row.id);      
-                    
+                $scope.caj_id=row.id;
+                if(row.estado1 == 1){
+                    crudService.Comprueba_caj_for_user1(row.id).then(function (data){
+                       if(data.id!=undefined && data.id!=''){
+                                $location.path('/cashes/edit/'+row.id);      
+                       }else{
+                               alert("usted no tiene permisos en esta caja");
+                       }});
+                     //$scope.cash.montoInicial=parseInt($scope.cash.montoInicial);
+                      
+            }else{
+              crudService.Comprueba_caj_for_user100(row.id).then(function (data){
+                if(data.id!=undefined && data.id!=''){
+                    $location.path('/cashes/edit/'+row.id);      
                 }else{
                     alert("usted no tiene permisos en esta caja");
                 }});
                      //$scope.cash.montoInicial=parseInt($scope.cash.montoInicial);
                 };
+            }
 
                 $scope.updatecash = function(){
                    if ($scope.cashCreateForm.$valid) {

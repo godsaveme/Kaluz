@@ -86,10 +86,16 @@ class CashRepo extends BaseRepo{
         return $cashes;
     }
      public function searchuserincaja100($idCaja,$id){
-        $cashes =Cash::where('id','=', $idCaja)
+        if(auth()->user()->id == 1){
+             $cashes =Cash::where('id','=', $idCaja)
+                    //with(['customer','employee'])
+                    ->first();
+        }else{
+              $cashes =Cash::where('id','=', $idCaja)
                      ->where('user_id','=',$id)
                     //with(['customer','employee'])
                     ->first();
+        }
         return $cashes;
     }
 } 

@@ -226,10 +226,20 @@
 
                 return deferred.promise;
             }
+             function Comprueba_caj_for_user100(id)
+            {
+                var deferred = $q.defer();
+                $http.get('api/cashes/cajas_for_user100/'+id).success(function (data) {
+                    deferred.resolve(data);
+                });
+
+                return deferred.promise;
+            }
             return {
                 all: all,
                 paginate: paginate,
                 Comprueba_caj_for_user1: Comprueba_caj_for_user1,
+                Comprueba_caj_for_user100: Comprueba_caj_for_user100,
                 create:create,
                 byId:byId,
                 validar:validar,
