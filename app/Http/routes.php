@@ -637,6 +637,8 @@ Route::get('api/cashes/search/{q?}',['as'=>'person_search', 'uses'=>'CashesContr
 Route::get('api/cashes/find/{id}',['as'=>'person_find', 'uses'=>'CashesController@find']);
 Route::get('api/cashes/cajas_for_user','CashesController@cajas_for_user');
 Route::get('api/cashes/cajas_for_user1/{id}','CashesController@cajas_for_user1');
+
+Route::get('api/cashes/cajas_for_user100/{id}','CashesController@cajas_for_user100');
 Route::post('api/cashes/searchOpenCashxCashHeader','CashesController@searchOpenCashxCashHeader');
 //Route::get('api/cashes/select','SuppliersController@selectSupliers');
 
