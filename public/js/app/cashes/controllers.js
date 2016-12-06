@@ -303,6 +303,7 @@
                     //}
                 }
 
+
                 $scope.editcash = function(row){
                 $scope.caj_id=row.id;
                 if(row.estado1 == 1){
