@@ -57,4 +57,10 @@ class WarehouseRepo extends BaseRepo{
         
         
     }
+     public function listaAlmacenesTienda(){
+        $warehouses =Warehouse::join('stores','stores.id','=','warehouses.store_id')
+                       ->join('users','users.store_id','=','stores.id')
+                       ->select('warehouses.*','stores.nombreTienda')->groupBy('warehouses.id')->get();
+        return $warehouses;
+    }
 }

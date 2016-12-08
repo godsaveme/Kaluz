@@ -23,4 +23,10 @@ class BrandRepo extends BaseRepo{
                     ->first();
         return $brands;
     }
+    public function paraFiltro(){
+        $brands =Brand::select('nombre as value','nombre as label')->get();
+                    //->with(['customer','employee'])
+                    
+        return $brands;
+    }
 }

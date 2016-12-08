@@ -12,7 +12,16 @@
 
                 return deferred.promise;
             }
+            function consultaProductos(ware)
+            {
+                var deferred = $q.defer();
+                $http.get('/api/consultaProductos/selectall/'+ware)
+                    .success(function (data) {
+                        deferred.resolve(data);
+                    });
 
+                return deferred.promise;
+            }
             function paginate(uri,page)
             {
                 var deferred = $q.defer();
@@ -240,6 +249,7 @@
                 paginate: paginate,
                 Comprueba_caj_for_user1: Comprueba_caj_for_user1,
                 Comprueba_caj_for_user100: Comprueba_caj_for_user100,
+                consultaProductos: consultaProductos,
                 create:create,
                 byId:byId,
                 validar:validar,

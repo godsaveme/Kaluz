@@ -33,7 +33,10 @@ class BrandsController extends Controller {
         $brands = $this->brandRepo->paginate(15);
         return response()->json($brands);
     }
-
+  public function paraFiltro(){
+    $brands = $this->brandRepo->paraFiltro();
+        return response()->json($brands);
+  }
 
     public function form_create()
     {

@@ -462,89 +462,10 @@
                   <div class="tab-pane" id="tab_5">
                       
                       
-                    <div class="box-body table-responsive no-padding">
-                    <table class="table table-bordered">
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>
-                           
-                          <form >
-                               <div class="input-group" style="width: 150px;">
-                                 <input ng-change="cargarConsulta()" type="text" ng-model="busCodigo"  name="table_search" class="form-control input-sm pull-right" placeholder="Codigo" />
-                                 <div class="input-group-btn">
-                                   <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                 </div>
-                               </div>
-                          </form>
-                      </th>
-                      <th>Sku</th>
-                      <th>
-                      <select class="form-control" name="" ng-model="materialId" ng-change="cargarConsulta1(materialId)"ng-options="item.id as item.nombre for item in brands">
-                          <option value="">Marca - Todos</option>
-                      <th><select class="form-control" name="" ng-model="lineaId" ng-change="cargarConsulta2(lineaId)"ng-options="item.id as item.nombre for item in types">
-                          <option value="">Linea - Todos</option>
-                          </select></th>
-                      <th>Stock 1</th>
-                      <th>Stock 2</th>
-                      <th><form >
-                               <div class="input-group" style="width: 120px;">
-                                 <input ng-change="cargarConsulta()" type="text" ng-model="busColor"  name="table_search" class="form-control input-sm pull-right" placeholder="Color" />
-                                 <div class="input-group-btn">
-                                   <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                 </div>
-                               </div>
-                          </form>
-                      </th>
-                      <th><form >
-                               <div class="input-group" style="width: 80px;">
-                                 <input ng-change="cargarConsulta()" type="text" ng-model="busTaco"  name="table_search" class="form-control input-sm pull-right" placeholder="Taco" />
-                                 <div class="input-group-btn">
-                                   <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                 </div>
-                               </div>
-                          </form>
-                          </th>
-                      <th><form >
-                               <div class="input-group" style="width: 80px;">
-                                 <input ng-change="cargarConsulta()" type="text" ng-model="busTalla"  name="table_search" class="form-control input-sm pull-right" placeholder="Talla" />
-                                 <div class="input-group-btn">
-                                   <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                 </div>
-                               </div>
-                          </form></th>
-                      <th><form >
-                               <div class="input-group" style="width: 150px;">
-                                 <input ng-change="cargarConsulta()" type="text" ng-model="busMaterial"  name="table_search" class="form-control input-sm pull-right" placeholder="Material" />
-                                 <div class="input-group-btn">
-                                   <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                 </div>
-                               </div>
-                          </form></th>
-                      <th>Precio Venta (S/.)</th>
-                    </tr>
+                    <iframe src="http://localhost:8007/consultas" style="width:100%" height="480px;">
+                      
+                    </iframe>
                     
-                    <tr ng-if="row.color!=undefined  && row.Taco!=undefined && row.Talla!=undefined && row.Material!=undefined" ng-repeat="row in variants1 track by $index">
-                      <td>@{{$index + 1}}</td>
-                      <td>@{{row.codigo}}</td>
-                      <td>@{{row.sku}}</td>
-                      <td>@{{row.braNombre}}</td>
-                      <td>@{{row.typNombre}}</td>
-                      <td>@{{row.stoStockActual}}<spam ng-if="row.separado>0" style="color: red;">-@{{row.separado}}</spam></td>
-                      <td>@{{row.stoStockActual2}}</td>
-                      <td>@{{row.color}}</td>
-                      <td>@{{row.Taco}}</td>
-                      <td>@{{row.Talla}}</td>
-                      <td>@{{row.Material}}</td> 
-                      <td>@{{row.price}}</td> 
-                    </tr>
-                    
-                    
-                  </table>
-                  </div>
-                    <div class="box-footer clearfix">
-                        <pagination total-items="totalItemsZ" ng-model="currentPageZ" max-size="maxSizeZ" class="pagination-sm no-margin pull-right" 
-                        items-per-page="itemsperPageZ" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChangedZ()"></pagination>
-                    </div>
                   </div>
                 </div><!-- /.tab-content -->
               </div>

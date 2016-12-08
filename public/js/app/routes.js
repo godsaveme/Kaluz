@@ -15,6 +15,11 @@
                     templateUrl:'/atributes/form-edit',
                     controller: 'AtributController'
                 })  
+
+                 .when('/consultas', {
+                    templateUrl: '/js/app/consultas/views/index.html',
+                    controller: 'ConsultaController'
+                })
                 //--------------------------------------------------------
                 .when('/reports', {
                     templateUrl: '/js/app/reports/views/index.html',

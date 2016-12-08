@@ -46,6 +46,10 @@ class WarehousesController extends Controller {
     {
         return View('warehouses.form_edit');
     }
+    public function listaAlmacenesTienda(){
+        $warehouse = $this->warehouseRepo->listaAlmacenesTienda();
+        return response()->json($warehouse);
+    }
  
     public function create(Request $request)
     {

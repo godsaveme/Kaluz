@@ -28,6 +28,10 @@ class TypesController extends Controller {
         return response()->json($types);
         //var_dump($types);
     }
+    public function paraFiltroType(){
+        $types = $this->typeRepo->paraFiltroTypes();
+        return response()->json($types);
+    }
 
     public function paginatep(){
         $types = $this->typeRepo->paginate(15);

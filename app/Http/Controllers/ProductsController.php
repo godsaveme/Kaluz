@@ -435,9 +435,9 @@ class ProductsController extends Controller
 
         return response()->json($products);
     }
-    public function consultaProductos($codigo,$marca,$linea,$busColor,$busTaco,$busTalla,$busMate){
+    public function consultaProductos($ware){
         
-        $products = $this->productRepo->consultaProductos($codigo,$marca,$linea,$busColor,$busTaco,$busTalla,$busMate);
+        $products = $this->productRepo->consultaProductos($ware);
 
         return response()->json($products);
     }

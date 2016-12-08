@@ -40,6 +40,7 @@ Route::get('status', function(){
         ->header('Content-Type', 'text/html; charset=UTF-8');
 });
 
+Route::get('consultas',['as'=>'person','uses'=>'SalesController@consultas']);
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -131,12 +132,13 @@ Route::get('api/products/types',['as' => 'products_types_select','uses' => 'Prod
 Route::get('api/products/stations',['as' => 'products_stations_select','uses' => 'ProductsController@stations_select']);
 Route::get('products/show/{id?}',['as' => 'products_show_by_id','uses' => 'ProductsController@index']);
 Route::get('products/view-show','ProductsController@show');
+Route::get('api/paraFiltro/all',['uses'=>'BrandsController@paraFiltro']);
 Route::get('api/products/autocomplit/','ProductsController@autocomplit');
 Route::get('api/products/autocomplit2/','ProductsController@getAutocomplit2');
 Route::get('api/products/select','ProductsController@selectProducts');
 
 Route::get('api/products/validar/{text}','ProductsController@validarNombre');
-Route::get('api/consultaProductos/selectall/{codigo?}/{marca?}/{linea?}/{busColor?}/{busTaco?}/{busTalla?}/{busMate?}','ProductsController@consultaProductos');
+Route::get('api/consultaProductos/selectall/{ware}','ProductsController@consultaProductos');
 
 Route::post('api/products/actualizarDsctoGeneral','ProductsController@actualizarDsctoGeneral');
 //Route::post('api/products/actualizarDsctoGeneral','ProductsController@actualizarDsctoVar');
@@ -236,6 +238,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('types/form-edit', ['as' => 'type_form_edit', 'uses' => 'TypesController@form_edit']);
 });
 Route::get('api/types/all',['as'=>'type_all', 'uses'=>'TypesController@all']);
+Route::get('api/paraFiltroType/all',['as'=>'type_all', 'uses'=>'TypesController@paraFiltroType']);
 Route::get('api/types/paginate/',['as' => 'type_paginate', 'uses' => 'TypesController@paginatep']);
 Route::post('api/types/create',['as'=>'type_create', 'uses'=>'TypesController@create']);
 Route::put('api/types/edit',['as'=>'type_edit', 'uses'=>'TypesController@edit']);
@@ -278,6 +281,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('warehouses/form-edit', ['as' => 'atribut_form_edit', 'uses' => 'WarehousesController@form_edit']);
 });
 Route::get('api/warehouses/all',['as'=>'atribut_all', 'uses'=>'WarehousesController@all']);
+Route::get('api/listaAlmacenesTienda/all',['uses'=>'WarehousesController@listaAlmacenesTienda']);
 Route::get('api/warehouses/paginate/',['as' => 'atribut_paginate', 'uses' => 'WarehousesController@paginatep']);
 Route::post('api/warehouses/create',['as'=>'atribut_create', 'uses'=>'WarehousesController@create']);
 Route::put('api/warehouses/edit',['as'=>'atribut_edit', 'uses'=>'WarehousesController@edit']);
