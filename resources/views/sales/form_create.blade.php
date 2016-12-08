@@ -462,7 +462,7 @@
                   <div class="tab-pane" id="tab_5">
                       
                       
-                    <iframe src="http://localhost:8007/consultas" style="width:100%" height="480px;">
+                    <iframe src="http://45.58.34.74/consultas" style="width:100%" height="480px;">
                       
                     </iframe>
                     
