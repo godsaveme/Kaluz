@@ -83,6 +83,7 @@
                       <th>Monto Inicial</th>
                       <th>Ingresos</th>
                       <th>Gastos</th>
+                      <th>Ventas <spam style="color:blue;">Efect.</spam>/<spam style="color:green;">Tar.</spam></th>
                       <th>Monto Bruto</th>
                       <th>Monto Real</th>
                       <th>Descuadre</th>
@@ -98,10 +99,11 @@
                       <td>{{row.nomUser}}</td>
                       <td>{{row.montoInicial}}</td>
                       <td>{{row.ingresos}}</td>
-                      <td>{{row.gastos}}</td>
+                      <td style="color:red;">{{row.gastos}}</td>
+                      <td><spam style="color:blue;">{{row.totEfect}}</spam>+<spam style="color:green;">{{row.totTar}}</spam>={{row.totVentas}}</td>
                       <td>{{row.montoBruto}}</td>
                       <td>{{row.montoReal}}</td>
-                      <td>{{row.descuadre}}</td>
+                      <td style="color:red;">{{row.descuadre}}</td>
                       <td ng-if="row.estado1==0">Caja Cerrada</td>
                       <td ng-if="row.estado1==1">Caja Abierta</td>
                       <td ng-if="row.estado1==0"><a ng-click="editcash(row)" class="btn btn-info btn-xs">Ver</a></td>

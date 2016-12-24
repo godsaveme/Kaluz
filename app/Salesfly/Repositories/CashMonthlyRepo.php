@@ -18,6 +18,7 @@ class CashMonthlyRepo extends BaseRepo{
         ->get();
         return $cashMonthlys;
     }
+    
     public function search($m,$a,$c)
     { 
         /*if($m==0){

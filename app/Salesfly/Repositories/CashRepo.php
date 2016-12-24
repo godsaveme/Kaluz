@@ -51,7 +51,19 @@ class CashRepo extends BaseRepo{
                                 (SUBSTRING(cashes.fechaInicio,1,4)))as fechainicio2,
                             CONCAT((SUBSTRING(cashes.fechaFin,9,2)),'-',
                                 (SUBSTRING(cashes.fechaFin,6,2)),'-',
-                                (SUBSTRING(cashes.fechaFin,1,4)))as fechafin2"))
+                                (SUBSTRING(cashes.fechaFin,1,4)))as fechafin2,
+                    (SELECT IF(SUM(dc.montoMovimientoTarjeta)>0,SUM(dc.montoMovimientoTarjeta),0)
+                    FROM detCash dc inner join sales s on s.detCash_id=dc.id where dc.cashMotive_id=1 
+                    and s.estado = 1 and dc.cash_id=cashes.id) as totTar,
+                    (SELECT IF(SUM(dc.montoMovimientoEfectivo)>0,SUM(dc.montoMovimientoEfectivo),0) 
+                    FROM detCash dc inner join sales s on s.detCash_id=dc.id where dc.cashMotive_id=1 
+                    and s.estado = 1 and dc.cash_id=cashes.id) as totEfect,
+((SELECT IF(SUM(dc.montoMovimientoTarjeta)>0,SUM(dc.montoMovimientoTarjeta),0)
+                    FROM detCash dc inner join sales s on s.detCash_id=dc.id where dc.cashMotive_id=1 
+                    and s.estado = 1 and dc.cash_id=cashes.id) +
+                    (SELECT IF(SUM(dc.montoMovimientoEfectivo)>0,SUM(dc.montoMovimientoEfectivo),0) 
+                    FROM detCash dc inner join sales s on s.detCash_id=dc.id where dc.cashMotive_id=1 
+                    and s.estado = 1 and dc.cash_id=cashes.id)) as totVentas"))
                     //with(['customer','employee'])
                     ->where('cashHeaders.store_id','=',auth()->user()->store_id)
                         ->orderby('cashes.fechaInicio','DESC')
@@ -87,7 +99,7 @@ class CashRepo extends BaseRepo{
     }
     
      public function searchuserincaja100($idCaja,$id){
-        if(auth()->user()->id == 1){
+        if(auth()->user()->role_id == 1){
              $cashes =Cash::where('id','=', $idCaja)
                     //with(['customer','employee'])
                     ->first();

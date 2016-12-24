@@ -19,6 +19,7 @@
                 $scope.expenses = {};
                 $scope.expense = {};
                 $scope.year.year=2015;
+                $scope.cashMonthly.fechaPedido=new Date();
                 //$scope.acumulado=0;
 
                 $scope.toggle = function () {
@@ -136,15 +137,10 @@
                 {
                     crudService.byId(id,'cashMonthlys').then(function (data) {
                         $scope.cashMonthly = data;
+                        $scope.cashMonthly.amount=Number(data.amount);
+                        $scope.cashMonthly.fechaPedido= new Date(data.fecha);
                     });
-                    crudService.select('months','select').then(function (data) {
-                        $scope.months = data;
-                    });
-
-                    crudService.select('years','select').then(function (data) {                        
-                        $scope.years = data;
-
-                    });
+                    
                     crudService.select('expenses','select').then(function (data) {
                         $scope.expenses = data;
                     });
@@ -275,14 +271,9 @@
                 
                 $scope.createcashMonthly = function(){
                     if ($scope.cashMonthlyCreateForm.$valid) {  
-                        $scope.fechap=new Date($scope.fechap);
-                        //$scope.fechap.getTimezoneOffset();
-                        $scope.cashMonthly.fecha=$scope.fechap.getFullYear()+'-'+($scope.fechap.getMonth()+1)+'-'+$scope.fechap.getDate()+' '+$scope.fechap.getHours()+':'+$scope.fechap.getMinutes()+':'+$scope.fechap.getSeconds();
-                        $log.log($scope.cashMonthly.fecha);
-                        //eee
-                        //$scope.cashMonthly.fecha=$scope.fechap;
-                        //$log.log($scope.cashMonthly);
-                        //'999plasas
+                        $scope.fechap=new Date();
+                        $scope.cashMonthly.fecha=$scope.cashMonthly.fechaPedido.getFullYear()+'-'+($scope.cashMonthly.fechaPedido.getMonth()+1)+'-'+$scope.cashMonthly.fechaPedido.getDate()+' '+$scope.fechap.getHours()+':'+$scope.fechap.getMinutes()+':'+$scope.fechap.getSeconds();
+                        
                         crudService.create($scope.cashMonthly, 'cashMonthlys').then(function (data) {
                             if (data['estado'] == true) {
                                 $scope.success = data['descripcion'];
@@ -303,6 +294,9 @@
 
                 $scope.updatecashMonthly = function(){
                     if ($scope.cashMonthlyCreateForm.$valid) {
+                        $scope.fechap=new Date();
+                        $scope.cashMonthly.fecha=$scope.cashMonthly.fechaPedido.getFullYear()+'-'+($scope.cashMonthly.fechaPedido.getMonth()+1)+'-'+$scope.cashMonthly.fechaPedido.getDate()+' '+$scope.fechap.getHours()+':'+$scope.fechap.getMinutes()+':'+$scope.fechap.getSeconds();
+                        
                         crudService.update($scope.cashMonthly,'cashMonthlys').then(function(data)
                         {
                             if(data['estado'] == true){

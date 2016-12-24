@@ -95,21 +95,17 @@
                       </div>
                       </div> -->
 
-                      <div class="form-group" ng-class="{true: 'has-error'}[ cashMonthlyCreateForm.fechaPedido.$error.required &amp;&amp; cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.fechaPedido.$dirty &amp;&amp; cashMonthlyCreateForm.fechaPedido.$invalid]">
-                                <label for="fechaPedido">Fecha Entrega: </label>
+                     <div  class="form-group" ng-class="{true: 'has-error'}[ orderPurchaseCreateForm.fechaPedido.$error.required && orderPurchaseCreateForm.$submitted || orderPurchaseCreateForm.fechaPedido.$dirty && orderPurchaseCreateForm.fechaPedido.$invalid]">
+                                <label for="fechaPedido">Fecha: </label>
                             <div ng-hide="show" class="input-group">
                                 <div class="input-group-addon">
                                       <i class="fa fa-calendar"></i>
                                 </div>
-                                  <input type="datetime-local" class="form-control ng-pristine ng-valid ng-touched" name="fechaPedido">
-                                </div>
-                            <label ng-show="cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.fechaPedido.$dirty &amp;&amp; cashMonthlyCreateForm.fechaPedido.$invalid" class="ng-hide">
-                            <span ng-show="cashMonthlyCreateForm.fechaPedido.$invalid" class="ng-hide"><i class="fa fa-times-circle-o"></i>Fecha Inválida.</span>
-                            </label>
+                                  <input type="date" class="form-control"  name="fechaPedido" ng-model="cashMonthly.fechaPedido" >
+                            </div>
+                           
                              
-                             <div ng-show="show" class="input-group ng-hide">
-                               <spam class="ng-binding"></spam>
-                            </div> 
+                           
                       </div>  
 
                       <!-- capo de Texto  Monto-->

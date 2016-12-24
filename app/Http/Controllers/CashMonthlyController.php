@@ -74,7 +74,7 @@ class CashMonthlyController extends Controller {
 
     public function find($id)
     {
-        $material = $this->CashMonthlyRepo->find($id)->paginate(15);
+        $material = $this->CashMonthlyRepo->find($id);
         return response()->json($material);
     }
 

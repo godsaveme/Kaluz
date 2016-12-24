@@ -25,11 +25,11 @@
                 <form name="cashMonthlyCreateForm" role="form" novalidate>
                   <div class="box-body">
                     <div class="callout callout-danger" ng-show="errors">
-                      <ul>
+                    <ul>
                         <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
-                      </ul>
+                    </ul>
                     </div>
-                    <!-- Combo Concepto tabla expenseMonthlys-->
+                      <!-- Combo Concepto tabla expenseMonthlys-->
                       <div class="row">
                       <div class="col-md-6">
                         <div class="row">
@@ -37,7 +37,8 @@
                         <div class="form-group" >
                          <label for="expense">Concepto</label>
 
-                          <select class="form-control" name="" ng-model="cashMonthly.expenseMonthlys_id" ng-options="item.id as item.name for item in expenses">
+                          <select class="form-control" name="" ng-model="cashMonthly.expenseMonthlys_id" ng-options="item.id as item.name for item in expenses | orderBy: 'name'">
+                            <option value="">--Elije Concepto--</option>
                           </select>
                           </div>
                           </div>
@@ -60,10 +61,11 @@
                       <div class="row">
                       <div class="col-md-8">
 
-                        <div class="form-group" >
+                        <!--<div class="form-group" >
                           <label for="year">Año</label>
 
-                          <select class="form-control" name="" ng-model="cashMonthly.years_id" ng-options="item.id as item.year for item in years">
+                          <select class="form-control" name="" ng-model="cashMonthly.years_id" ng-options="item.id as item.year for item in years | orderBy: 'year'">
+                          <option value="">--Elije Año--</option>
                           </select>
                           </div>
                           </div>
@@ -78,147 +80,64 @@
                         </div>
                         
                       </div>
-                      </div>
+                      </div> -->
 
                       <!-- Combo Mes tabla mounts-->
-                      <div class="row">
+                      <!-- <div class="row">
                       <div class="col-md-4">
                         <div class="form-group" >
                           <label for="month">Mes</label>
 
                           <select class="form-control" name="" ng-model="cashMonthly.months_id" ng-options="item.id as item.month for item in months">
+                          <option value="">--Elije Mes--</option>
                           </select>
                         </div>
                       </div>
-                      </div>
+                      </div> -->
+
+                     <div  class="form-group" ng-class="{true: 'has-error'}[ orderPurchaseCreateForm.fechaPedido.$error.required && orderPurchaseCreateForm.$submitted || orderPurchaseCreateForm.fechaPedido.$dirty && orderPurchaseCreateForm.fechaPedido.$invalid]">
+                                <label for="fechaPedido">Fecha: </label>
+                            <div ng-hide="show" class="input-group">
+                                <div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                </div>
+                                  <input type="date" class="form-control"  name="fechaPedido" ng-model="cashMonthly.fechaPedido" >
+                            </div>
+                           
+                             
+                           
+                      </div>  
 
                       <!-- capo de Texto  Monto-->
-                      <div class="form-group" ng-class="{true: 'has-error'}[ cashMonthlyCreateForm.amaunt.$error.required && cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.amaunt.$dirty && cashMonthlyCreateForm.amaunt.$invalid]">
-                      <label for="amaunt">Monto</label>
-                      <input type="text" class="form-control" name="amaunt" placeholder="Monto" ng-model="cashMonthly.amount" required>
-                      <label ng-show="cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.amaunt.$dirty && cashMonthlyCreateForm.amaunt.$invalid">
-                        <span ng-show="cashMonthlyCreateForm.amaunt.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
-                      </div>
+                        <div class="form-group" ng-class="{true: 'has-error'}[ cashMonthlyCreateForm.amount.$error.required && cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.amount.$dirty && cashMonthlyCreateForm.amount.$invalid]">
+                          <label for="amount">Monto</label>
+                          <input type="number" class="form-control ng-pristine ng-valid ng-touched" name="amount" placeholder="0.00" ng-model="cashMonthly.amount" ng-blur="calculateSuppPric()" step="0.1">
+                          <label ng-show="cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.amount.$dirty && cashMonthlyCreateForm.amount.$invalid">
+                            <span ng-show="cashMonthlyCreateForm.amount.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                          </label>
+                         </div>
+
                       <!-- capo de Texto  Descripcion-->
-                      <div class="form-group" ng-class="{true: 'has-error'}[ cashMonthlyCreateForm.descripcion.$error.required && cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.descripcion.$dirty && cashMonthlyCreateForm.descripcion.$invalid]">
-                      <label for="descripcion">Descripcion</label>
-                      <input type="text" class="form-control" name="descripcion" placeholder="Descripcion" ng-model="cashMonthly.descripcion" required>
-                      <label ng-show="cashMonthlyCreateForm.$submitted || cashMonthlyCreateForm.descripcion.$dirty && cashMonthlyCreateForm.descripcion.$invalid">
-                        <span ng-show="cashMonthlyCreateForm.descripcion.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                      </label>
+                      <div class="form-group" >
+                        <label for="descripcion">Descripción</label>
+                          <textarea type="descripcion" class="form-control" name="descripcion" placeholder="..."
+                            ng-model="cashMonthly.descripcion" rows="4" cols="50"></textarea>
                       </div>
-
-                    </div>
-
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="updatecashMonthly()">Modificar</button>
-                    <a href="/cashMonthlys" class="btn btn-danger">Cancelar</a>
                   </div>
+                 
                 </form>
               </div><!-- /.box -->
+               <div class="box-footer">
+            <button type="submit" class="btn btn-primary" ng-click="updatecashMonthly()">Guradar Cambios</button>
+            <a href="/cashMonthlys" class="btn btn-danger">Cancelar</a>
 
+            <!-- <a href="/cashMonthlys" class="btn btn-danger">Cancelar</a>-->
+          </div>
               </div>
               </div><!-- /.row -->
         </section><!-- /.content -->
 
- <!-- =========================================Ventana Agregar Año=================================-->
-         <div class="container"  style="margin-top: 60px;">
-           <div  class="modal fade" id="miventana2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ngenabled">
-             <div  class="modal-dialog">
-                  <div style="border-radius: 5px" class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="ngenabled"> &times; </button>
-                          <h4 class="modal-title">Opciones Año</h4>
-                        </div>
-                        <!--=================cueropo========================-->
-                        <div class="nav-tabs-custom" id="myTabs">
-                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#tab_11" data-toggle="#tab">Agregar Año</a></li>
-                  <li><a href="#tab_21" data-toggle="tab">Editar o Eliminar</a></li>
-
-                </ul>
-                <div class="tab-content">
-                  <div class="tab-pane active" id="tab_11">
-                      <form name="yearCreateForm" role="form" novalidate>
-                        <div class="row">
-                          <div class="col-md-8">
-
-                          <div class="form-group" ng-class="{true: 'has-error'}[ yearCreateForm.year.$error.required && yearCreateForm.$submitted || yearCreateForm.year.$dirty && yearCreateForm.year.$invalid]">
-                          <label for="year">Año</label>
-                          <input type="number" class="form-control ng-pristine ng-valid ng-touched" name="year" placeholder="2015" ng-model="year.year" ng-blur="calculateSuppPric()" step="1">
-                          <label ng-show="yearCreateForm.$submitted || yearCreateForm.year.$dirty && yearCreateForm.year.$invalid">
-                            <span ng-show="yearCreateForm.year.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
-                         </div>
-
-                          </div>
-                        </div>
-                      
-
-                      <div class="modal-footer" >
-                          <button type="submit" class="btn btn-primary" ng-click="createYear()" data-dismiss="modal">Agregar</button>
-                          <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
-                      </div>
-                      </form>
-                  </div><!-- /.tab-pane -->
-                  <div class="tab-pane" id="tab_21">
-                    <div class="form-group" >
-                          
-                          <div class="row" ng-hide="mostrardata1">
-                          <div class="col-md-8">
-
-                          <div class="form-group" >
-                          <label for="year">Año</label>
-
-                          <select class="form-control" name="" ng-model="cashMonthly.years_id" ng-options="item.id as item.year for item in years | orderBy: 'year'">
-                            <option value="">--Elije Año--</option>
-                          </select>
-                          </div>
-                          </div>
-                          </div>
-                          </div>
-                          <!---->
-                        <div class="row" ng-show="mostrardata1">
-                          <div class="col-md-8">
-                          
-
-                            <div class="form-group" ng-class="{true: 'has-error'}[ yearCreateForm.year.$error.required && yearCreateForm.$submitted || yearCreateForm.year.$dirty && yearCreateForm.year.$invalid]">
-                          <label for="year">Año</label>
-                          <input type="number" class="form-control ng-pristine ng-valid ng-touched" name="year" placeholder="2015" ng-model="year.year" ng-blur="calculateSuppPric()" step="1">
-                          <label ng-show="yearCreateForm.$submitted || yearCreateForm.year.$dirty && yearCreateForm.year.$invalid">
-                            <span ng-show="yearCreateForm.year.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
-                          </label>
-                         </div>
-
-                          </div>
-
-                        </div>
-
-
-                        <div class="modal-footer" >
-                          <button type="submit" class="btn btn-primary" ng-show="mostrardata1" ng-click="ocultar()">Cancelar</button>
-                          <button type="submit" class="btn btn-primary" ng-click="updatecashYear()" ng-show="mostrardata1">Guardar</button>
-                          <button type="submit" class="btn btn-primary" ng-hide="mostrardata1" ng-click="deleteYear()">Eliminar</button>
-                          <button type="submit" class="btn btn-primary" ng-hide="mostrardata1" ng-click="ver()">Modificar</button>
-                          <a  class="btn btn-danger" data-dismiss="modal" aria-hidden="ngenabled">Salir</a>
-                      </div>
-
-                      </div>
-                  </div><!-- /.tab-pane -->
-                </div><!-- /.tab-content -->
-              </div>
-              <script type="text/javascript">$('#myTabs a').click(function (e) {
-                          e.preventDefault()
-                          $(this).tab('show')})
-              </script>
-              
-                        <!--================================================-->
-                  </div>
-              </div>
-            </div>
-          </div>
-
+ 
 <!-- =========================================Ventana Agregar Concepto=================================-->
    
            <div class="container"  style="margin-top: 60px;">
