@@ -119,7 +119,7 @@ class DetCashController extends Controller
      */
     public function edit($id)
     {
-        //
+      
     }
 
     /**
@@ -129,9 +129,15 @@ class DetCashController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        var_dump($request->all());die();
+        $cash = $this->detCashRepo->find($request->id);
+
+        $manager = new DetCashManager($cash,$request->all());
+        $manager->update();
+
+        return response()->json(['estado'=>true, 'nombre'=>$cash->nombre]);
     }
 
     /**

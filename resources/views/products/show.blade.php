@@ -264,7 +264,7 @@
             <div class="col-md-8">
                 <input type="text" class="form-control hidden" name="presentation.nombre" ng-model="presentation.nombre">
                 <div class="form-group" >
-                    <label>Porcentaje de Dscto</label>
+                    <label>Monto de Dscto</label>
                     <input type="number" class="form-control" name="DsctoVal" placeholder="0.00" ng-model="areaDscto.DsctoVal" step="1">
                 </div>
             </div>

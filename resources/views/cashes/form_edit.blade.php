@@ -111,10 +111,13 @@
                               <span ng-show="cashCreateForm.ingresos.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
                             </label>
                           </div>
-
                           <div ng-if="cash.estado==1" class="form-group" ng-class="{true: 'has-error'}[ cashCreateForm.ingresos.$error.required && cashCreateForm.$submitted || cashCreateForm.ingresos.$dirty && cashCreateForm.ingresos.$invalid]">
-                            <label for="ingresos">Monto Real</label>
-                            <input string-to-number type="number" min="0"class="form-control ng-pristine ng-valid ng-touched" name="ingresos" placeholder="0.00" ng-model="cash.montoReal" ng-blur="calculardescuadre()" step="0.1">
+                              <label for="ingresos">Monto Real Efect./Tarj.</label>
+                          </div>
+                          <div ng-if="cash.estado==1" class="form-group" ng-class="{true: 'has-error'}[ cashCreateForm.ingresos.$error.required && cashCreateForm.$submitted || cashCreateForm.ingresos.$dirty && cashCreateForm.ingresos.$invalid]">
+                            
+                            <input string-to-number style="width:50%; float:left;" type="number" min="0"class="form-control ng-pristine ng-valid ng-touched" name="ingresos" placeholder="0.00" ng-model="cash.montoReal" ng-blur="calculardescuadre()" step="0.1">
+                            <input string-to-number style="width:50%;" type="number" min="0"class="form-control ng-pristine ng-valid ng-touched" name="ingresos" placeholder="0.00" ng-model="cash.montoRealTar" ng-blur="calculardescuadre()" step="0.1">
                             <label ng-show="cashCreateForm.$submitted || cashCreateForm.ingresos.$dirty && cashCreateForm.ingresos.$invalid">
                               <span ng-show="cashCreateForm.ingresos.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
                             </label>
@@ -175,7 +178,8 @@
                       <td ng-if="row.cashMotive_id==15 || row.cashMotive_id==16 || row.cashMotive_id==17"><a href="/separateSales/edit/@{{row.observacion}}" target="_blank">ver pedido</a></td>
                       <td ng-if="row.cashMotive_id==19 || row.cashMotive_id==20 || row.cashMotive_id==21"><a href="/separateSales/edit/@{{row.observacion}}" target="_blank">ver separado</a></td>
                       <td ng-if="row.cashMotive_id!=1 && row.cashMotive_id!=13 && row.cashMotive_id!=14 && row.cashMotive_id!=15 && row.cashMotive_id!=16 && row.cashMotive_id!=17
-                                 && row.cashMotive_id!=19 && row.cashMotive_id!=20 && row.cashMotive_id!=21">@{{row.observacion}}</td>
+                                 && row.cashMotive_id!=19 && row.cashMotive_id!=20 && row.cashMotive_id!=21">
+                               @{{row.observacion}}</td>
 
                     </tr>                    
                   </table>
@@ -189,14 +193,45 @@
 
                     </div>
 
-                  <div class="box-footer">
-                    <a href="/cashes" class="btn btn-danger">salir</a>
-                  </div>
+
+                  <script type="text/javascript">
+                     $('#myModal').on('shown.bs.modal', function () {
+                        $('#myInput').focus()
+                      })
+                  </script>
+                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">Cambiar Monto de Gasto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4"> 
+               <label>Ingrese nuevo Monto</label>
+            </div>
+            <div class="col-md-8"> 
+               <input string-to-number type="number" class="form-control" ng-model="nuevoMonto">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" ng-click="updateMontoGasto()" class="btn btn-primary">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
                 </form>
               </div><!-- /.box -->
 
               </div>
               </div><!-- /.row -->
+
+
+
         </section><!-- /.content -->
 
 

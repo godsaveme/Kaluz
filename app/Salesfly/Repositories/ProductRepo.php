@@ -153,11 +153,12 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
                             ->leftjoin('stock','stock.variant_id','=','variants.id')
                             ->join('warehouses','warehouses.id','=','stock.warehouse_id')
                             ->join('stores','stores.id','=','warehouses.store_id')
-                            ->select('variants.codigo as Codigo','variants.sku as Sku','variants.id as varid','products.estado as proEstado',
+                            ->select('variants.codigo as Codigo','variants.sku as Sku','variants.id as varid',
+                              'products.estado as proEstado',
                                'brands.nombre as Marca','products.hasVariants as TieneVariante','types.nombre as Linea',
                               
                               \DB::raw('ROUND(stock.stockActual) as stock,(select dt.descripcion from detAtr dt inner join variants v on v.id=dt.variant_id inner join atributes atr on atr.id=dt.atribute_id where v.id=varid and atr.nombre="Color") as Color'),
-                              \DB::raw('variants.id as idvariante,(SELECT SUM(detSeparateSales.cantidad) FROM separateSales INNER JOIN detSeparateSales ON detSeparateSales.separateSale_id=
+                              \DB::raw('variants.id as idvariante,ROUND(sum(stock.stockSeparados)) as Separados,(SELECT SUM(detSeparateSales.cantidad) FROM separateSales INNER JOIN detSeparateSales ON detSeparateSales.separateSale_id=
                                 separateSales.id INNER JOIN detPres ON detSeparateSales.detPre_id=detPres.id 
                                 WHERE detPres.variant_id=idvariante and (separateSales.estado=0 OR separateSales.estado=1))as separado'),
                              

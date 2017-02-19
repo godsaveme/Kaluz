@@ -21,6 +21,7 @@
                 $scope.payment={};
                 $scope.atributes=[];
                 $scope.atribute={};
+                $scope.enviarCompra=false;
                 //$scope.detPayments=[];
                 $scope.cantidad;
                 $scope.detPayment={};
@@ -1095,6 +1096,7 @@
                       
                 }
                 $scope.CrearCompraDirecta =function(){
+                    $scope.enviarCompra=true;
                     $scope.orderPurchase.compraDirecta=1;
                     $scope.orderPurchase.fecha=new Date();
                     $scope.orderPurchase.fechaEntrega=$scope.orderPurchase.fechaPedido;
@@ -1110,6 +1112,7 @@
                                 $window.location.href='/purchases';
                             } else {
                                 $scope.errors = data;
+                                $scope.enviarCompra=false;
 
                             }
                         });

@@ -155,6 +155,7 @@ class CashesController extends Controller
 
         return response()->json(['estado'=>true, 'nombre'=>$cash->nombre]);
     }
+    
 
     public function store(Request $request)
     {

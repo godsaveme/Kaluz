@@ -602,7 +602,7 @@
          </div>
     </div>
         
-                    <button type="submit" class="btn btn-primary" ng-click="CrearCompraDirecta()">Crear</button>
+                    <button type="submit" ng-disabled="enviarCompra" class="btn btn-primary" ng-click="CrearCompraDirecta()">Crear</button>
                     <a target="_self" href="/purchases" class="btn btn-danger">Cancelar</a>
                   </div>
       </div>

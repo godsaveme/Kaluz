@@ -504,10 +504,11 @@ class ProductsController extends Controller
             //var_dump($variant->detPreONE->id);
             $detPre = $variant->detPreONE;
             //var_dump($detPre->id);
-            $detPre->dscto = $request->input('DsctoVal');
-            $dsctCant = $detPre->price*$request->input('DsctoVal')/100; //pq aun no se guarda el dato;
+            $detPre->dscto = (($detPre->price-($detPre->price-$request->input('DsctoVal')))*100)/$detPre->price;
+            //$dsctCant = $detPre->price*$request->input('DsctoVal')/100; //pq aun no se guarda el dato;
+            $dsctCant = $request->input('DsctoVal');        
             $detPre->dsctoCant = $dsctCant;
-            $detPre->pvp = $detPre->price -$dsctCant;
+            $detPre->pvp = $detPre->price -$request->input('DsctoVal');
             $detPre->save();
         }
 

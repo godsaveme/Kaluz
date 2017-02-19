@@ -10,11 +10,13 @@
                 $scope.cashHeaders = {};
                 $scope.cashHeader={};
                 $scope.detCashes={};
+                $scope.detCashe10={};
                 $scope.buscar;
                 $scope.date = new Date(); 
                 $scope.stores={};
                 $scope.bandera=true;
                 $scope.banderaAbrirCaja=false;
+
                 $scope.mostrarCajas = function () {
 
                     crudService.search('searchHeaders',$scope.stores.id,1).then(function (data){
@@ -33,6 +35,23 @@
                     }
                     
                 };
+                $scope.nuevoMonto=0;
+                $scope.actualizarMontoGasto = function(row){
+                     $scope.nuevoMonto=row.efectivo;
+                     $scope.detCashe10=row;
+                }
+                $scope.updateMontoGasto = function(row){
+                     $scope.detCashe10.efectivo=$scope.nuevoMonto;
+                     if ($scope.nuevoMonto>0){
+                        crudService.update($scope.detCashe10,'gastosDiarios').then(function (data){
+                                if(data!=undefined){
+                                    alert("actualizado Correctamente")
+                                }else{
+                                    alert("Error al generar reporte");
+                                }
+                        });
+                     }
+                }
                 $scope.descriReport="Generar Reporte";
                 $scope.generarReporteDetCash=function(){
                     
@@ -80,7 +99,7 @@
                     $scope.rutaDetCash='/detCashes/create/'+$scope.cash.id; 
                 };
                 $scope.calculardescuadre = function () {
-                    $scope.cash.descuadre=Number($scope.cash.montoReal)-Number($scope.cash.montoBruto);
+                    $scope.cash.descuadre=(Number($scope.cash.montoReal)+Number($scope.cash.montoRealTar))-Number($scope.cash.montoBruto);
                 };
                 $scope.caj_id=1;
                 $scope.verCaja = function () {
@@ -128,7 +147,7 @@
                             //alert($scope.cash.fechaFin);
                             $log.log($scope.cash);
                         if ($scope.cashCreateForm.$valid) {  
-                            
+                        $scope.cash.montoReal=(Number($scope.cash.montoReal)+Number($scope.cash.montoRealTar));
                         crudService.update($scope.cash,'cashes').then(function(data)
                         {
                             if(data['estado'] == true){
@@ -201,6 +220,7 @@
                     crudService.byId(id,'cashes').then(function (data) {
                         $scope.cash = data;
                         $scope.buscar=$scope.cash.id;
+                        $scope.cash.montoRealTar='0';
                         //$log.log($scope.cash);
 
                         crudService.search('detCashes',$scope.cash.id,1).then(function (data){
@@ -284,7 +304,7 @@
                     }else{
                        $scope.cash.fechaInicio=$scope.date.getFullYear()+'-'+($scope.date.getMonth()+1)+'-'+$scope.date.getDate()+' '+$scope.date.getHours()+':'+$scope.date.getMinutes()+':'+$scope.date.getSeconds();
                         $scope.cash.estado='1'; 
-                        $scope.cash.montoBruto=$scope.cash.montoInicial;
+                        $scope.cash.montoBruto=0;
                         crudService.create($scope.cash, 'cashes').then(function (data) {
                            
                             if (data['estado'] == true) {
