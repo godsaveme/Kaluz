@@ -114,7 +114,7 @@
                 };
                  $scope.calculate = function() {
                     //alert($scope.tipo);
-                    if($scope.detCash.montoMovimientoEfectivo>$scope.cash.montoBruto && $scope.tipo=='-'){
+                    if($scope.detCash.montoMovimientoEfectivo>$scope.cash.montoBruto2 && $scope.tipo=='-'){
                         alert("Monto Insuficiente");
                         $scope.detCash.montoMovimientoEfectivo=0;
                         ///////////$scope.detCash.montoMovimientoTarjeta=0;

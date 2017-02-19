@@ -96,7 +96,7 @@ class CashesController extends Controller
 
     public function find($id)
     {
-        $cash = $this->cashRepo->find($id);
+        $cash = $this->cashRepo->findCalculado($id);
         return response()->json($cash);
     }
 

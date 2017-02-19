@@ -97,6 +97,19 @@ class CashRepo extends BaseRepo{
                     ->first();
         return $cashes;
     }
+
+    public function findCalculado($id){
+        $cashes =Cash::select(\DB::raw("cashes.*,(SELECT ifnull(sum(montoMovimientoTarjeta),0) as tarjeta FROM detCash
+WHERE cash_id=cashes.id) as totoTarjeta,(SELECT ifnull(sum(montoMovimientoEfectivo),0)  FROM detCash
+WHERE cash_id=cashes.id)-(SELECT ifnull(sum(montoMovimientoEfectivo),0) as efectivo FROM detCash dc inner join cashMotives cm on cm.id=dc.cashMotive_id 
+WHERE dc.cash_id=cashes.id and cm.tipo='+') as montoBruto2,(SELECT ifnull(sum(montoMovimientoEfectivo),0) as efectivo FROM detCash dc inner join cashMotives cm on cm.id=dc.cashMotive_id 
+WHERE dc.cash_id=cashes.id and cm.tipo='-') as gatos2"))
+
+                    ->where('id','=', $id)
+                    //with(['customer','employee'])
+                    ->first();
+        return $cashes;
+    }
     
      public function searchuserincaja100($idCaja,$id){
         if(auth()->user()->role_id == 1){

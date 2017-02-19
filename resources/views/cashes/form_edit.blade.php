@@ -95,10 +95,14 @@
                           <h3 class="box-title">Arqueo</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
+                           <div class="form-group" ng-class="{true: 'has-error'}[ cashCreateForm.montoInicial.$error.required && cashCreateForm.$submitted || cashCreateForm.montoInicial.$dirty && cashCreateForm.montoInicial.$invalid]">
+                            <label for="montoInicial">Monto Teorico</label>
+                            
+                          </div>
 
                           <div class="form-group" ng-class="{true: 'has-error'}[ cashCreateForm.montoInicial.$error.required && cashCreateForm.$submitted || cashCreateForm.montoInicial.$dirty && cashCreateForm.montoInicial.$invalid]">
-                            <label for="montoInicial">Monto Teorico</label>
-                            <input string-to-number ng-disabled="true" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.montoBruto" ng-blur="calculateSuppPric()" step="0.1">
+                            <input string-to-number ng-disabled="true" style="width:50%; float:left;" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.montoBruto2" ng-blur="calculateSuppPric()" step="0.1">
+                            <input string-to-number ng-disabled="true" style="width:50%;" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.totoTarjeta" ng-blur="calculateSuppPric()" step="0.1">
                             <label ng-show="cashCreateForm.$submitted || cashCreateForm.montoInicial.$dirty && cashCreateForm.montoInicial.$invalid">
                               <span ng-show="cashCreateForm.montoInicial.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
                             </label>
@@ -169,7 +173,12 @@
                       <td ng-if="row.tipoDoc!=null">@{{row.tipoDoc+"-"+row.NumDocument}}</td>
                       <td ng-if="row.tipoDoc==null">-</td>
                       <td>@{{row.tarjeta}}</td>
-                      <td>@{{row.efectivo}}</td>
+                      <td ng-if="row.cashMotive_id!=1 && row.cashMotive_id!=13 && row.cashMotive_id!=14 && row.cashMotive_id!=15 && row.cashMotive_id!=16 && row.cashMotive_id!=17
+                                 && row.cashMotive_id!=19 && row.cashMotive_id!=20 && row.cashMotive_id!=21"><spam style="color:red;">@{{row.efectivo}}</spam></td>
+                      <td ng-if="row.cashMotive_id==1 || row.cashMotive_id==13 || row.cashMotive_id==14
+                      || row.cashMotive_id==15 || row.cashMotive_id==16 || row.cashMotive_id==17 ||
+                      row.cashMotive_id==19 || row.cashMotive_id==20 || row.cashMotive_id==21">@{{row.efectivo}}</td>
+                      
                       <td ng-if="row.estado==3"><span style="color: red;">Anul.</span></td>
                       <td ng-if="row.estado==1"><span style="color: green;">Term.</span></td>
                       <td ng-if="row.estado==0"><span style="color: yellow;">Pend.</span></td>
