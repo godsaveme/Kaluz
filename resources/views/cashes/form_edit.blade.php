@@ -101,8 +101,10 @@
                           </div>
 
                           <div class="form-group" ng-class="{true: 'has-error'}[ cashCreateForm.montoInicial.$error.required && cashCreateForm.$submitted || cashCreateForm.montoInicial.$dirty && cashCreateForm.montoInicial.$invalid]">
-                            <input string-to-number ng-disabled="true" style="width:50%; float:left;" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.montoBruto2" ng-blur="calculateSuppPric()" step="0.1">
-                            <input string-to-number ng-disabled="true" style="width:50%;" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.totoTarjeta" ng-blur="calculateSuppPric()" step="0.1">
+                            <input string-to-number ng-disabled="true" style="width:40%; float:left;" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.montoBruto2" ng-blur="calculateSuppPric()" step="0.1">
+                            <input string-to-number ng-disabled="true" style="width:30%; float:left" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.totoTarjeta" ng-blur="calculateSuppPric()" step="0.1">
+                            <input string-to-number ng-disabled="true" style="width:30%;" type="text" class="form-control ng-pristine ng-valid ng-touched" name="montoInicial" placeholder="0.00" ng-model="cash.montoBruto" ng-blur="calculateSuppPric()" step="0.1">
+                            
                             <label ng-show="cashCreateForm.$submitted || cashCreateForm.montoInicial.$dirty && cashCreateForm.montoInicial.$invalid">
                               <span ng-show="cashCreateForm.montoInicial.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
                             </label>

@@ -100,9 +100,8 @@ class CashRepo extends BaseRepo{
 
     public function findCalculado($id){
         $cashes =Cash::select(\DB::raw("cashes.*,(SELECT ifnull(sum(montoMovimientoTarjeta),0) as tarjeta FROM detCash
-WHERE cash_id=cashes.id) as totoTarjeta,(SELECT ifnull(sum(montoMovimientoEfectivo),0)  FROM detCash
-WHERE cash_id=cashes.id)-(SELECT ifnull(sum(montoMovimientoEfectivo),0) as efectivo FROM detCash dc inner join cashMotives cm on cm.id=dc.cashMotive_id 
-WHERE dc.cash_id=cashes.id and cm.tipo='+') as montoBruto2,(SELECT ifnull(sum(montoMovimientoEfectivo),0) as efectivo FROM detCash dc inner join cashMotives cm on cm.id=dc.cashMotive_id 
+WHERE cash_id=cashes.id and estado <> 3) as totoTarjeta,(SELECT ifnull(sum(montoMovimientoEfectivo),0) as efectivo FROM detCash dc inner join cashMotives cm on cm.id=dc.cashMotive_id 
+WHERE dc.cash_id=cashes.id and cm.tipo='+' and estado <> 3) as montoBruto2,(SELECT ifnull(sum(montoMovimientoEfectivo),0) as efectivo FROM detCash dc inner join cashMotives cm on cm.id=dc.cashMotive_id 
 WHERE dc.cash_id=cashes.id and cm.tipo='-') as gatos2"))
 
                     ->where('id','=', $id)
