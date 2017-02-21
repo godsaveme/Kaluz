@@ -114,6 +114,7 @@
         },field: 'Linea', headerCellClass: $scope.highlightFilteredHeader },
           
        { field: 'stock',enableFiltering: false},
+       { field: 'Separados',enableFiltering: false},
        { field: 'Tot_Stock',enableFiltering: false},
        { field: 'Color', headerCellClass: $scope.highlightFilteredHeader },
         { field: 'Taco', headerCellClass: $scope.highlightFilteredHeader },
