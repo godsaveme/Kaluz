@@ -71,7 +71,7 @@
                       <th style="width: 40px">Eliminar</th>
                     </tr>
                    
-                    <tr ng-repeat="row in employees">
+                    <tr ng-repeat="row in employees" ng-class="{ 'text-muted' : row.estado == 0}">
                       <td>{{$index + 1 + (currentPage-1)*itemsperPage}}</td>
 
                       <td>{{row.nombres+ " " + row.apellidos }}</td>

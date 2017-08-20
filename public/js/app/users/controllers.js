@@ -104,7 +104,7 @@
                             crudService.create($scope.user, 'users').then(function (data) {
                                 if (data['estado'] == true) {
                                     $scope.success = data['nombres'];
-
+                                    alert('creado correctamente');
                                     $location.path('/users');
 
                                 } else {
@@ -113,6 +113,9 @@
                                     //alert(data);
 
                                 }
+                            }, function(data){
+                                $scope.errors =data;
+                                $btn.button('reset');
                             });
                         }
                         }else{
@@ -123,7 +126,7 @@
                         crudService.create($scope.user,'users').then(function (data){
                             if (data['estado'] == true) {
                                 $scope.success = data['nombres'];
-
+                                alert('creado correctamente');
                                 $location.path('/users');
 
                             } else {
@@ -131,6 +134,9 @@
                                 $btn.button('reset');
 
                             }
+                        }, function(data){
+                            $scope.errors =data;
+                            $btn.button('reset');
                         });}
 
                         if(document.getElementById('userImage').files[0] && document.getElementById('userImage').files[0].size <= 400000){
@@ -164,6 +170,9 @@
                                     $scope.errors =data;
                                     $btn.button('reset');
                                 }
+                            }, function (data){
+                                $scope.errors =data;
+                                $btn.button('reset');
                             });
                             }
                         }else{
@@ -181,6 +190,9 @@
                                 $scope.errors =data;
                                 $btn.button('reset');
                             }
+                        },function(data){
+                            $scope.errors =data;
+                            $btn.button('reset');
                         });}
 
                         if(document.getElementById('userImage').files[0] && document.getElementById('userImage').files[0].size <= 400000){

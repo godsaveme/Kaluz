@@ -36,7 +36,7 @@
 <form name="employeeCreateForm" role="form" novalidate>
 <div class="callout callout-danger" ng-show="errors">
                                                   <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
+                                              <li ng-repeat="row in errors track by $index"><strong >@{{row[$index]}}</strong></li>
                                               </ul>
                                             </div>
 <div class="">
@@ -127,10 +127,14 @@
                       </div>
                       </div>
                       <div class="col-md-4">     
-                    <div class="form-group" >
-                      <label for="apellidos">Dni</label>
-                      <input type="text" class="form-control" name="empresa" placeholder="Dni"
-                      ng-model="employee.dni">
+                    <div class="form-group" ng-class="{true: 'has-error'}[ employeeCreateForm.dni.$error.required && employeeCreateForm.$submitted || employeeCreateForm.dni.$dirty && employeeCreateForm.dni.$invalid]">
+                      <label for="dni">Dni</label>
+                      <input type="text" class="form-control" name="dni" placeholder="Dni"
+                      ng-model="employee.dni" required>
+                        <label ng-show="employeeCreateForm.$submitted || employeeCreateForm.dni.$dirty && employeeCreateForm.dni.$invalid">
+
+                            <span ng-show="employeeCreateForm.dni.$error.required"><i class="fa fa-times-circle-o"></i>Requerido.</span>
+                        </label>
                      </div>
             </div>
                      

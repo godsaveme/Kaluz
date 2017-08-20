@@ -58,16 +58,17 @@
                     {
                         deferred.resolve(data);
                     }).error(function(data)
-                {
-                    //$log.log(data);
-                    alert('No se puede Agregar: Datos incorrectos o repetidos');
-                });
+                    {
+                        //$log.log(data);
+                        //alert('No se puede Agregar: Datos incorrectos o repetidos');
+                        deferred.reject(data);
+                    });
                 //    .error(function (data) //add for user , error send by 422 status
                 //    {
                 //        deferred.resolve(data);
                 //    })
-                ;
-                return deferred.promise;
+
+                    return deferred.promise;
             }
 
             function update(area,uri)
@@ -77,8 +78,9 @@
                     .success(function(data)
                     {
                         deferred.resolve(data);
-                    }
-                );
+                    }).error(function(data){
+                        deferred.reject(data);
+                    });
                 return deferred.promise;
             }
 

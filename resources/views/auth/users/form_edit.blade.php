@@ -28,7 +28,7 @@
                   <div class="box-body">
                   <div class="callout callout-danger" ng-show="errors">
                                                   <ul>
-                                              <li ng-repeat="row in errors track by $index"><strong >@{{row}}</strong></li>
+                                              <li ng-repeat="row in errors track by $index"><strong >@{{row[$index]}}</strong></li>
                                               </ul>
                                             </div>
                     <div class="row">
