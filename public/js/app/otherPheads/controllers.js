@@ -120,9 +120,9 @@
                     });
                       
                  }
-                socket.on('otherPhead.update', function (data) {
+                /*socket.on('otherPhead.update', function (data) {
                     $scope.otherPheads=JSON.parse(data);
-                });
+                });*/
                  if($location.path() == '/otherPheads/balance') {
                      $scope.pagos.fecha1=new Date();
                       

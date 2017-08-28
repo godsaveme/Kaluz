@@ -270,9 +270,9 @@
 
                 }
 
-                socket.on('cashes.update', function (data) {
+                /*socket.on('cashes.update', function (data) {
                     $scope.cashes=JSON.parse(data);
-                });
+                });*/
                 
 
 

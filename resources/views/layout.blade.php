@@ -17,7 +17,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins multi_select
          folder instead of downloading all of them to reduce the load. -->
     <link href="/vendor/adminlte/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-    <link href="/vendor/multi_select/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="/vendor/multi_select/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" /> -->
     <!-- AdminLTE fonts OpenSans-->
     <link href="/css/fonts.css" rel="stylesheet" type="text/css" />
 
@@ -593,7 +593,7 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="/vendor/multi_select/js/bootstrap-multiselect.js"></script>
+    <!-- <script src="/vendor/multi_select/js/bootstrap-multiselect.js"></script> -->
     <script src="/vendor/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="/vendor/jquery-ui/ui/minified/jquery-ui.min.js" type="text/javascript"></script>
@@ -614,7 +614,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/vendor/adminlte/dist/js/demo.js" type="text/javascript"></script>
 
-    <script src="/dev2/socket.io/socket.io.js"></script>
+    {{--<script src="/dev2/socket.io/socket.io.js"></script>--}}
   <!-- bower:js -->
   <script src="/vendor/angular/angular.js"></script>
   <script src="/vendor/moment/moment.js"></script>

@@ -66,9 +66,9 @@
                     });
                 }
 
-                socket.on('user.update', function (data) {
+                /*socket.on('user.update', function (data) {
                     $scope.users=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchUser = function(){
                 if ($scope.query.length > 0) {
@@ -84,7 +84,7 @@
                         $scope.currentPage = data.current_page;
                     });
                 }
-                    
+
                 };
 
 

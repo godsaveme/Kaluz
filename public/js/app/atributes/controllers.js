@@ -42,9 +42,9 @@
                     });
                 }
 
-                socket.on('atributes.update', function (data) {
+                /*socket.on('atributes.update', function (data) {
                     $scope.atributes=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchAtribut = function(){
                 if ($scope.query.length > 0) {

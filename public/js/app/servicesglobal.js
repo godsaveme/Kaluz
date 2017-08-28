@@ -263,10 +263,10 @@
                 select:select,
                 reporteCajaMensual: reporteCajaMensual,
                 byforeingKey: byforeingKey,
-                searchMes,searchMes,
+                searchMes: searchMes,
                 Reportes10: Reportes10,
-                reportPro,reportPro,
-                reportProWare,reportProWare,
+                reportPro: reportPro,
+                reportProWare: reportProWare,
                 deudasSupplier: deudasSupplier,
                 selectPost: selectPost,
                 Reportes: Reportes,
@@ -276,8 +276,11 @@
         .factory('socketService', function ($rootScope) {
             var host = window.location.hostname;
             //var host = '192.168.0.26';
-            var socket = io.connect('http://'+host+':3001');
+            //var socket = io.connect('http://'+host+':3001');
             return {
+                test:null
+            }
+            /*return {
                 on: function (eventName, callback) {
                     socket.on(eventName, function () {
                         var args = arguments;
@@ -296,6 +299,6 @@
                         });
                     })
                 }
-            };
+            };*/
         });
 })();

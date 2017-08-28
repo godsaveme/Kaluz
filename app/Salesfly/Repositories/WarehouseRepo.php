@@ -45,16 +45,26 @@ class WarehouseRepo extends BaseRepo{
         return $warehouses;
     }
     public function paginaterepo($c){
-       
-        $warehouses =Warehouse::join('stores','stores.id','=','warehouses.store_id')
+
+
+        /* $warehouses =Warehouse::join('stores','stores.id','=','warehouses.store_id')
                        ->join('users','users.store_id','=','stores.id')
                        ->where('users.id','=',auth()->user()->id)
-                       ->select(\DB::raw('warehouses.id as idW,warehouses.*,stores.nombreTienda,(SELECT s.nombreTienda FROM warehouses w 
+                       ->select(\DB::raw('warehouses.id as idW,warehouses.*,stores.nombreTienda,(SELECT s.nombreTienda FROM warehouses w
                         inner join stores s on s.id=w.store_id2 where w.id=idW) as nombreTienda2 '))
                        ->paginate($c);
+        return $warehouses; */
+
+        /* $warehouses =Warehouse::join('stores','stores.id','=','warehouses.store_id')
+            ->join('users','users.store_id','=','stores.id')
+            ->where('users.id','=',auth()->user()->id)
+            ->select(\DB::raw('*'))
+            ->paginate($c);
+        return $warehouses; */
+        $warehouses = Warehouse::with('store')->paginate($c);
         return $warehouses;
-    
-        
+
+
         
     }
      public function listaAlmacenesTienda(){

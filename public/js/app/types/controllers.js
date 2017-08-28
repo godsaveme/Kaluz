@@ -43,9 +43,9 @@
                     });
                 }
 
-                socket.on('Ttype.update', function (data) {
+                /*socket.on('Ttype.update', function (data) {
                     $scope.types=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchBrand = function(){
                 if ($scope.query.length > 0) {

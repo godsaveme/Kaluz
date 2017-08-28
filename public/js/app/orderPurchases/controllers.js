@@ -281,9 +281,9 @@
 }
                      
 
-                socket.on('orderPurchase.update', function (data) {
+                /*socket.on('orderPurchase.update', function (data) {
                     $scope.orderPurchases=JSON.parse(data);
-                });
+                });*/
                 $scope.ProvandoEdicion=function(){
                     $scope.show = !$scope.show;
                     crudPurchase.select('warehouses','select').then(function(data){

@@ -1615,9 +1615,9 @@ $scope.validaDocumento=function(){
 
                 
 
-                socket.on('sales.update', function (data) {
+                /*socket.on('sales.update', function (data) {
                     $scope.orders=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchorder = function(){
                 if ($scope.query.length > 0) {

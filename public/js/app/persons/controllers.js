@@ -42,9 +42,9 @@
                     });
                 }
 
-                socket.on('person.update', function (data) {
+                /*socket.on('person.update', function (data) {
                     $scope.persons=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchPerson = function(){
                 if ($scope.query.length > 0) {

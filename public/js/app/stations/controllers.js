@@ -43,9 +43,9 @@
                     });
                 }
 
-                socket.on('station.update', function (data) {
+                /*socket.on('station.update', function (data) {
                     $scope.stations=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchStation = function(){
                 if ($scope.query.length > 0) {

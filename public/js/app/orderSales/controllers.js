@@ -230,9 +230,9 @@
                     //alert($scope.montosaldo);
                 }
 
-                socket.on('orderSale.update', function (data) {
+                /*socket.on('orderSale.update', function (data) {
                     $scope.orderSales=JSON.parse(data);
-                });
+                });*/
 
 
                 $scope.dynamicPopover = {

@@ -72,8 +72,8 @@ class WarehousesController extends Controller {
     public function edit(Request $request)
     {
         $warehouse = $this->warehouseRepo->find($request->id);
-        //var_dump($warehouse);
-        //die(); 
+        //var_dump($request->all());
+        //die();
         $manager = new WarehouseManager($warehouse,$request->all());
         $manager->save();
 

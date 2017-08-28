@@ -175,9 +175,9 @@
                    
                 }
 
-                socket.on('cashMonthly.update', function (data) {
+                /*socket.on('cashMonthly.update', function (data) {
                     $scope.cashMonthlys=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchcashMonthly = function(){
                 if ($scope.query.length > 0) {

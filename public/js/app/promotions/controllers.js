@@ -48,9 +48,9 @@
                     });
                 }
 
-                socket.on('promotion.update', function (data) {
+                /*socket.on('promotion.update', function (data) {
                     $scope.promotions=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchPromotion = function(){
                 if ($scope.query.length > 0) {

@@ -473,9 +473,9 @@
 
                 }
 
-                socket.on('product.update', function (data) {
+                /*socket.on('product.update', function (data) {
                     $scope.products=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchProduct = function(){
                 if ($scope.query.length > 0) {

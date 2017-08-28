@@ -173,9 +173,9 @@
                 }
                 //$log.log($scope.cash);
 
-                socket.on('detCashes.update', function (data) {
+                /*socket.on('detCashes.update', function (data) {
                     $scope.detCashes=JSON.parse(data);
-                });
+                });*/
                 
 
 

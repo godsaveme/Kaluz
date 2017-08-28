@@ -43,9 +43,9 @@
                     });
                 }
 
-                socket.on('material.update', function (data) {
+                /*socket.on('material.update', function (data) {
                     $scope.materials=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchMaterial = function(){
                 if ($scope.query.length > 0) {

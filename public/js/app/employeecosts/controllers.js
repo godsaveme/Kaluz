@@ -43,9 +43,9 @@
                     });
                 }
 
-                socket.on('employeecosts.update', function (data) {
+                /*socket.on('employeecosts.update', function (data) {
                     $scope.employeecosts=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchEmployeecost = function(){
                 if ($scope.query.length > 0) {

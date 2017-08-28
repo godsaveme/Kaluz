@@ -67,9 +67,9 @@
                     });
                 }
 
-                socket.on('employees.update', function (data) {
+                /*socket.on('employees.update', function (data) {
                     $scope.employees=JSON.parse(data);
-                });
+                });*/
                  
                   $scope.editCostos=function(row){
                      //  alert(id);

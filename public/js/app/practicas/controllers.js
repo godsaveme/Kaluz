@@ -44,9 +44,9 @@
                     });
                 }
 
-                socket.on('practica.update', function (data) {
+                /*socket.on('practica.update', function (data) {
                     $scope.practicas=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchpracticas = function(){
                 if ($scope.query.length > 0) {

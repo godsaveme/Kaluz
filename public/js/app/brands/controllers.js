@@ -43,9 +43,9 @@
                     });
                 }
 
-                socket.on('brand.update', function (data) {
+                /*socket.on('brand.update', function (data) {
                     $scope.brands=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchBrand = function(){
                 if ($scope.query.length > 0) {

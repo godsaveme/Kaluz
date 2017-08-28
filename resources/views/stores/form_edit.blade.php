@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" ng-click="updateStore()">Crear</button>
+                            <button type="submit" class="btn btn-primary" ng-click="updateStore()">Editar</button>
                             <a href="/stores" class="btn btn-danger">Cancelar</a>
                         </div>
                 </form>

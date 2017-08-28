@@ -55,9 +55,9 @@
                     })
                 }
 
-                socket.on('warehouse.update', function (data) {
+                /*socket.on('warehouse.update', function (data) {
                     $scope.warehouses=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchWarehouse = function(){
                 if ($scope.query.length > 0) {
@@ -78,7 +78,7 @@
 
                 $scope.createWarehouse = function(){
                     //$scope.atribut.estado = 1;
-                     alert($scope.warehouse.store_id[0]+"--"+$scope.warehouse.store_id[1]);
+                     //alert($scope.warehouse.store_id[0]+"--"+$scope.warehouse.store_id[1]);
                      if($scope.warehouse.store_id[1]!=undefined){
                         $scope.warehouse.store_id2=$scope.warehouse.store_id[1];
                         $scope.warehouse.store_id=$scope.warehouse.store_id[0];
@@ -107,10 +107,11 @@
                 };
 
                 $scope.updateWarehouse = function(){
-                     if($scope.warehouse.store_id[1]!=undefined){
+                     /* if($scope.warehouse.store_id[1]!=undefined){
                         $scope.warehouse.store_id2=$scope.warehouse.store_id[1];
                         $scope.warehouse.store_id=$scope.warehouse.store_id[0];
-                     }
+                     } */
+                    console.log($scope.warehouse);
                     if ($scope.warehouseCreateForm.$valid) {
                         crudService.update($scope.warehouse,'warehouses').then(function(data)
                         {

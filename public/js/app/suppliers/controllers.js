@@ -53,9 +53,9 @@
                     });
                 }
 
-                socket.on('supplier.update', function (data) {
+                /*socket.on('supplier.update', function (data) {
                     $scope.suppliers=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchSupplier = function(){
                 if ($scope.query.length > 0) {

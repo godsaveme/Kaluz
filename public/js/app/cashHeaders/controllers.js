@@ -52,9 +52,9 @@
                     });
                 }
 
-                socket.on('cashHeaders.update', function (data) {
+                /*socket.on('cashHeaders.update', function (data) {
                     $scope.cashHeaders=JSON.parse(data);
-                });
+                });*/
                 
 
 

@@ -42,9 +42,9 @@
                     });
                 }
 
-                socket.on('stores.update', function (data) {
+                /*socket.on('stores.update', function (data) {
                     $scope.stores=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchStore = function(){
                 if ($scope.query.length > 0) {

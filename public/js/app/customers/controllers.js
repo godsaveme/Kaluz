@@ -60,9 +60,9 @@
                     });
                 }
 
-                socket.on('customer.update', function (data) {
+                /*socket.on('customer.update', function (data) {
                     $scope.customers=JSON.parse(data);
-                });
+                });*/
 
                 $scope.searchCustomer = function(){
                 if ($scope.query.length > 0) {

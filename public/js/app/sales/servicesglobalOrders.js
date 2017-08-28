@@ -264,11 +264,11 @@ function Document_venta_Factura()
                 search: search,
                 select:select,
                 byforeingKey: byforeingKey,
-                searchMes,searchMes,
-                reportPro,reportPro,
-                reportProWare,reportProWare,
-                getPres, setPres,
-                editFavoritoId,editFavoritoId,
+                searchMes: searchMes,
+                reportPro: reportPro,
+                reportProWare: reportProWare,
+                getPres: setPres,
+                editFavoritoId: editFavoritoId,
                 Document_venta_Factura: Document_venta_Factura,
                 Comprueba_caj_for_user: Comprueba_caj_for_user
             }

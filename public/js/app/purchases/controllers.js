@@ -154,10 +154,10 @@
                    
                 }
 
-                socket.on('purchase.update', function (data) {
+                /*socket.on('purchase.update', function (data) {
                     $scope.purchases=JSON.parse(data);
-                });
-                $scope.estado;
+                });*/
+                //$scope.estado;
 
              /*   $scope.searchEstados=function(){
                     alert($scope.estado);

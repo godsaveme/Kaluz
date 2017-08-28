@@ -11,8 +11,6 @@
 |
 */
 
-\Debugbar::disable();
-
 Route::get('/', 'Layout\LayoutController@index');
 
 Route::get('/login', function () {
@@ -844,4 +842,3 @@ Route::post('api/pagos/destroy',['as'=>'type_destroy', 'uses'=>'OtherPheadContro
 Route::post('api/pagosGastos/destroy',['as'=>'type_destroy', 'uses'=>'OtherPheadController@destroyPagos2']);
 Route::get('api/acounts/select','CashMotivesController@select2');
 Route::get('api/pagos2/find/{id}','OtherPheadController@pagosCompras2');
-
