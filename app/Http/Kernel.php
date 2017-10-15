@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
         'cashier' => \Salesfly\Http\Middleware\CashierMiddleware::class,
         'role-cashier' => \Salesfly\Http\Middleware\RoleCashierMiddleware::class,
         'role-asistant' => \Salesfly\Http\Middleware\RoleAsistantMiddleware::class,
-        'role-cashier-asistant' => \Salesfly\Http\Middleware\RoleCashierAsistantMiddleware::class
+        'role-cashier-asistant' => \Salesfly\Http\Middleware\RoleCashierAsistantMiddleware::class,
+        'multiWareType' => \Salesfly\Http\Middleware\MultiWarehouseProductsTypeMiddleware::class
     ];
 }

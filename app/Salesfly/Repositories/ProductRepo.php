@@ -249,10 +249,21 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
         return $products;
     }
    public function cantidadProductos(){
-        $products = Product::leftjoin('variants','products.id','=','variants.product_id')
+        /*$products = Product::leftjoin('variants','products.id','=','variants.product_id')
                              ->select(\DB::raw('(select COUNT(*) as cantProductos from variants) as cantidad,(select SUM(stock.stockActual)  from stock ) as stockA'))
                              ->groupBy('variants.id')
-                             ->first();
+                             ->first();*/
+       $products = collect(\DB::select(\DB::raw('SELECT v.cantVariants, s.stockA
+                                                FROM (
+
+                                                SELECT COUNT( * ) AS cantVariants
+                                                FROM variants
+                                                ) AS v, (
+
+                                                SELECT SUM( stock.stockActual ) AS stockA
+                                                FROM stock
+                                                ) AS s')))->first();
+
 
         return $products;
    }

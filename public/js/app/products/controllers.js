@@ -390,8 +390,9 @@
                 }else{
                      crudService.cantidadProductos().then(function(data)
                     {
-                        $scope.product.canttoalProducts=data.cantidad;
+                        $scope.product.cantVariants=data.cantVariants;
                         $scope.product.stockA=data.stockA;
+
                     });
                     crudService.paginate('products',1).then(function (data) {
                         $scope.products = data.data;
@@ -400,7 +401,7 @@
                         $scope.totalItems = data.total;
                         $scope.currentPage = data.current_page;
                         $scope.itemsperPage = 15;
-
+                        $scope.product.cantProducts=data.total; //se muestra la cantidad de prod en el top
                     });
 
                     if($location.path() == '/products/create') {

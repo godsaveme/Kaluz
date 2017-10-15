@@ -61,8 +61,35 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
+                <li class="dropdown messages-menu">
+                    <a href="/paramselect" style="text-decoration: underline; color: #3c8dbc;">Actualizar</a>
+                    {{--<button type="button" class="btn bg-navy btn-flat margin">.btn.bg-navy.btn-flat</button>--}}
+                    {{--<a href="/probandoMiddleware" class="dropdown-toggle" data-toggle="dropdown">--}}
+                        {{--Actualizar--}}
+                    {{--</a>--}}
 
+                </li>
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                      {{session('storeName')}}
+                    </a>
 
+                </li>
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                      {{session('warehouseName')}}
+                    </a>
+
+                </li>
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                      {{session('productName')}}
+                    </a>
+
+                </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -79,35 +106,32 @@
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
-                  <li class="user-header">
+                  <li class="user-header" style="height: 190px!important;">
                     <img src="{{Auth()->user()->image}}" class="img-circle" alt="User Image" />
                     <p>
                     @if(!empty(Auth()->user()))
-                      {{Auth()->user()->name}}
-                      <small>Miembro desde {{Auth()->user()->created_at}}</small>
-                    <p class="text-muted text-center">{{Auth()->user()->email}}</p>
-                      @else
-                        Not user
-                        <small>Miembro desde --</small>
-                      @endif
-                    </p>
+                        {{Auth()->user()->name}}
+                        <small>Miembro desde {{Auth()->user()->created_at}}</small>
+                        <p class="text-muted text-center"> {{Auth()->user()->email}} </p>
+                    @endif
+
                   </li>
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
+                      <a href="#"></a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
+                      <a href="#"></a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
+                      <a href="#"></a>
                     </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="/users/edit/{{Auth()->user()->id}}" class="btn btn-default btn-flat">Profile</a>
+                      <a href="/users/edit/{{Auth()->user()->id}}" class="btn btn-default btn-flat">Editar usuario</a>
                     </div>
                     <div class="pull-right">
                       <a href="/auth/logout" class="btn btn-default btn-flat">Salir</a>

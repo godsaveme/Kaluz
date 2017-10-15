@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Salesfly\Http\Requests;
 use Salesfly\Http\Controllers\Controller;
+use Salesfly\Salesfly\Entities\Store;
+use Salesfly\Salesfly\Entities\Warehouse;
 
 class LayoutController extends Controller
 {
@@ -23,6 +25,46 @@ class LayoutController extends Controller
      */
     public function index()
     {
+        $storeId = session('storeId');
+        $warehouseId = session('warehouseId');
+        $productTypeId = session('prodType');
+        return response()->view($this->layout,[
+            'storeId' => $storeId,
+            'warehouseId' => $warehouseId,
+            'productTypeId' => $productTypeId
+        ]);
+    }
+
+    /** Funcion que recibe los parametros de sucursal, almacén y tipo de producto para ponerlos en session
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postIndex(Request $request){
+        //dd($request->all());
+        session(['storeId' => $request->storeId]);
+        session(['warehouseId' => $request->warehouseId]);
+        session(['productTypeId' => $request->prodType]);
+
+        $storeId = session('storeId');
+        $storeName = Store::find($storeId)->nombreTienda;
+        session(['storeName' => $storeName]);
+
+        $warehouseId = session('warehouseId');
+        $warehouseName = Warehouse::find($warehouseId)->nombre;
+        session(['warehouseName' => $warehouseName]);
+
+        $productTypeId = session('productTypeId');
+
+        if($productTypeId == 1){
+            $productName = 'Zapatos';
+        }elseif($productTypeId == 2){
+            $productName = 'Accesorios';
+        }else{
+            $productName = 'No selecc.';
+        }
+        session(['productName' => $productName]);
+
+
         return response()->view($this->layout);
     }
 

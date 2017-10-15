@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,6 +13,7 @@
 */
 
 Route::get('/', 'Layout\LayoutController@index');
+Route::post('/', 'Layout\LayoutController@postIndex');
 
 Route::get('/login', function () {
     return view('login');
@@ -34,8 +36,12 @@ Route::get('/vista-redis', function() {
 });
 
 Route::get('status', function(){
-    return response('holi', 422)
+    return response('holi', 200)
         ->header('Content-Type', 'text/html; charset=UTF-8');
+})->middleware('multiWareType');
+
+Route::get('paramselect', function(){
+    return View('middleware');
 });
 
 Route::get('consultas',['as'=>'person','uses'=>'SalesController@consultas']);

@@ -1,0 +1,11 @@
+(function(angular){
+    angular.module('warehouseProductTypeMiddleware',[
+        'ngRoute',
+        'btford.socket-io',
+        'ngSanitize',
+        'warehouseProductTypeMiddleware.controllers',
+        'crud.services',
+        'routes',
+        'ui.bootstrap'
+    ]);
+})(angular);

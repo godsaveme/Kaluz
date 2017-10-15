@@ -2,19 +2,13 @@
 
 namespace Salesfly\Http\Controllers\Auth;
 
-
-
-//use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 use Salesfly\User;
 use Salesfly\Salesfly\Entities\Store;
 use Validator;
 use Salesfly\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-//add custom
-//use Salesfly\Http\Requests;
 
 class AuthController extends Controller
 {
@@ -29,6 +23,13 @@ class AuthController extends Controller
     |
     */
 
+    /**
+     * @var $redirectPath
+     * @desc Variable para ser redirigida cuando inicie sesión
+     */
+    protected $redirectPath = 'paramselect';
+
+
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
@@ -38,9 +39,25 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['getLogout','indexU','all','paginate','form_create','form_edit','store_select','postRegister','search','find','edit','disableuser','changePass','destroy']]);
-        //$this->middleware('auth',['only' => 'index']);
+        $this->middleware('guest',
+            ['except' => [
+                'getLogout',
+                'indexU',
+                'all',
+                'paginate',
+                'form_create',
+                'form_edit',
+                'store_select',
+                'postRegister',
+                'search',
+                'find',
+                'edit',
+                'disableuser',
+                'changePass',
+                'destroy'
+            ]]);
     }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -95,7 +112,6 @@ class AuthController extends Controller
             'store_id' => $data['store_id'],
             'role_id' => $data['role_id'],
             'estado' => $data['estado']
-            //'image' => $data['image']
         ]);
     }
 
@@ -114,7 +130,6 @@ class AuthController extends Controller
             'store_id' => $data['store_id'],
             'role_id' => $data['role_id'],
             'estado' => $data['estado']
-            //'image' => $data['image']
         ]);
         return $user;
     }
@@ -148,11 +163,6 @@ class AuthController extends Controller
             $users = User::with(array('store'=>function($query){
                 $query->select('id','nombreTienda');
             }))->paginate(15);
-            /*$users = User::where('name','like','%234')->get();
-            foreach($users as $user){
-                print_r(response()->json($user->store()->get()));
-            }
-            $tienda = $user->store()->get();*/
             return response()->json($users);
 
         }else{
@@ -176,7 +186,6 @@ class AuthController extends Controller
     public function search($q){
         $users =User::where('name','like', $q.'%')
             ->orWhere('email','like',$q.'%')
-            //->with(['customer','employee'])
             ->paginate(15);
         return $users;
     }
@@ -187,23 +196,17 @@ class AuthController extends Controller
     }
 
     public function disableuser($userId){
-        //print_r($proId);
         \DB::beginTransaction();
         $user = User::find($userId);
         $estado = $user->estado;
-        //var_dump($product->hasVariants); die();
 
             if ($estado == 1) {
                 $user->estado = 0;
-                //$variant->estado = 0;
-
             } else {
                 $user->estado = 1;
-                //$variant->estado = 1;
             }
 
         $user->save();
-        //die();
 
         \DB::commit();
         return response()->json(['estado'=>true]);
@@ -211,10 +214,8 @@ class AuthController extends Controller
 
     public function destroy(Request $request)
     {
-        //var_dump($request->all());
         $user= User::find($request->id);
         $user->delete();
-        //Event::fire('update.atribut',$atribut->all());
         return response()->json(['estado'=>true]);
     }
 

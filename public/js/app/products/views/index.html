@@ -31,11 +31,14 @@
               <div class="box">
 
                 <div class="box-header with-border">
-                  <h3 class="box-title">Productos</h3>
-                  <label>----->Total Productos:</label>
+                  <h3 class="box-title"></h3>
+                  <label>Total Productos:</label>
                   <!--<input type="text" ng-model="product.canttoalProducts">-->
-                    <span style="font-size: 16px; color: red; font-weight: bold;">{{product.canttoalProducts}}</span>
-                  <label>----->Total en Stock:</label>
+                    <span style="font-size: 16px; color: red; font-weight: bold;">{{product.cantProducts}}</span>
+                    <label> / Total Variantes:</label>
+                    <!--<input type="text" ng-model="product.canttoalProducts">-->
+                    <span style="font-size: 16px; color: red; font-weight: bold;">{{product.cantVariants}}</span>
+                  <label> / Total Stock Almacenes:</label>
                   <!--<input type="text" ng-model="product.stockA">-->
                    
                    <span style="font-size: 16px; color: red; font-weight: bold;">{{product.stockA | number:0}}</span>
@@ -79,8 +82,8 @@
                       <th style="width: 40px">Eliminar</th>
                     </tr>
                     
-                    <tr ng-repeat="row in products">
-                      <td>{{$index + 1}}</td>
+                    <tr ng-repeat="row in products" ng-class="{ 'text-muted' : row.proEstado == 0}">
+                      <td>{{$index + 1 + (currentPage-1)*itemsperPage}}</td>
 
                       <td><a ng-href="/products/show/{{row.proId}}">{{row.proCodigo }}</a></td>
                         <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.proId,row.Dscto)">{{row.Dscto}}</button></td>

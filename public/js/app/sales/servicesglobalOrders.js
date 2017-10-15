@@ -276,8 +276,9 @@ function Document_venta_Factura()
         .factory('socketService', function ($rootScope) {
             var host = window.location.hostname;
             //var host = '192.168.0.26';
-            var socket = io.connect('http://'+host+':3001');
-            return {
+            //var socket = io.connect('http://'+host+':3001');
+            return {test: null}
+            /*return {
                 on: function (eventName, callback) {
                     socket.on(eventName, function () {
                         var args = arguments;
@@ -296,6 +297,6 @@ function Document_venta_Factura()
                         });
                     })
                 }
-            };
+            };*/
         });
 })();
