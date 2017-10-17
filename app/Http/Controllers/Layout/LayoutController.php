@@ -54,7 +54,6 @@ class LayoutController extends Controller
         session(['warehouseName' => $warehouseName]);
 
         $productTypeId = session('productTypeId');
-
         if($productTypeId == 1){
             $productName = 'Zapatos';
         }elseif($productTypeId == 2){

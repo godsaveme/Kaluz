@@ -62,7 +62,10 @@
             <ul class="nav navbar-nav">
 
                 <li class="dropdown messages-menu">
-                    <a href="/paramselect" style="text-decoration: underline; color: #3c8dbc;">Actualizar</a>
+                    <a href="/paramselect" style="text-decoration: underline; color: #3c8dbc;">
+                      <i class="fa fa-cog"></i>
+                      Actualizar
+                    </a>
                     {{--<button type="button" class="btn bg-navy btn-flat margin">.btn.bg-navy.btn-flat</button>--}}
                     {{--<a href="/probandoMiddleware" class="dropdown-toggle" data-toggle="dropdown">--}}
                         {{--Actualizar--}}
@@ -71,21 +74,21 @@
                 </li>
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-check-square-o"></i>
                       {{session('storeName')}}
                     </a>
 
                 </li>
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-check-square-o"></i>
                       {{session('warehouseName')}}
                     </a>
 
                 </li>
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-check-square-o"></i>
                       {{session('productName')}}
                     </a>
 

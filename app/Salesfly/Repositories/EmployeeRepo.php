@@ -18,11 +18,13 @@ class EmployeeRepo extends BaseRepo{
     }
     public function searchVenta($q)
     {
-        $employee =Employee::select(\DB::raw('id,nombres,apellidos,estado,codigo,CONCAT(nombres,"-",apellidos) as busqueda'))
-                    ->where('estado','!=', 0)
-                    ->where('nombres','like', $q.'%')
-                    ->orWhere('apellidos','like',$q.'%')
-                    ->orWhere('codigo','like',$q.'%')
+        $employee =Employee::select(\DB::raw('id,nombres,apellidos,estado,codigo,CONCAT(nombres," - ",apellidos) as busqueda'))
+                    ->where('estado','=', 1)
+                    ->where(function($query) use ($q){
+                        $query->orWhere('nombres','like', $q.'%');
+                        $query->orWhere('apellidos','like',$q.'%');
+                        $query->orWhere('codigo','like',$q.'%');
+                    })
                     ->paginate(15);
         return $employee;
     }
