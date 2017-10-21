@@ -162,7 +162,9 @@ class AuthController extends Controller
         if(\Auth::check()) {
             $users = User::with(array('store'=>function($query){
                 $query->select('id','nombreTienda');
-            }))->paginate(15);
+            }))
+                ->where('store_id','=',session('storeId'))
+                ->paginate(15);
             return response()->json($users);
 
         }else{
@@ -184,8 +186,8 @@ class AuthController extends Controller
         return response()->json($stores);
     }
     public function search($q){
-        $users =User::where('name','like', $q.'%')
-            ->orWhere('email','like',$q.'%')
+        $users =User::where('store_id','=', session('storeId'))
+            ->where('name','like', '%'.$q.'%')
             ->paginate(15);
         return $users;
     }
