@@ -32,7 +32,7 @@ class EmployeesController extends Controller {
     }
 
     public function paginatep(){
-        $employees = $this->employeeRepo->paginate(15);
+        $employees = $this->employeeRepo->paginatep(15);
         return response()->json($employees);
     }
 

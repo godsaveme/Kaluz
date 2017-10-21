@@ -10,9 +10,11 @@ class EmployeeRepo extends BaseRepo{
 
     public function search($q)
     {
-        $customers =Employee::where('nombres','like', $q.'%')
-                    ->orWhere('apellidos','like',$q.'%')
-                    //->with(['customer','employee'])
+        $customers =Employee::where('store_id','=', session('storeId'))
+                    ->where(function($query) use ($q){
+                        $query->where('nombres','like', '%'.$q.'%');
+                        $query->orWhere('apellidos','like','%'.$q.'%');
+                    })
                     ->paginate(15);
         return $customers;
     }
@@ -33,5 +35,11 @@ class EmployeeRepo extends BaseRepo{
     {
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
+    }
+
+    function paginatep($c){
+        $employees = Employee::where('store_id','=',session('storeId'))
+                        ->paginate($c);
+        return $employees;
     }
 } 
