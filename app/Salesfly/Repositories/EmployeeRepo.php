@@ -23,9 +23,9 @@ class EmployeeRepo extends BaseRepo{
         $employee =Employee::select(\DB::raw('id,nombres,apellidos,estado,codigo,CONCAT(nombres," - ",apellidos) as busqueda'))
                     ->where('estado','=', 1)
                     ->where(function($query) use ($q){
-                        $query->orWhere('nombres','like', $q.'%');
-                        $query->orWhere('apellidos','like',$q.'%');
-                        $query->orWhere('codigo','like',$q.'%');
+                        $query->orWhere('nombres','like', '%'.$q.'%');
+                        $query->orWhere('apellidos','like','%'.$q.'%');
+                        $query->orWhere('codigo','like','%'.$q.'%');
                     })
                     ->paginate(15);
         return $employee;

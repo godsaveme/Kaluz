@@ -1,4 +1,4 @@
-(function(){
+(function(angular){
     angular.module('employees.controllers',[])
         .controller('EmployeeController',['$scope', '$routeParams','$location','crudService','socketService' ,'$filter','$route','$log',
             function($scope, $routeParams,$location,crudService,socket,$filter,$route,$log){
@@ -20,8 +20,10 @@
                     $scope.show = !$scope.show;
                 };
 
+                $scope.getStores = getStores;
+
+
                 $scope.pageChanged = function() {
-                     //$scope.employee.estado='1';
                     if ($scope.query.length > 0) {
                         crudService.search('employees',$scope.query,$scope.currentPage).then(function (data){
                         $scope.employees = data.data;
@@ -38,25 +40,22 @@
 
                 if(id)
                 {
-                    //$scope.employee.estado=1;
                     crudService.byId(id,'employees').then(function (data) {
                         $log.log(data);
                         if(data.fechanac != null) {
                             if (data.fechanac.length > 0) {
-
                                 data.fechanac = new Date(data.fechanac);
                                 $log.log(data.fechanac);
-                                //data.employee.fechanac = new Date(data.fechanac);
                             }
                         }
-                       
+
 
                         $scope.employee = data;
                         $scope.employee.autogenerado = false;
                     });
+                    getStores();
                     
                 }else{
-                    //$scope.employee.estado='1';
                     crudService.paginate('employees',1).then(function (data) {
                         $scope.employees = data.data;
                         $scope.maxSize = 5;
@@ -65,14 +64,21 @@
                         $scope.itemsperPage = 15;
 
                     });
+                    getStores();
                 }
 
-                /*socket.on('employees.update', function (data) {
-                    $scope.employees=JSON.parse(data);
-                });*/
+                function getStores(){
+                    crudService
+                        .all('stores')
+                        .then(function (data){
+                            $scope.stores = data.data;
+                            if(!id){
+                                $scope.employee.store_id="1";
+                            }
+                        });
+                }
                  
                   $scope.editCostos=function(row){
-                     //  alert(id);
                        crudService.byforeingKey('employeecosts','mostrarCostos',row.id).then(function(data){
                         $scope.employeecost = data;
                         $scope.totalItems=data.total;
@@ -100,12 +106,7 @@
                             if($scope.employeecost.total!=null)
                                 {$scope.employeecost.total=parseFloat($scope.employeecost.total);
                                 }else{$scope.employeecost.total=0;}
-                           // $scope.employeecost.seguro=parseFloat($scope.employeecost.seguro);
-                            //$scope.employeecost.menu=parseFloat($scope.employeecost.menu);
-                            //$scope.employeecost.pasajes=parseFloat($scope.employeecost.pasajes);
-                           // $scope.employeecost.descuento=parseFloat($scope.employeecost.descuento);
                             $scope.employeecost.comisiones=parseFloat($scope.employeecost.comisiones);
-                            //$scope.employeecost.total=parseFloat($scope.employeecost.total);
 
                        }else{
                             $scope.mostraragregar=true;
@@ -148,7 +149,6 @@
                     if ($scope.employeeCreateForm.$valid){
                         var $btn = $('#btn_generate').button('loading');
                         var f = document.getElementById('employeeImage').files[0] ? document.getElementById('employeeImage').files[0] : null;
-                        //alert(f);
                         if(f){
                             if(f.size <= 400000) {
                                 var r = new FileReader();
@@ -208,13 +208,11 @@
                     if ($scope.employeeCreateForm.$valid){
                         var $btn = $('#btn_generate').button('loading');
                         var f = document.getElementById('employeeImage').files[0] ? document.getElementById('employeeImage').files[0] : null;
-                        //alert(f);
                         if(f){
                             if(f.size <= 400000) {
                         var r = new FileReader();
                         r.onloadend = function(e) {
                             $scope.employee.imagen = e.target.result;
-                           // alert("aqui estoy");
                             crudService.update($scope.employee, 'employees').then(function (data) {
 
                                 if (data['estado'] == true) {
@@ -255,8 +253,6 @@
 
                     }
 
-
-
                 };
 
                 $scope.deleteEmployee = function(row){
@@ -287,9 +283,6 @@
                 }
 
                   $scope.createEmployeecost = function(){
-                    //$scope.employeecost.estado = 1;
-                      
-
                     if ($scope.employeecostCreateForm.$valid) {
                         crudService.create($scope.employeecost, 'employeecosts').then(function (data) {
                            
@@ -320,47 +313,6 @@
                         }
                     });
                   };
-                     /*if ($scope.employeeCreateForm.$valid){
-                        var f = document.getElementById('employeeImage').files[0] ? document.getElementById('employeeImage').files[0] : null;
-                        //alert(f);
-
-                        var r = new FileReader();
-                        r.onloadend = function(e) {
-                            $scope.employee.imagen = e.target.result;
-                       //alert("aqui estoy");
-                           crudService.create($scope.employee, 'employees').then(function (data) {
-                           
-                            if (data['estado'] == true) {
-                                $scope.success = data['nombres'];
-                                alert('editado correctamente');
-                                //$location.path('/employees');
-
-                            } else {
-                                $scope.errors = data;
-
-                            }
-                        });
-                        }
-                        if(!document.getElementById('employeeImage').files[0]){
-                        crudService.create($scope.employee, 'employees').then(function (data) {
-                            //alert("aqui estoy!!");
-                            if (data['estado'] == true) {
-                                $scope.success = data['nombres'];
-                                alert('editado correctamente');
-                                //$location.path('/employees');
-
-                            } else {
-                                $scope.errors = data;
-
-                            }
-                        });}
-
-                        if(document.getElementById('employeeImage').files[0]){
-                            r.readAsDataURL(f);
-                        }
-
-                    }
-                };*/
                 $scope.destroyEmployeecost = function(){
                 if(confirm("Esta seguro de querer eliminar este registro de Gastos!!!") == true){
                     crudService.destroy($scope.employeecost,'employeecosts').then(function(data)
@@ -384,15 +336,11 @@
                     $scope.ngenabled=true;
                 }
                 $scope.CalcCostos=function(){
-                    //alert("hola"+$scope.employeecost.SueldoFijo);
                     $scope.employeecost.total=(parseFloat($scope.employeecost.SueldoFijo)+parseFloat($scope.employeecost.seguro)+
                                               parseFloat($scope.employeecost.menu)+parseFloat($scope.employeecost.pasajes))
                                               -parseFloat($scope.employeecost.descuento);
-                   /* $scope.employeecost.total=(((parseFloat($scope.employeecost.SueldoFijo)+
-                                             parseFloat($scope.employeecost.seguro)+parseFloat($scope.employeecost.menu)+
-                                             parseFloat($scope.employeecost.pasajes))-parseFloat($scope.employeecost.descuento)).toFixed(2));
-                */}
+                   }
                
                 
             }]);
-})();
+})(angular);

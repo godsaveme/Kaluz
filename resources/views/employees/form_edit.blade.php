@@ -172,6 +172,15 @@
               </div>
 
        </div>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="form-group" >
+                  <label for="cargo">Sucursal</label>
+                  <select name="storeId" class="form-control" ng-model="employee.store_id" ng-options="item.id as item.nombreTienda for item in stores">
+                  </select>
+              </div>
+          </div>
+      </div>
    </div>
    <div class="col-md-4">
 

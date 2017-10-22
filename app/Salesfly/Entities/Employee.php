@@ -24,6 +24,7 @@ class Employee extends \Eloquent {
     						'notas',
                             'estado',
                             'dni',
-							'cargo'
+							'cargo',
+							'store_id'
     						];
 }

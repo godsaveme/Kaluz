@@ -106,7 +106,7 @@ class EmployeesController extends Controller {
     public function edit(Request $request)
     {
        $employee = $this->employeeRepo->find($request->id);
-       //var_dump($employee->all());die();
+       //var_dump($request->all());die();
         //===================autogenerado========================//
 
         if($request->input('autogenerado') === true) {

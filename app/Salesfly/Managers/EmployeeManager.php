@@ -25,7 +25,8 @@ class EmployeeManager extends BaseManager {
                             'notas'=>'',
                             'estado'=>'',
                             'dni'=>'required|unique:employees,dni,'.$this->entity->id,
-                            'cargo' => ''
+                            'cargo' => '',
+                            'store_id' => 'required'
                   ];
         return $rules;
     }
