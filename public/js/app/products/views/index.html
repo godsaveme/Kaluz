@@ -74,6 +74,7 @@
                         <th>Descuento</th>
                       <th>Marca</th>
                       <th>Línea</th>
+                        <th>Estación</th>
                         <th>Variantes</th>
                         <th>Stock</th>
                         <th ng-show="check">Stock Real</th>
@@ -86,11 +87,12 @@
                       <td>{{$index + 1 + (currentPage-1)*itemsperPage}}</td>
 
                       <td><a ng-href="/products/show/{{row.proId}}">{{row.proCodigo }}</a></td>
-                        <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.proId,row.Dscto)">{{row.Dscto}}</button></td>
+                        <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.proId,row.Dscto)">{{row.Dscto}} %</button></td>
 
 
                         <td>{{row.braNombre}}</td>
                       <td>{{row.typNombre}}</td>
+                        <td>{{row.stationNombre}}</td>
                         <td>
                             <span ng-if="row.proHasVar == '1'">
                                         <span ng-if="row.proQuantvar == '0'">0</span>
@@ -163,6 +165,7 @@
                                 <th style="width: 10px">#</th>
                                 <th>Variante</th>
                                 <th>Precio</th>
+                                <th>Prec Vent Públ (Incl. Dscto)</th>
                                 <th style="width: 40px">Stock</th>
                             </tr>
                             <tr ng-repeat="row in variants">
@@ -173,7 +176,8 @@
                                     </span>
 
                                 </a></td>
-                                <td>{{row.det_pre[0].price}}</td>
+                                <td>S/. {{row.det_pre[0].price}}</td>
+                                <td class="text-center">S/. {{row.det_pre[0].pvp}}</td>
                                 <td>{{row.stock[0].stockActual}}</td>
                             </tr>
 

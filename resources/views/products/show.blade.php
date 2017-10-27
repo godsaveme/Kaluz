@@ -81,12 +81,13 @@
                                   <th style="width: 10px">#</th>
                                     <th>Código</th>
                                   <th>SKU</th>
-                                    <th>Descuento</th>
+                                    <th>Dscto</th>
                                   <th>Variante</th>
                                     <th>Creado por</th>
-                                  <th style="">Precio</th>
+                                  <th style="">Precio Compra</th>
                                   <th style="">Ganacia</th>
                                   <th style="">Precio Venta</th>
+                                    <th>Prec Vent (Incl. Dscto)</th>
                                   <th style="">En stock</th>
                                   <th ng-show="check">Stock Real</th>
                                     <th>Editar</th>
@@ -107,9 +108,10 @@
 
                                         </a></td>
                                     <td>@{{ row.user.name }}</td>
-                                    <td>@{{row.det_pre[0].suppPri}}</td>
-                                    <td>@{{row.det_pre[0].markup}}</td>
-                                    <td>@{{row.det_pre[0].price}}</td>
+                                    <td>S/. @{{row.det_pre[0].suppPri}}</td>
+                                    <td>@{{row.det_pre[0].markup}}%</td>
+                                    <td style="width: 80px;">S/. @{{row.det_pre[0].price}}</td>
+                                    <td>S/. @{{row.det_pre[0].pvp}}</td>
                                     <td>@{{row.stock[0].stockActual}}</td>
 
                                     <td ng-show="check" style="width:90px;"><input type="number" class="form-control" ng-blur="llenarDatosTemp2(row.id,row)" ng-model="temporal[row.id].stockReal"></td>

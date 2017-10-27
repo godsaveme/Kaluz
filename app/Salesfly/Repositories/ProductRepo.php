@@ -26,6 +26,7 @@ class ProductRepo extends BaseRepo{
         //return $promotion;
         $products = Product::leftjoin('brands','products.brand_id','=','brands.id')
             ->leftjoin('types','products.type_id','=','types.id')
+            ->leftjoin('stations','products.station_id','=','stations.id')
             ->leftjoin('variants','products.id','=','variants.product_id')
             ->leftjoin('detPres','variants.id','=','detPres.variant_id')
             ->leftjoin('presentation','detPres.presentation_id','=','presentation.id')
@@ -33,7 +34,7 @@ class ProductRepo extends BaseRepo{
             ->leftjoin('users','users.id','=','products.user_id')
             ->select(\DB::raw('DISTINCT(products.id) as proId'),'products.codigo as proCodigo','products.nombre as proNombre','products.dscto as Dscto',
                 'variants.suppPri as varPrice','variants.price as precioProducto','users.name as userNombre','products.estado as proEstado',
-                'brands.nombre as braNombre','products.hasVariants as TieneVariante','products.hasVariants as proHasVar','types.nombre as typNombre','products.created_at as proCreado',
+                'brands.nombre as braNombre','products.hasVariants as TieneVariante','products.hasVariants as proHasVar','stations.nombre as stationNombre','types.nombre as typNombre','products.created_at as proCreado',
                 \DB::raw('(select count(variants.id) from products inner join variants on products.id = variants.product_id
 where products.hasVariants = true
 and products.id = proId) as proQuantvar'),
@@ -50,8 +51,8 @@ INNER JOIN presentation ON detPres.presentation_id = presentation.id
 WHERE products.presentation_base = presentation.id and products.id = proId and products.hasVariants = false ) as detPresPri'))
             //->having()
             ->groupBy('products.id')
-            ->where('products.nombre','like',$q.'%')
-            ->orWhere('products.codigo','like',$q.'%')
+            ->where('products.nombre','like','%'.$q.'%')
+            ->orWhere('products.codigo','like','%'.$q.'%')
             ->orderBy('products.id','DESC')
             ->paginate(15);
         return $products;
@@ -111,6 +112,7 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
         //return $products;
 
         $products = Product::leftjoin('brands','products.brand_id','=','brands.id')
+                            ->leftjoin('stations','products.station_id','=','stations.id')
                             ->leftjoin('types','products.type_id','=','types.id')
                             ->leftjoin('variants','products.id','=','variants.product_id')
                             ->leftjoin('detPres','variants.id','=','detPres.variant_id')
@@ -119,7 +121,7 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
                             ->leftjoin('users','users.id','=','products.user_id')
                             ->select(\DB::raw('DISTINCT(products.id) as proId'),'products.codigo as proCodigo','products.nombre as proNombre','products.dscto as Dscto',
                               'variants.suppPri as varPrice','variants.price as precioProducto','users.name as userNombre','products.estado as proEstado',
-                               'brands.nombre as braNombre','products.hasVariants as TieneVariante','products.hasVariants as proHasVar','types.nombre as typNombre','products.created_at as proCreado',
+                               'brands.nombre as braNombre','products.hasVariants as TieneVariante','products.hasVariants as proHasVar','stations.nombre as stationNombre','types.nombre as typNombre','products.created_at as proCreado',
                               \DB::raw('(select count(variants.id) from products inner join variants on products.id = variants.product_id
 where products.hasVariants = true
 and products.id = proId) as proQuantvar'),
