@@ -51,8 +51,12 @@ INNER JOIN presentation ON detPres.presentation_id = presentation.id
 WHERE products.presentation_base = presentation.id and products.id = proId and products.hasVariants = false ) as detPresPri'))
             //->having()
             ->groupBy('products.id')
-            ->where('products.nombre','like','%'.$q.'%')
-            ->orWhere('products.codigo','like','%'.$q.'%')
+            ->where('products.store_id','=', session('storeId'))
+            ->where('products.globalType','=', session('productTypeId'))
+            ->where(function($query) use ($q){
+                $query->orWhere('products.nombre','like','%'.$q.'%');
+                $query->orWhere('products.codigo','like','%'.$q.'%');
+            })
             ->orderBy('products.id','DESC')
             ->paginate(15);
         return $products;
@@ -137,6 +141,8 @@ INNER JOIN detPres ON variants.id = detPres.variant_id
 INNER JOIN presentation ON detPres.presentation_id = presentation.id
 WHERE products.presentation_base = presentation.id and products.id = proId and products.hasVariants = false ) as detPresPri'))
                             //->having()
+                            ->where('products.store_id','=', session('storeId'))
+                            ->where('products.globalType','=', session('productTypeId'))
                             ->groupBy('products.id')
                             ->orderBy('products.id','DESC')
                             ->paginate($qantity);
@@ -255,16 +261,23 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
                              ->select(\DB::raw('(select COUNT(*) as cantProductos from variants) as cantidad,(select SUM(stock.stockActual)  from stock ) as stockA'))
                              ->groupBy('variants.id')
                              ->first();*/
-       $products = collect(\DB::select(\DB::raw('SELECT v.cantVariants, s.stockA
-                                                FROM (
-
-                                                SELECT COUNT( * ) AS cantVariants
-                                                FROM variants
-                                                ) AS v, (
-
-                                                SELECT SUM( stock.stockActual ) AS stockA
-                                                FROM stock
-                                                ) AS s')))->first();
+       $products = collect(\DB::select(\DB::raw(
+           'SELECT v.cantVariants, s.stockA
+                FROM (
+                SELECT COUNT( * ) AS cantVariants
+                FROM variants INNER JOIN products ON products.id = variants.product_id
+                WHERE products.store_id = '.session("storeId").'
+                AND products.globalType = '.session("productTypeId").'
+                ) AS v,
+                 (
+                SELECT COALESCE(SUM( stock.stockActual ), 0) AS stockA
+                FROM stock INNER JOIN variants ON stock.variant_id = variants.id
+                INNER JOIN products ON products.id = variants.product_id
+                WHERE products.store_id = '.session("storeId").'
+                AND products.globalType = '.session("productTypeId").'
+                ) AS s'
+       )
+       ))->first();
 
 
         return $products;
