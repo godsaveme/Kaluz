@@ -37,6 +37,9 @@ class Product extends Model
         return $this->belongsTo('Salesfly\Salesfly\Entities\Material');
     }
 
+    public function store(){
+        return $this->belongsTo('Salesfly\Salesfly\Entities\Store');
+    }
     /*
      * Fx para variants
      */

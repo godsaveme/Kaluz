@@ -37,13 +37,18 @@
                   <div class="col-md-8">
                       <b>Descripción:</b> @{{ product.descripcion }} <br/> <br/>
             ------------------------------------------------------------------------------------------------------------------------------------<br/>
-                      <b>SKU</b>: @{{variant.sku}}<br/>
+                      <b>SKU</b>: @{{variant.sku || 'Producto con Variantes'}}<br/>
             <b>Marca:</b> @{{ product.brand.nombre }} <br/> <br/>
             <b>Línea:</b> @{{ product.type.nombre }} <br/> <br/>
             <b>Código Único de Producto:</b> @{{ product.codigo }}<br/> <br/>
                       <b>Código de Proveedor:</b> @{{ product.suppCode }} <br/>
             <b>Estación:</b> @{{ product.station.nombre }} <br/> <br/>
-                      <b>Modelo:</b> @{{ product.modelo }}
+                      <b>Modelo:</b> @{{ product.modelo }} <br/> <br/>
+                      <b>Tienda:</b> @{{ product.store.nombreTienda }}  <br/> <br/>
+
+                      <b>Tipo de Producto:</b> <span ng-if="product.globalType == 1"> Zapatos </span>
+                      <span ng-if="product.globalType == 2"> Accesorios </span>
+
                 <br>
                 <span>Con. Inventario</span><input    type="checkbox"  name="variantes" ng-model="check" />
 

@@ -1,4 +1,4 @@
-(function(){
+(function(angular){
     angular.module('crudPurchases.services',[])
         .factory('crudPurchase',['$http', '$q','$location', function($http, $q,$location){
 
@@ -312,29 +312,4 @@
                 paginatVariants: paginatVariants
             }
         }])
-        .factory('socketService', function ($rootScope) {
-            var host = window.location.hostname;
-            //var host = '192.168.0.26';
-            var socket = io.connect('http://'+host+':3001');
-            return {
-                on: function (eventName, callback) {
-                    socket.on(eventName, function () {
-                        var args = arguments;
-                        $rootScope.$apply(function () {
-                            callback.apply(socket, args);
-                        });
-                    });
-                },
-                emit: function (eventName, data, callback) {
-                    socket.emit(eventName, data, function () {
-                        var args = arguments;
-                        $rootScope.$apply(function () {
-                            if (callback) {
-                                callback.apply(socket, args);
-                            }
-                        });
-                    })
-                }
-            };
-        });
-})();
+})(angular);

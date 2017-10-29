@@ -1,7 +1,7 @@
 (function(){
     angular.module('orderPurchases.controllers',[])
-        .controller('OrderPurchaseController',['$window','$scope','ngProgressFactory','$routeParams','$location','crudPurchase','socketService' ,'$filter','$route','$http','$log',
-            function($window,$scope,ngProgressFactory, $routeParams,$location,crudPurchase,socket,$filter,$route , $http,$log){
+        .controller('OrderPurchaseController',['$window','$scope','ngProgressFactory','$routeParams','$location','crudPurchase' ,'$filter','$route','$http','$log',
+            function($window,$scope,ngProgressFactory, $routeParams,$location,crudPurchase,$filter,$route , $http,$log){
                 $scope.progressbar = ngProgressFactory.createInstance();
                 $scope.orderPurchases = [];
                 $scope.orderPurchase = {};
@@ -279,11 +279,7 @@
                     alert("no coinsiden los resultados");
                  }});
 }
-                     
-
-                /*socket.on('orderPurchase.update', function (data) {
-                    $scope.orderPurchases=JSON.parse(data);
-                });*/
+                
                 $scope.ProvandoEdicion=function(){
                     $scope.show = !$scope.show;
                     crudPurchase.select('warehouses','select').then(function(data){

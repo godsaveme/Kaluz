@@ -285,7 +285,7 @@ WHERE products.presentation_base = presentation.id and products.id = proId and p
     public function find($id){
         $oProduct = Product::find($id);
 
-        $product = $oProduct->load(['station','type','brand','material']);
+        $product = $oProduct->load(['station','type','brand','material','store']);
 
         return $product;
     }
