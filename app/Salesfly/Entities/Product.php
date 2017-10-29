@@ -22,17 +22,23 @@ class Product extends Model
                             'estado',
                             'modelo',
                             'presentation_base',
-                            'user_id'
+                            'user_id',
+                            'store_id',
+                            'globalType'
                             ];
+
     public function brand(){
         return $this->belongsTo('Salesfly\Salesfly\Entities\Brand');
     }
+
     public function type(){
         return $this->belongsTo('Salesfly\Salesfly\Entities\Ttype');
     }
+
     public function station(){
         return $this->belongsTo('Salesfly\Salesfly\Entities\Station');
     }
+
     public function material(){
         return $this->belongsTo('Salesfly\Salesfly\Entities\Material');
     }
@@ -47,9 +53,11 @@ class Product extends Model
     public function variant(){
         return $this->hasOne('Salesfly\Salesfly\Entities\Variant');
     }
+
     public function variants(){
         return $this->hasMany('Salesfly\Salesfly\Entities\Variant');
     }
+
     public function presentation(){
         return $this->hasMany('Salesfly\Salesfly\Entities\Presentation');
     }

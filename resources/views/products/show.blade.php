@@ -43,7 +43,7 @@
             <b>Código Único de Producto:</b> @{{ product.codigo }}<br/> <br/>
                       <b>Código de Proveedor:</b> @{{ product.suppCode }} <br/>
             <b>Estación:</b> @{{ product.station.nombre }} <br/> <br/>
-                      <b>Modelo:</b> @{{ product.modelo }} <br/> <br/>
+                      <b>Modelo:</b> @{{ product.modelo || '(ninguno)'}} <br/> <br/>
                       <b>Tienda:</b> <span class="text-red">@{{ product.store.nombreTienda }}</span>  <br/> <br/>
 
                       <b>Tipo de Producto:</b> <span class="text-red" ng-if="product.globalType == 1"> Zapatos </span>

@@ -341,7 +341,10 @@
                             $scope.variant.presentations = data.det_pre;
                             $scope.variant.stock = data.stock;
 
-                            crudService.all('warehouses').then(function (data){
+                            /*crudService.all('warehouses').then(function (data){
+                                $scope.warehouses = data;
+                            });*/
+                            crudService.selectPost($scope.variant.product_id,'warehouses','getWarehousesByStoreProduct').then(function (data){
                                 $scope.warehouses = data;
                             });
 
@@ -462,9 +465,14 @@
 
                         });
 
-                        crudService.all('warehouses').then(function (data){
+                        /*crudService.all('warehouses').then(function (data){
+                            $scope.warehouses = data;
+                        });*/
+
+                        crudService.selectPost($routeParams.product_id,'warehouses','getWarehousesByStoreProduct').then(function (data){
                             $scope.warehouses = data;
                         });
+
                         crudService.all('atributes').then(function (data){
                             $scope.attributes = data.data;
                             $log.log($scope.attributes);

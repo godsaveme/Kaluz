@@ -3,30 +3,17 @@
 namespace Salesfly\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\View;
-use Mockery\Matcher\Type;
 use Salesfly\Http\Requests;
-use Salesfly\Http\Controllers\Controller;
-
 use Salesfly\Salesfly\Repositories\VariantRepo;
 use Salesfly\Salesfly\Managers\VariantManager;
-
 use Salesfly\Salesfly\Entities\Variant;
 use Salesfly\Salesfly\Entities\Product;
-
 use Salesfly\Salesfly\Repositories\DetPresRepo;
 use Salesfly\Salesfly\Managers\DetPresManager;
-
-use Salesfly\Salesfly\Repositories\AtributRepo;
-use Salesfly\Salesfly\Managers\AtributManager;
-
 use Salesfly\Salesfly\Repositories\DetAtrRepo;
 use Salesfly\Salesfly\Managers\DetAtrManager;
-
 use Salesfly\Salesfly\Repositories\StockRepo;
 use Salesfly\Salesfly\Managers\StockManager;
-
 use Intervention\Image\Facades\Image;
 
 class VariantsController extends Controller
@@ -42,57 +29,52 @@ class VariantsController extends Controller
     {
         return View('products.index');
     }
+
     public function searchCodigo($q)
     {
         $variants = $this->variantRepo->searchCodigo($q);
-
         return response()->json($variants);
     }
+
     public function find($id)
     {
         $variants = $this->variantRepo->find($id);
-        //var_dump($variants);die();
         return response()->json($variants);
     }
+
     public function  Paginar_por_Variante(){
         $variants=$this->variantRepo->Paginar_por_Variante();
         return response()->json($variants);
     }
 
-        public function getAttr($id)
+    public function getAttr($id)
     {
         $variant = $this->variantRepo->getAttr($id);
         return response()->json($variant);
     }
-    /*public function autocomplit($sku){
-        $variants = $this->variantRepo->uatocomplit($sku);
-    {*/
-   /* public function 
-        $variant = $this->variantRepo->getAttr($id);
-        return response()->json($variant);
-    }
-*/
+
     public function traer_por_Sku($sku){
         $variants = $this->variantRepo->traer_por_Sku($sku);
         return response()->json($variants);
-
     }
 
     public function paginatep($id,$var){ //->with(['store'])
         $variants = $this->variantRepo->selectByID($id,$var);
         return response()->json($variants);
     }
-  public function selectStocksTalla($id,$var,$almac){
-     $variants = $this->variantRepo->selectStocksTalla($id,$var,$almac);
+
+    public function selectStocksTalla($id,$var,$almac){
+        $variants = $this->variantRepo->selectStocksTalla($id,$var,$almac);
         return response()->json($variants);
-  }
-  public function selectStocksTallaSinTaco($id,$almac){
-    $variants = $this->variantRepo->selectStocksTallaSinTaco($id,$almac);
+    }
+
+    public function selectStocksTallaSinTaco($id,$almac){
+        $variants = $this->variantRepo->selectStocksTallaSinTaco($id,$almac);
         return response()->json($variants);
-  }
+    }
+
     public function form_create()
     {
-        //$product = Product::find($product_id);
         return View('variants.form_create');
     }
 
@@ -104,7 +86,7 @@ class VariantsController extends Controller
     public function create(Request $request)
     {
         //var_dump($request->all()); die();
-     \DB::beginTransaction();
+        \DB::beginTransaction();
         $tallasDisponibles=$request->otros;
         $cantTallas=$request->cantTallas;
         $request->merge(["estado"=>1]);
@@ -425,37 +407,34 @@ class VariantsController extends Controller
 
     public function destroy(Request $request)
     {
-        //$customer= $this->productRepo->find($request->id);
 
         \DB::beginTransaction();
-        $variant = Variant::find($request->id);
-        $product = Product::find($variant->product_id);
-        if($product->hasVariants == 1) {
-            //$variant = Variant::where('product_id', $product->id)->first();
-            $variant->warehouse()->detach();
-            $variant->presentation()->detach();
-            $variant->atributes()->detach();
-            $variant->delete();
-            //die();
-            //$product->delete();
-            //Event::fire('update.customer',$customer->all());
-            \DB::commit();
-        }
+            $variant = Variant::find($request->id);
+            $product = Product::find($variant->product_id);
+            if($product->hasVariants == 1) {
+                $variant->warehouse()->detach();
+                $variant->presentation()->detach();
+                $variant->atributes()->detach();
+                $variant->delete();
+                \DB::commit();
+            }
+
         return response()->json(['estado'=>true, 'nombre'=>$product->nombre]);
     }
 
     public function disablevar($id){
+
         \DB::beginTransaction();
-        //print_r($id); die();
-        $variant = Variant::find($id);
-        $estado = $variant->estado;
-        if($estado == 1){
-            $variant->estado = 0;
-        }else{
-            $variant->estado = 1;
-        }
-        $variant->save();
+            $variant = Variant::find($id);
+            $estado = $variant->estado;
+            if($estado == 1){
+                $variant->estado = 0;
+            }else{
+                $variant->estado = 1;
+            }
+            $variant->save();
         \DB::commit();
+
         return response()->json(['estado'=>true]);
     }
 
@@ -465,12 +444,12 @@ class VariantsController extends Controller
         $variant = $this->variantRepo->findVariant($id);
         return response()->json($variant);
     }
+
     public function selectTalla($id,$taco)
     {
         $variant = $this->variantRepo->selectTalla($id,$taco);
         return response()->json($variant);
     }
-
 
     public function variants($product_id){
 
@@ -490,11 +469,7 @@ class VariantsController extends Controller
             $variants = null;
         }
 
-        //$variants = Variant::with('atributes')->get();
-
-
         return response()->json($variants);
-        //return response()->json(Product::find(2)->with('brand')->get());
     }
 
     public function variant($product_id){
@@ -508,11 +483,9 @@ class VariantsController extends Controller
         }else{
             $product = $oProduct->variant->load(['detPre' => function ($query){
                 $query->join('presentation','presentation.id','=','detPres.presentation_id');
-                //$query->orderBy('id');
             },'stock' => function($q){
                 $q->join('warehouses','warehouses.id','=','stock.warehouse_id');
             },'product']);
-            //print_r('hoho'); die;
         }
 
         return response()->json($product);
@@ -521,14 +494,12 @@ class VariantsController extends Controller
     public function editFavoritos(Request $request)
     {
         $vatiant = $this->variantRepo->find($request->id);
-        //var_dump($vatiant);
-        //die();
+
         $manager = new VariantManager($vatiant,$request->all());
         $manager->save();
 
-        //Event::fire('update.store',$store->all());
         return response()->json(['estado'=>true, 'nombre'=>$vatiant->nombreTienda]);
-        }
+    }
 
     /*fx ayuda para img*/
     public function get_string_between($string, $start, $end){
@@ -539,6 +510,7 @@ class VariantsController extends Controller
         $len = strpos($string,$end,$ini) - $ini;
         return substr($string,$ini,$len);
     }
+
     public function reportes2($id){
         
         $database = \Config::get('database.connections.mysql');
@@ -550,11 +522,7 @@ class VariantsController extends Controller
             public_path() . '/report/TiketVariante.jasper', 
             $output, 
             array($ext),
-            //array(),
-            //while($i<=3){};
             ['idVariante'=>intval($id)],//Parametros
-           
-
             $database,
             false,
             false
@@ -562,7 +530,8 @@ class VariantsController extends Controller
         
         return '/report/'.$time.'_TiketVariante.'.$ext;
     }
-     public function reportes3($id){
+
+    public function reportes3($id){
         
         $database = \Config::get('database.connections.mysql');
         $time=time();
@@ -573,11 +542,7 @@ class VariantsController extends Controller
             public_path() . '/report/TiketVariante2.jasper', 
             $output, 
             array($ext),
-            //array(),
-            //while($i<=3){};
             ['idVariante'=>intval($id)],//Parametros
-           
-
             $database,
             false,
             false
@@ -588,35 +553,19 @@ class VariantsController extends Controller
     /*./ fx ayuda para img*/
 
     public function actualizarDsctoVar(Request $request){
-        //var_dump($request->all()); die();
         \DB::beginTransaction();
-        $variant = $this->variantRepo->find($request->input('DsctoProId')); //DStoProID es el id de la variant
-        //$variants = $product->variants;
+            $variant = $this->variantRepo->find($request->input('DsctoProId')); //DStoProID es el id de la variant
 
-        $detPre = null;
-        $dsctCant = null;
-        //foreach ($variants as $variant) {
-            //var_dump($variant->detPreONE->id);
-        $detPre = $variant->detPreONE;
-            //var_dump($detPre->id);
-        $detPre->dscto = (($detPre->price-($detPre->price-$request->input('DsctoVal')))*100)/$detPre->price;
-       // $dsctCant = $detPre->price*$request->input('DsctoVal')/100; //pq aun no se guarda el dato;
-        $dsctCant = $request->input('DsctoVal');
-        //$dsctCant = ((Number($scope.compras[index].precioProducto)-Number($scope.compras[index].precioVenta))*100)/Number($scope.compras[index].precioProducto);
-        $detPre->dsctoCant = $dsctCant;
-        $detPre->pvp = $detPre->price -$request->input('DsctoVal');
-        $detPre->save();
-        //}
-
-        //$product->dscto = $request->input('DsctoVal');
-        //$product->save();
-
-        //die();
-
-        //var_dump(count($variants)); die();
-
+            $detPre = null;
+            $dsctCant = null;
+            $detPre = $variant->detPreONE;
+            $detPre->dscto = (($detPre->price-($detPre->price-$request->input('DsctoVal')))*100)/$detPre->price;
+            $dsctCant = $request->input('DsctoVal');
+            $detPre->dsctoCant = $dsctCant;
+            $detPre->pvp = $detPre->price -$request->input('DsctoVal');
+            $detPre->save();
         \DB::commit();
+
         return response()->json(['estado' => true]);
     }
-
 }

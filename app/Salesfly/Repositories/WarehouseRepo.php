@@ -1,6 +1,7 @@
 <?php
 namespace Salesfly\Salesfly\Repositories;
 use Salesfly\Salesfly\Entities\Warehouse;
+use Salesfly\Salesfly\Entities\Product;
 
 class WarehouseRepo extends BaseRepo{
     public function getModel()
@@ -71,6 +72,14 @@ class WarehouseRepo extends BaseRepo{
         $warehouses =Warehouse::join('stores','stores.id','=','warehouses.store_id')
                        ->join('users','users.store_id','=','stores.id')
                        ->select('warehouses.*','stores.nombreTienda')->groupBy('warehouses.id')->get();
+        return $warehouses;
+    }
+
+    public function getWarehousesByStoreProduct($productId){
+
+        $product = Product::find($productId);
+        $storeIdfromProduct = $product->store_id;
+        $warehouses= Warehouse::where('store_id','=',$storeIdfromProduct)->get();
         return $warehouses;
     }
 }

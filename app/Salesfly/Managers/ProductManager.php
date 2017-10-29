@@ -5,6 +5,7 @@ namespace Salesfly\Salesfly\Managers;
 class ProductManager extends BaseManager{
 
     public function getRules(){
+
         $rules = [
             'nombre' => '',
             'codigo' => 'required|unique:products,codigo,'.$this->entity->id,
@@ -19,9 +20,11 @@ class ProductManager extends BaseManager{
             'image' => '',
             'modelo' => '',
             'presentation_base' => 'integer',
-            'user_id' => 'required|integer'
-
+            'user_id' => 'required|integer',
+            'store_id' => 'required|integer',
+            'globalType' => 'required|integer'
         ];
+
         return $rules;
     }
 }

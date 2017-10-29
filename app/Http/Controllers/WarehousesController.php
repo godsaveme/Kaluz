@@ -121,4 +121,13 @@ class WarehousesController extends Controller {
         return response()->json($warehouses);
     }
 
+    public function getWarehousesByStoreProduct(Request $request){
+        //dd($request->input(0));
+        $productId = $request->input(0);
+        if(isset($productId)) {
+            $warehouses = $this->warehouseRepo->getWarehousesByStoreProduct($productId);
+            return response()->json($warehouses);
+        }
+    }
+
 }

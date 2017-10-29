@@ -285,6 +285,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('warehouses/form-edit', ['as' => 'atribut_form_edit', 'uses' => 'WarehousesController@form_edit']);
 });
 Route::get('api/warehouses/all',['as'=>'atribut_all', 'uses'=>'WarehousesController@all']);
+Route::post('api/warehouses/getWarehousesByStoreProduct',['as'=>'get_warehouses_by_store_product', 'uses'=>'WarehousesController@getWarehousesByStoreProduct']);
 Route::get('api/listaAlmacenesTienda/all',['uses'=>'WarehousesController@listaAlmacenesTienda']);
 Route::get('api/warehouses/paginate/',['as' => 'atribut_paginate', 'uses' => 'WarehousesController@paginatep']);
 Route::post('api/warehouses/create',['as'=>'atribut_create', 'uses'=>'WarehousesController@create']);
