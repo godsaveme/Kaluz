@@ -21,6 +21,9 @@
     <!-- AdminLTE fonts OpenSans-->
     <link href="/css/fonts.css" rel="stylesheet" type="text/css" />
 
+    <!-- Estilos globales-->
+    <link href="/css/app.css" rel="stylesheet" type="text/css" />
+
     <link rel="stylesheet" href="/vendor/ngprogress/ngProgress.css">
 
     <link href="/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />

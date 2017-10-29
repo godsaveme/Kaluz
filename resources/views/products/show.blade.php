@@ -44,10 +44,10 @@
                       <b>Código de Proveedor:</b> @{{ product.suppCode }} <br/>
             <b>Estación:</b> @{{ product.station.nombre }} <br/> <br/>
                       <b>Modelo:</b> @{{ product.modelo }} <br/> <br/>
-                      <b>Tienda:</b> @{{ product.store.nombreTienda }}  <br/> <br/>
+                      <b>Tienda:</b> <span class="text-red">@{{ product.store.nombreTienda }}</span>  <br/> <br/>
 
-                      <b>Tipo de Producto:</b> <span ng-if="product.globalType == 1"> Zapatos </span>
-                      <span ng-if="product.globalType == 2"> Accesorios </span>
+                      <b>Tipo de Producto:</b> <span class="text-red" ng-if="product.globalType == 1"> Zapatos </span>
+                      <span class="text-red" ng-if="product.globalType == 2"> Accesorios </span>
 
                 <br>
                 <span>Con. Inventario</span><input    type="checkbox"  name="variantes" ng-model="check" />
