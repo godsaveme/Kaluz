@@ -439,7 +439,7 @@ Route::get('api/practicas/find/{id}',['as'=>'person_find', 'uses'=>'PracticasCon
 
 Route::get('api/expenses/find/{id}','ExpenseMonthlysController@find');
 Route::get('api/years/find/{id}','YearsController@find');
-Route::get('api/warehouses/select','WarehousesController@selectWarehouses');
+Route::get('api/warehousesByStore/select','WarehousesController@getWarehousesByStore');
 Route::get('api/warehouses2/select','WarehousesController@traertodosAlmacenes');
 Route::group(['middleware' => 'role'], function () {
     Route::get('orderPurchases', ['as' => 'person', 'uses' => 'OrderPurchasesController@index']);

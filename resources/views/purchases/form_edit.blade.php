@@ -64,13 +64,13 @@
               <th style="width: 10px">#</th>
 
               <th>Producto</th>
-              <th>Variante </th>
+              <th>SKU</th>
               <th>Cantidad</th>
-              <th>Precio Producto</th>
-              <th>Precio Compra</th>
-              <th>Total Bruto</th>
+              <th>Prec Compr Prod</th>
+              <th>Prec Compr Prod (Incl. Dscto)</th>
+              <th>SubTotal Bruto</th>
               <th>Descuento</th>
-              <th>Total</th>
+              <th>SubTotal</th>
               
             </tr>
             <tr  ng-repeat="row in detailPurchases">

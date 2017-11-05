@@ -199,7 +199,7 @@
 
                     });
                    
-                    crudPurchase.select('warehouses2','select').then(function(data){
+                    crudPurchase.select('warehousesByStore','select').then(function(data){
                         $scope.warehouses = data;
                     });
 
@@ -282,7 +282,7 @@
                 
                 $scope.ProvandoEdicion=function(){
                     $scope.show = !$scope.show;
-                    crudPurchase.select('warehouses','select').then(function(data){
+                    crudPurchase.select('warehousesByStore','select').then(function(data){
                         $scope.warehouses = data;
                     });   
                 }

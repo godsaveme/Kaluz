@@ -45,6 +45,14 @@ class WarehouseRepo extends BaseRepo{
                        ->select('warehouses.*')->groupBy('warehouses.id')->get();
         return $warehouses;
     }
+
+    public function getWarehousesByStore(){
+        return Warehouse::join('stores','stores.id','=','warehouses.store_id')
+                    ->select('warehouses.*','stores.nombreTienda')
+                    ->where('store_id','=',session('warehouseId'))
+                    ->get();
+
+    }
     public function paginaterepo($c){
 
 

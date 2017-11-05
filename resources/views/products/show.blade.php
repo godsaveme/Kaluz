@@ -86,14 +86,14 @@
                                   <th style="width: 10px">#</th>
                                     <th>Código</th>
                                   <th>SKU</th>
-                                    <th>Dscto</th>
+                                    <th>% Dscto</th>
                                   <th>Variante</th>
                                     <th>Creado por</th>
                                   <th style="">Precio Compra</th>
                                   <th style="">Ganacia</th>
                                   <th style="">Precio Venta</th>
                                     <th>Prec Vent (Incl. Dscto)</th>
-                                  <th style="">En stock</th>
+                                  <th style="">En stock (1er Alm.)</th>
                                   <th ng-show="check">Stock Real</th>
                                     <th>Editar</th>
                                     <th >Opción</th>
@@ -104,7 +104,7 @@
                                     <td>@{{$index + 1}}</td>
                                     <td>@{{ row.codigo }}</td>
                                     <td>@{{ row.sku }}</td>
-                                    <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.id,row.det_pre[0].dscto)">@{{row.det_pre[0].dscto}}</button>
+                                    <td> <button popover-placement="bottom" popover-template="dsctoTemplate" type="button" class="btn btn-default btn-xs" ng-click="showDscto(row.id,row.det_pre[0].dscto)">@{{row.det_pre[0].dscto}}%</button>
 
                                     <td><a ng-href="/variants/edit/@{{row.id}}">@{{row.product.nombre}}
                                             <span ng-repeat="row2 in row.det_atr ">
@@ -271,7 +271,7 @@
             <div class="col-md-8">
                 <input type="text" class="form-control hidden" name="presentation.nombre" ng-model="presentation.nombre">
                 <div class="form-group" >
-                    <label>Monto de Dscto</label>
+                    <label>% de Dscto</label>
                     <input type="number" class="form-control" name="DsctoVal" placeholder="0.00" ng-model="areaDscto.DsctoVal" step="1">
                 </div>
             </div>

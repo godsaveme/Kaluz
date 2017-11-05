@@ -113,6 +113,11 @@ class WarehousesController extends Controller {
         $warehouses = $this->warehouseRepo->traertodosAlmacenes();
         return response()->json($warehouses); 
     }
+    public function getWarehousesByStore(){
+        return response()->json(
+            $this->warehouseRepo->getWarehousesByStore()
+        );
+    }
     public function searchWere($q)
     {
         //$q = Input::get('q');

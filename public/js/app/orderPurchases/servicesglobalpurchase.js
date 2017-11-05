@@ -173,6 +173,20 @@
 
                 return deferred.promise;
             }
+            function selectPost(area,uri,select)
+            {
+                var deferred = $q.defer();
+                $http.post('/api/'+uri+'/'+select, area )
+                    .success(function(data)
+                    {
+                        deferred.resolve(data);
+                    }
+                ).error(function(data)
+                    {
+                        alert(data);
+                    });
+                return deferred.promise;
+            }
              function autocomplit(uri)
             {
                 var deferred = $q.defer();
@@ -296,6 +310,7 @@
                 destroy:destroy,
                 search: search,
                 select:select,
+                selectPost: selectPost,
                 byforeingKey: byforeingKey,
                 bytraervar: bytraervar,
                 comprovarCaja: comprovarCaja,
