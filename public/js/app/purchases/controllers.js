@@ -176,7 +176,8 @@
                      });
                 if($location.path() == '/purchases/createMov') {
                     $scope.purchase.fecha=new Date();
-                     crudOPurchase.select('warehouses','select').then(function(data){
+                    //$scope.purchase.fecha = $scope.purchase.fecha.toLocaleDateString();
+                     crudOPurchase.select('warehousesByStore','select').then(function(data){
                         $scope.warehouses = data;
                     });
                      crudOPurchase.autocomplit('products',1).then(function (data) {
@@ -249,7 +250,7 @@
                         $scope.itemsperPage = 15;
 
                     });
-                    crudOPurchase.select('warehouses','select').then(function(data){
+                    crudOPurchase.select('warehousesByStore','select').then(function(data){
                         $scope.warehouses = data;
                     });
                      crudOPurchase.autocomplit('products',1).then(function (data) {
@@ -1139,6 +1140,7 @@
                     $scope.purchase.detailOrderPurchases=$scope.inputStocks;
                     $scope.mostrarCreate=!$scope.mostrarCreate;
                      //alert("sobre");
+                      $scope.purchase.fecha = $scope.purchase.fecha.toLocaleDateString();
                     crudOPurchase.create($scope.purchase, 'inputStocks').then(function (data) {
                         // alert("debajo");
                         //alert("jijijiijijij");

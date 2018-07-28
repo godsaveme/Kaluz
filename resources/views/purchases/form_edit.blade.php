@@ -41,10 +41,14 @@
                                <label>Fecha de Entrega:</label>
                                <spam>@{{purchases.fechaEntrega.substring(0,10)}}</spam>
                          </div>
+                        <div  class="input-group">
+                               <label>Fecha/Hora de Creación:</label>
+                               <spam>@{{purchases.created_at}}</spam>
+                         </div>
                           <div  class="input-group">
                                <label>Orden de Pedido:</label>
                                <spam ng-if="purchases.orderPurchase_id>0"><a   target="_self" ng-href="/orderPurchases/edit/@{{purchases.orderPurchase_id}}">ver Orden de Pedido</a></spam>
-                               <spam ng-if="purchases.orderPurchase_id==null">No Cuenta con orden de Pedido</spam>
+                               <spam ng-if="purchases.orderPurchase_id==null" class="text-red">No Cuenta con orden de Pedido</spam>
                          
                          </div>
     </div>   
@@ -83,7 +87,7 @@
                       <td>S/.@{{row.preProducto}}</td>
                       <td>S/.@{{row.preCompra}}</td>
                       <td>S/.@{{row.montoBruto}}</td>
-                      <td>S/.@{{row.descuento}}</td>
+                      <td>@{{row.descuento}}%</td>
                       <td>S/.@{{row.montoTotal}}</td>
                       
                       <!--<td><a ng-click="sacarRow(row.index,row.montoTotal)" class="btn btn-warning btn-xs">Sacar</a></td>

@@ -1095,7 +1095,10 @@
                     $scope.enviarCompra=true;
                     $scope.orderPurchase.compraDirecta=1;
                     $scope.orderPurchase.fecha=new Date();
-                    $scope.orderPurchase.fechaEntrega=$scope.orderPurchase.fechaPedido;
+                    //Añadido por la diferencia de huso horario
+                    $scope.orderPurchase.fecha = $scope.orderPurchase.fecha.toLocaleDateString();
+                    // ./dif huso horario
+                    $scope.orderPurchase.fechaEntrega=$scope.orderPurchase.fechaPedido.toLocaleDateString();
                     $scope.orderPurchase.detailOrderPurchases=$scope.detailOrderPurchases
                     $scope.orderPurchase.Saldo=$scope.orderPurchase.montoTotal;
                     $scope.orderPurchases.push( $scope.orderPurchase);

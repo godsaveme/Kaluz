@@ -82,7 +82,7 @@
           <div class="form-group" >
                 <label for="Variante">Filtrar Por</label>
                 <select  class="form-control"   ng-change="searchporTipo()" ng-model="purchase.tipoMov" >
-                  <option value="">Elejir Mov</option>
+                  <option value="">Elegir Mov</option>
                   <option value="Entrada">Entrada</option>
                   <option value="Salida">Salida</option>
                   <option value="Transferencia">Transferencia</option>
@@ -96,7 +96,7 @@
           <div class="form-group" >
                 <label for="Variante">Filtrar Por</label>
                 <select  ng-disabled="purchase.fechaini==null || purchase.fechafin==null" ng-change="filtrarFechas()" class="form-control"   ng-model="purchase.tipoMov" >
-                  <option value="">Elejir Mov</option>
+                  <option value="">Elegir Mov</option>
                   <option value="Entrada">Entrada</option>
                   <option value="Salida">Salida</option>
                   <option value="Transferencia">Transferencia</option>
@@ -120,7 +120,7 @@
             <table class="table table-striped">
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Fecha</th>
+                      <th>Fecha Registro</th>
                       <th>Tipo</th>
                       <th>Numero de Orden</th>
                       <th>Numero de Compra</th>
@@ -132,7 +132,7 @@
                     
                     <tr ng-repeat="row in headInputStocks">
                       <td>@{{$index + 1}}</td>
-                      <td >@{{row.Fecha}}</td>
+                      <td >@{{row.created_at | date}}</td>
                       <td ng-if="row.tipo=='Entrada-Anulado'"><span class="badge bg-yellow">Entrada-Anulado</span></td> 
                       <td ng-if="row.tipo=='Entrada'"><span class="badge bg-red">Entrada</span></td> 
                       <td ng-if="row.tipo=='Transferencia'"><span class="badge bg-yellow">Transferencia</span></td> 

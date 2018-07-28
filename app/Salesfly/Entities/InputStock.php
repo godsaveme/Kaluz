@@ -1,7 +1,7 @@
 <?php
 namespace Salesfly\Salesfly\Entities;
 
-class InputStock extends \Eloquent {
+class   InputStock extends \Eloquent {
 
 	protected $table = 'inputStocks';
     

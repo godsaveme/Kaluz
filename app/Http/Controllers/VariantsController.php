@@ -254,7 +254,7 @@ class VariantsController extends Controller
 
                 if ($request->input('track') == 1) {
                     foreach ($request->input('stock') as $stock) {
-                        //var_dump($stock['stockActual']);die();
+                        //dd($stock['stockActual']);
                         if (!isset($stock['stockActual']) || $stock['stockActual'] == NULL || $stock['stockActual'] == '') $stock['stockActual'] = 0;
                         if (!isset($stock['stockMin']) || $stock['stockMin'] == NULL || $stock['stockMin'] == '') $stock['stockMin'] = 0;
                         if (!isset($stock['stockMinSoles']) || $stock['stockMinSoles'] == NULL || $stock['stockMinSoles'] == '') $stock['stockMinSoles'] = 0;
